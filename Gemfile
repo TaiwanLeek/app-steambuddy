@@ -8,3 +8,6 @@ gem 'minitest'
 ## Static Analysis
 gem 'flog'
 gem 'rubocop'
+
+## http requests
+gem 'httparty'

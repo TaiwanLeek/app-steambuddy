@@ -6,6 +6,7 @@ require 'httparty'
 require 'yaml'
 require 'json'
 
+# global variable 
 $st_results = {}
 
 def take_st_result(api, param, col_name)
@@ -33,8 +34,5 @@ parameter = {
 take_st_result(friends_api, parameter, 'friends')
 take_st_result(owned_api, parameter, 'owned')
 
-
 filename = 'spec/fixtures/steam_results.yml'
-File.open(filename, 'w+') do |f|
-  f.write($st_results.to_yaml)
-end
+File.write(filename, $st_results.to_yaml)

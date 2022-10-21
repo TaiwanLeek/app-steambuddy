@@ -1,4 +1,47 @@
 ---
+friends:
+- steamid: '76561197990171372'
+  relationship: friend
+  friend_since: 1480699419
+- steamid: '76561198006810389'
+  relationship: friend
+  friend_since: 1284031605
+- steamid: '76561198014910569'
+  relationship: friend
+  friend_since: 1622271858
+- steamid: '76561198047273221'
+  relationship: friend
+  friend_since: 1636268582
+- steamid: '76561198067522541'
+  relationship: friend
+  friend_since: 1586707842
+- steamid: '76561198075496191'
+  relationship: friend
+  friend_since: 1484471563
+- steamid: '76561198090582577'
+  relationship: friend
+  friend_since: 1562133188
+- steamid: '76561198114782296'
+  relationship: friend
+  friend_since: 1586204456
+- steamid: '76561198144229031'
+  relationship: friend
+  friend_since: 1649333254
+- steamid: '76561198162148029'
+  relationship: friend
+  friend_since: 1649304390
+- steamid: '76561198259987224'
+  relationship: friend
+  friend_since: 1649246138
+- steamid: '76561198431725617'
+  relationship: friend
+  friend_since: 1648660149
+- steamid: '76561199026760857'
+  relationship: friend
+  friend_since: 1652688245
+- steamid: '76561199162664612'
+  relationship: friend
+  friend_since: 1666190021
 owned:
   response:
     game_count: 396
@@ -1024,7 +1067,7 @@ owned:
       playtime_linux_forever: 0
       rtime_last_played: 1596534044
     - appid: 305620
-      playtime_2weeks: 1479
+      playtime_2weeks: 1393
       playtime_forever: 7046
       playtime_windows_forever: 1944
       playtime_mac_forever: 0
@@ -2251,7 +2294,7 @@ owned:
       playtime_linux_forever: 0
       rtime_last_played: 1655657866
     - appid: 1449850
-      playtime_2weeks: 21
+      playtime_2weeks: 18
       playtime_forever: 21
       playtime_windows_forever: 21
       playtime_mac_forever: 0
@@ -2270,7 +2313,6 @@ owned:
       playtime_linux_forever: 0
       rtime_last_played: 1632589757
     - appid: 1468810
-      playtime_2weeks: 9
       playtime_forever: 1490
       playtime_windows_forever: 1490
       playtime_mac_forever: 0

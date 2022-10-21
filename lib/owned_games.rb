@@ -1,4 +1,5 @@
 module SteamCircle
+    # Get game lists from the given steamid
     class OwnedGames
       attr_reader :games_count
       attr_reader :games

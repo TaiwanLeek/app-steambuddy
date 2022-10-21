@@ -5,6 +5,7 @@ require_relative 'friends'
 require_relative 'owned_games'
 
 module SteamCircle
+  # Connect to steam api, and use the given steamid to acquire individual inforamtion
   class SteamApi
     API_ROOT = 'http://api.steampowered.com/'
 

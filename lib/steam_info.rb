@@ -26,8 +26,8 @@ owned_api = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v1'
 
 parameter = {
   query: {
-    key: config['key'],
-    steamid: config['steamid']
+    key: config['steam_key'],
+    steamid: config['steam_id']
   }
 }
 

@@ -1,7 +1,7 @@
 ---
 owned:
   response:
-    game_count: 453
+    game_count: 396
     games:
     - appid: 20
       playtime_forever: 27
@@ -741,12 +741,6 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 1608124680
-    - appid: 367690
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
     - appid: 264710
       playtime_forever: 4647
       playtime_windows_forever: 0
@@ -1030,12 +1024,12 @@ owned:
       playtime_linux_forever: 0
       rtime_last_played: 1596534044
     - appid: 305620
-      playtime_2weeks: 1291
-      playtime_forever: 5894
-      playtime_windows_forever: 1326
+      playtime_2weeks: 1479
+      playtime_forever: 7046
+      playtime_windows_forever: 1944
       playtime_mac_forever: 0
-      playtime_linux_forever: 639
-      rtime_last_played: 1665769485
+      playtime_linux_forever: 1173
+      rtime_last_played: 1666291938
     - appid: 333600
       playtime_forever: 58
       playtime_windows_forever: 0
@@ -1108,12 +1102,6 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 1463934717
-    - appid: 343450
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
     - appid: 271590
       playtime_forever: 23641
       playtime_windows_forever: 16563
@@ -1427,12 +1415,6 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 0
-    - appid: 444560
-      playtime_forever: 1
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 1455531214
     - appid: 445220
       playtime_forever: 5253
       playtime_windows_forever: 5147
@@ -1585,324 +1567,6 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 1485695641
-    - appid: 534600
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534610
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534611
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534612
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534613
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534614
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534615
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534616
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534617
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534618
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534619
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534620
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534621
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534622
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534623
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534624
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534625
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534626
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534627
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534628
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534629
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534630
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534631
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534632
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534633
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534634
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534635
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 534636
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550760
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550761
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550762
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550763
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550764
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550765
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550766
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550767
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550768
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550769
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550770
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550771
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550772
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550773
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550774
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550775
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550776
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550777
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550778
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550779
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550780
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550781
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550782
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550783
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
-    - appid: 550784
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
     - appid: 418370
       playtime_forever: 3338
       playtime_windows_forever: 3338
@@ -2000,12 +1664,6 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 1582548690
-    - appid: 1471280
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0
     - appid: 619150
       playtime_forever: 0
       playtime_windows_forever: 0
@@ -2702,6 +2360,12 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 1659709555
+    - appid: 1236300
+      playtime_forever: 0
+      playtime_windows_forever: 0
+      playtime_mac_forever: 0
+      playtime_linux_forever: 0
+      rtime_last_played: 0
     - appid: 1925210
       playtime_forever: 85
       playtime_windows_forever: 85
@@ -2728,9 +2392,3 @@ owned:
       playtime_mac_forever: 0
       playtime_linux_forever: 0
       rtime_last_played: 1660739181
-    - appid: 2111850
-      playtime_forever: 0
-      playtime_windows_forever: 0
-      playtime_mac_forever: 0
-      playtime_linux_forever: 0
-      rtime_last_played: 0

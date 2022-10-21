@@ -6,16 +6,15 @@ require 'httparty'
 require 'yaml'
 require 'json'
 
-# global variable 
-$st_results = {}
+st_results = {}
 
-def take_st_result(api, param, col_name)
+def take_st_result(st_results, api, param, col_name)
   response = HTTParty.get(api, param)
 
-  if col_name == 'firends'
-    $st_results['friends'] = JSON.parse(response.body)['friendslist']['friends']
+  if col_name == 'friends'
+    st_results['friends'] = JSON.parse(response.body)['friendslist']['friends']
   else
-    $st_results['owned'] = JSON.parse(response.body)
+    st_results['owned'] = JSON.parse(response.body)
   end
 end
 
@@ -26,13 +25,13 @@ owned_api = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v1'
 
 parameter = {
   query: {
-    key: config['key'],
-    steamid: config['steamid']
+    key: config['steam_key'],
+    steamid: config['steam_id']
   }
 }
 
-take_st_result(friends_api, parameter, 'friends')
-take_st_result(owned_api, parameter, 'owned')
+take_st_result(st_results, friends_api, parameter, 'friends')
+take_st_result(st_results, owned_api, parameter, 'owned')
 
 filename = 'spec/fixtures/steam_results.yml'
-File.write(filename, $st_results.to_yaml)
+File.write(filename, st_results.to_yaml)

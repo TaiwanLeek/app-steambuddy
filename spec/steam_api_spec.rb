@@ -4,6 +4,24 @@ require_relative '../lib/steam_api'
 require_relative 'spec_helper'
 
 describe 'Tests Steam API library' do
+  VCR.configure do |c|
+    c.cassette_library_dir = CASSETTES_FOLDER
+    c.hook_into :webmock
+
+    c.filter_sensitive_data('<STEAM_ID>') { STEAM_ID }
+    c.filter_sensitive_data('<STEAM_KEY>') { STEAM_KEY }
+  end
+
+  before do
+    VCR.insert_cassette CASSETTE_FILE,
+                        record: :new_episodes,
+                        match_requests_on: %i[method uri headers]
+  end
+
+  after do
+    VCR.eject_cassette
+  end
+
   describe 'Friends information' do
     it 'should provide correct friend list' do
       friends = SteamCircle::SteamApi.new(STEAM_KEY)

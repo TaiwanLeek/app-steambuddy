@@ -3,7 +3,8 @@
 source 'https://rubygems.org'
 
 ## Testing
-gem 'minitest'
+gem 'minitest', '~> 5'
+gem 'minitest-rg', '~> 5'
 
 gem 'json', '~> 2.6.2'
 

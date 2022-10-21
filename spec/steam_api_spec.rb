@@ -4,11 +4,7 @@ require 'minitest/autorun'
 require 'minitest/rg'
 require 'yaml'
 require_relative '../lib/steam_api'
-
-CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
-STEAM_KEY = CONFIG['key']
-STEAM_ID = CONFIG['steamid']
-CORRECT = YAML.safe_load(File.read('spec/fixtures/steam_results.yml'))
+require_relative 'spec_helper'
 
 describe 'Tests Steam API library' do
   describe 'Friends information' do

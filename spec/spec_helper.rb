@@ -5,8 +5,8 @@ SimpleCov.start
 
 require 'yaml'
 
+#require 'minitest'
 require 'minitest/autorun'
-require 'minitest/rg'
 require 'vcr'
 require 'webmock'
 

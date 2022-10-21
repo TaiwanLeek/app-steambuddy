@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require 'minitest/rg'
-require 'yaml'
 require_relative '../lib/steam_api'
 require_relative 'spec_helper'
 

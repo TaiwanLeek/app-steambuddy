@@ -31,10 +31,14 @@ describe 'Tests Steam API library' do
   end
 
   describe 'Owned games information' do
-    it 'should provide correct owned game list' do
+    it 'should provide correct game count' do
       owned_games = SteamCircle::SteamApi.new(STEAM_KEY)
                                          .owned_games(STEAM_ID)
       _(owned_games.count).must_equal CORRECT['owned']['response']['game_count']
+    end
+    it 'should provide correct owned game list' do
+      owned_games = SteamCircle::SteamApi.new(STEAM_KEY)
+                                         .owned_games(STEAM_ID)
       _(owned_games.games).must_equal CORRECT['owned']['response']['games']
     end
   end

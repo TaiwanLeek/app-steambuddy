@@ -1,26 +1,16 @@
 # SteamBuddy
 
-Project to gather useful gaming information from Steam API
+Application that allows Steam *player* to compare their *games* and *play time* with their *friends*.
 
-## Resources
+## Overview
 
-* Friend list
-* Owned game list
+SteamBuddy pulls data from Steam's API, and make list out of your *favorite played game*. It will generate *reports* to compare the total play time, favorite games of you and your friends on Steam.
 
-## Elements
+## Short-term usability goals
 
-* Friend list
-    * Friend Steam ID
-    * Friend since
-* Owned game list
-    * Game ID
-    * Play Time
-    * Windows Play Time
-    * Mac Play Time
-    * Linux Play Time
-    * Last played time
+- Pull data from Steam API
+- Analyze friend and game list
 
-## Entities
+## Long-term gols
 
-* Friends (aka friends list of a certain Steam ID)
-* Games (aka owned games of a certain Steam ID)
+- Static analysis among certain user and all their friends' gaming data.

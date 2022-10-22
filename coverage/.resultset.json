@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/pride829/Git/steamcircle/lib/steam_api.rb": {
+      "/home/pride829/Git/SteamBuddy/lib/steam_api.rb": {
         "lines": [
           null,
           null,
@@ -50,7 +50,7 @@
           null
         ]
       },
-      "/home/pride829/Git/steamcircle/lib/friends.rb": {
+      "/home/pride829/Git/SteamBuddy/lib/friends.rb": {
         "lines": [
           1,
           null,
@@ -66,7 +66,7 @@
           null
         ]
       },
-      "/home/pride829/Git/steamcircle/lib/owned_games.rb": {
+      "/home/pride829/Git/SteamBuddy/lib/owned_games.rb": {
         "lines": [
           1,
           null,

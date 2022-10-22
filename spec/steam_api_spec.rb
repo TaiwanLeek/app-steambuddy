@@ -24,7 +24,7 @@ describe 'Tests Steam API library' do
 
   describe 'Friends information' do
     it 'should provide correct friend list' do
-      friends = SteamCircle::SteamApi.new(STEAM_KEY)
+      friends = SteamBuddy::SteamApi.new(STEAM_KEY)
                                      .friends(STEAM_ID)
       _(friends.list).must_equal CORRECT['friends']
     end
@@ -32,7 +32,7 @@ describe 'Tests Steam API library' do
 
   describe 'Owned games information' do
     it 'should provide correct game count' do
-      owned_games = SteamCircle::SteamApi.new(STEAM_KEY)
+      owned_games = SteamBuddy::SteamApi.new(STEAM_KEY)
                                          .owned_games(STEAM_ID)
       correct_game_count = CORRECT['owned']['response']['game_count']
       if correct_game_count
@@ -43,7 +43,7 @@ describe 'Tests Steam API library' do
     end
 
     it 'should provide correct owned game list' do
-      owned_games = SteamCircle::SteamApi.new(STEAM_KEY)
+      owned_games = SteamBuddy::SteamApi.new(STEAM_KEY)
                                          .owned_games(STEAM_ID)
       correct_games = CORRECT['owned']['response']['games']
       if correct_games

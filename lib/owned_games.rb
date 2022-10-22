@@ -1,4 +1,4 @@
-module SteamCircle
+module SteamBuddy
     # Get game lists from the given steamid
     class OwnedGames
       attr_reader :games_count

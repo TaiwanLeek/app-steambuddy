@@ -4,7 +4,7 @@ require 'httparty'
 require_relative 'friends'
 require_relative 'owned_games'
 
-module SteamCircle
+module SteamBuddy
   # Connect to steam api, and use the given steamid to acquire individual inforamtion
   class SteamApi
     API_ROOT = 'http://api.steampowered.com/'

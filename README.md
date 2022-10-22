@@ -14,3 +14,7 @@ SteamBuddy pulls data from Steam's API, and make list out of your *favorite play
 ## Long-term gols
 
 - Static analysis among certain user and all their friends' gaming data.
+
+## TODO:
+
+- Owned game API of Steam does not included free games, we want to include free games.

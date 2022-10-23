@@ -27,9 +27,9 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Expires:
-      - Sun, 23 Oct 2022 06:45:11 GMT
+      - Sun, 23 Oct 2022 09:59:44 GMT
       Date:
-      - Sun, 23 Oct 2022 06:45:11 GMT
+      - Sun, 23 Oct 2022 09:59:44 GMT
       Content-Length:
       - '15'
       Connection:
@@ -37,7 +37,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"response":{}}'
-  recorded_at: Sun, 23 Oct 2022 06:45:12 GMT
+  recorded_at: Sun, 23 Oct 2022 09:59:44 GMT
 - request:
     method: get
     uri: http://api.steampowered.com//ISteamUser/GetFriendList/v1?key=<STEAM_KEY>&steamid=<STEAM_ID>
@@ -63,9 +63,9 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Expires:
-      - Sun, 23 Oct 2022 06:45:11 GMT
+      - Sun, 23 Oct 2022 09:59:44 GMT
       Date:
-      - Sun, 23 Oct 2022 06:45:11 GMT
+      - Sun, 23 Oct 2022 09:59:44 GMT
       Content-Length:
       - '111'
       Connection:
@@ -73,5 +73,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"friendslist":{"friends":[{"steamid":"76561198075496191","relationship":"friend","friend_since":1652008479}]}}'
-  recorded_at: Sun, 23 Oct 2022 06:45:12 GMT
+  recorded_at: Sun, 23 Oct 2022 09:59:44 GMT
 recorded_with: VCR 6.1.0

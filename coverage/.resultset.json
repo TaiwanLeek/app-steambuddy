@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/pride829/Git/steambuddy/lib/steam_api.rb": {
+      "/home/youthink/Desktop/steamcircle/lib/steam_api.rb": {
         "lines": [
           null,
           null,
@@ -50,8 +50,10 @@
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/friends.rb": {
+      "/home/youthink/Desktop/steamcircle/lib/friends.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -66,11 +68,12 @@
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/owned_games.rb": {
+      "/home/youthink/Desktop/steamcircle/lib/owned_games.rb": {
         "lines": [
-          1,
+          null,
           null,
           1,
+          null,
           1,
           1,
           null,
@@ -87,6 +90,6 @@
         ]
       }
     },
-    "timestamp": 1666507512
+    "timestamp": 1666519184
   }
 }

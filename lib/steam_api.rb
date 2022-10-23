@@ -35,7 +35,7 @@ module SteamBuddy
       parameter = {
         query: {
           key: @st_key,
-          steamid:
+          steamid: steamid
         }
       }
       response = HTTParty.get(url, parameter)

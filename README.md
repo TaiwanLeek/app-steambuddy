@@ -18,3 +18,4 @@ SteamBuddy pulls data from Steam's API, and make list out of your *favorite play
 ## TODO:
 
 - Owned game API of Steam does not included free games, we want to include free games.
+- Extract useful from original json, such as friend id..etc

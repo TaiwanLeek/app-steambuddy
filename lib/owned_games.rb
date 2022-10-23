@@ -1,15 +1,17 @@
-module SteamCircle
-    class OwnedGames
-      attr_reader :games_count
-      attr_reader :games
+# frozen_string_literal: true
 
-      def initialize(game_count, games)
-        @game_count = game_count
-        @games = games
-      end
+module SteamBuddy
+  # Get game lists from the given steamid
+  class OwnedGames
+    attr_reader :games_count, :games
 
-      def count
-        @game_count
-      end
+    def initialize(game_count, games)
+      @game_count = game_count
+      @games = games
     end
-  end 
+
+    def count
+      @game_count
+    end
+  end
+end

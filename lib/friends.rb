@@ -1,4 +1,7 @@
-module SteamCircle
+# frozen_string_literal: true
+
+module SteamBuddy
+  # Get friend lists from the given steamid
   class Friends
     def initialize(friends_data)
       @friends = friends_data

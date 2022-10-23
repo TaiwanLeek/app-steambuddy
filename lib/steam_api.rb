@@ -4,7 +4,8 @@ require 'httparty'
 require_relative 'friends'
 require_relative 'owned_games'
 
-module SteamCircle
+module SteamBuddy
+  # Connect to steam api, and use the given steamid to acquire individual inforamtion
   class SteamApi
     API_ROOT = 'http://api.steampowered.com/'
 
@@ -34,7 +35,7 @@ module SteamCircle
       parameter = {
         query: {
           key: @st_key,
-          steamid: steamid
+          steamid:
         }
       }
       response = HTTParty.get(url, parameter)

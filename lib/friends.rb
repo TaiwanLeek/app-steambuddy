@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SteamBuddy
   # Get friend lists from the given steamid
   class Friends

@@ -19,4 +19,3 @@ gem 'rake'
 gem 'flog'
 gem 'reek'
 gem 'rubocop'
-

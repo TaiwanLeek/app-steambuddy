@@ -8,7 +8,7 @@
           null,
           1,
           1,
-          6,
+          3,
           null,
           null
         ]
@@ -31,7 +31,7 @@
           null
         ]
       },
-      "/home/youthink/Desktop/steamcircle/lib/steam_api.rb": {
+      "/home/pride829/Git/steambuddy/lib/gateways/steam_api.rb": {
         "lines": [
           null,
           null,
@@ -40,41 +40,27 @@
           1,
           null,
           1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
           null,
           1,
           1,
           null,
           1,
-          3,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          null,
-          1,
-          3,
-          null,
-          null,
-          1,
+          0,
           null,
           3,
           null,
           null,
           null,
-          null,
-          3,
-          3,
+          1,
+          0,
           null,
           null,
           null
@@ -94,61 +80,42 @@
           2,
           null,
           null,
-          1,
-          1,
+          0,
+          0,
+          0,
+          0,
+          null,
           null,
           null,
           null
         ]
       },
-      "/home/youthink/Desktop/steamcircle/lib/steam_info.rb": {
+      "/home/pride829/Git/steambuddy/lib/owned_games.rb": {
         "lines": [
           null,
           null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
           1,
           null,
           1,
           1,
           null,
           1,
-          1,
-          1,
+          0,
+          0,
           null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/pride829/Git/steambuddy/spec/read_config.rb": {
+        "lines": [
+          null,
+          null,
+          1,
           1,
           1
         ]
@@ -195,6 +162,11 @@
         ]
       }
     },
-    "timestamp": 1666957043
+    "timestamp": 1666963657
+  },
+  "Minitest": {
+    "coverage": {
+    },
+    "timestamp": 1666963295
   }
 }

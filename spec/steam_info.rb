@@ -2,8 +2,9 @@
 
 # Steam Web API Reference: https://steamcommunity.com/dev
 
+require_relative 'read_config'
+
 require 'httparty'
-require 'yaml'
 require 'json'
 
 # Take Steam api info
@@ -17,20 +18,20 @@ class TakeResult
   end
 
   def response
+    puts @api
+    puts @param
     response = HTTParty.get(@api, @param)
     JSON.parse(response.body)
   end
 end
-
-config = YAML.safe_load(File.read('config/secrets.yml'))
 
 friends_api = 'http://api.steampowered.com/ISteamUser/GetFriendList/v1'
 owned_api = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v1'
 
 parameter = {
   query: {
-    key: config['steam_key'],
-    steamid: config['steam_id']
+    key: STEAM_KEY,
+    steamid: STEAM_ID
   }
 }
 

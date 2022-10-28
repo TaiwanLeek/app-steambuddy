@@ -5,8 +5,20 @@ module SteamBuddy
   module Steam
     # Data Mapper: Steam contributor -> PlayedGame entity
     class PlayedGameMapper
-      def initialize
+      def initialize(gh_token, gateway_class = Steam::Api)
         @token = gh_token
+        @gateway_class = gateway_class
+        @gateway = @gateway_class.new(@token)
+      end
+
+      def load_several(url)
+        @gateway.owned_games_data(url).map do |data|
+          PlayedGameMapper.build_entity(data)
+        end
+      end
+
+      def self.build_entity(data)
+        DataMapper.new(data).build_entity
       end
     end
 

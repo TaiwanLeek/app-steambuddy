@@ -5,8 +5,20 @@ module SteamBuddy
   module Steam
     # Data Mapper: Steam contributor -> User entity
     class UserMapper
-      def initialize
+      def initialize(gh_token, gateway_class = Steam::Api)
         @token = gh_token
+        @gateway_class = gateway_class
+        @gateway = @gateway_class.new(@token)
+      end
+
+      def load_several(url)
+        @gateway.friend_list_data(url).map do |data|
+          UserMapper.build_entity(data)
+        end
+      end
+
+      def self.build_entity(data)
+        DataMapper.new(data).build_entity
       end
     end
 

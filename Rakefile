@@ -10,8 +10,8 @@ end
 
 desc 'run tests'
 task :spec do
-  sh 'ruby lib/steam_info.rb'
-  sh 'ruby spec/steam_api_spec.rb'
+  sh 'ruby spec/steam_info.rb'
+  sh 'ruby spec/gateway_steam_spec.rb'
 end
 
 namespace :vcr do

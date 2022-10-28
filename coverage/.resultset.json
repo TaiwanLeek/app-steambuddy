@@ -1,37 +1,19 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/pride829/Git/steambuddy/require_app.rb": {
+      "/home/youthink/Desktop/steamcircle/require_app.rb": {
         "lines": [
           null,
           null,
           null,
           1,
           1,
-          4,
+          6,
           null,
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/friends.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/pride829/Git/steambuddy/lib/owned_games.rb": {
+      "/home/youthink/Desktop/steamcircle/lib/friends.rb": {
         "lines": [
           null,
           null,
@@ -39,20 +21,17 @@
           null,
           1,
           1,
-          null,
           1,
-          0,
-          0,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/steam_api.rb": {
+      "/home/youthink/Desktop/steamcircle/lib/steam_api.rb": {
         "lines": [
           null,
           null,
@@ -66,42 +45,63 @@
           1,
           null,
           1,
-          0,
+          3,
           null,
           null,
           1,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
           null,
           1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          0,
+          2,
+          2,
+          2,
           null,
           null,
           1,
           null,
-          0,
+          1,
+          3,
+          null,
+          null,
+          1,
+          null,
+          3,
           null,
           null,
           null,
           null,
-          0,
-          0,
+          3,
+          3,
           null,
           null,
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/steam_info.rb": {
+      "/home/youthink/Desktop/steamcircle/lib/owned_games.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/youthink/Desktop/steamcircle/lib/steam_info.rb": {
         "lines": [
           null,
           null,
@@ -152,8 +152,49 @@
           1,
           1
         ]
+      },
+      "/home/youthink/Desktop/steamcircle/lib/entities/friends.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/youthink/Desktop/steamcircle/lib/entities/owned_games.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1666955193
+    "timestamp": 1666957043
   }
 }

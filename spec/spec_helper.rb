@@ -9,7 +9,8 @@ require 'minitest/autorun'
 require 'vcr'
 require 'webmock'
 
-require_relative '../lib/steam_api'
+require_relative '../require_app'
+require_app
 
 CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
 STEAM_KEY = CONFIG['steam_key']

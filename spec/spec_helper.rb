@@ -12,9 +12,8 @@ require 'webmock'
 require_relative '../require_app'
 require_app
 
-CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
-STEAM_KEY = CONFIG['steam_key']
-STEAM_ID = CONFIG['steam_id']
+require_relative 'read_config'
+
 CORRECT = YAML.safe_load(File.read('spec/fixtures/steam_results.yml'))
 
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'

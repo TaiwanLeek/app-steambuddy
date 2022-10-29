@@ -3,4 +3,4 @@
 require_relative 'require_app'
 require_app
 
-run CodePraise::App.freeze.app
+run SteamBuddy::App.freeze.app

@@ -12,7 +12,7 @@ require 'webmock'
 require_relative '../require_app'
 require_app
 
-require_relative 'read_config'
+require_relative 'test_config'
 
 CORRECT = YAML.safe_load(File.read('spec/fixtures/steam_results.yml'))
 

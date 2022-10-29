@@ -19,10 +19,6 @@ module SteamBuddy
       def find_games(steam_id)
         owned_games_data = @gateway.owned_games_data(steam_id)
         game_list_data = owned_games_data['games']
-        build_entities(game_list_data)
-      end
-
-      def build_entities(game_list_data)
         return game_list_data unless game_list_data
 
         game_list_data.map do |data|

@@ -5,12 +5,6 @@ require_app
 
 require_relative 'spec/read_config'
 
-friend_list = SteamBuddy::Steam::Api.new(STEAM_KEY)
-  .friend_list_data(STEAM_ID)
+user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY).find(STEAM_ID)
 
-owned_games = SteamBuddy::Steam::Api.new(STEAM_KEY)
-  .owned_games_data(STEAM_ID)
-
-puts friend_list
-
-puts owned_games
+puts user

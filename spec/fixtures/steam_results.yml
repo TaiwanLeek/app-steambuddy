@@ -1067,12 +1067,12 @@ owned:
       playtime_linux_forever: 0
       rtime_last_played: 1596534044
     - appid: 305620
-      playtime_2weeks: 2539
-      playtime_forever: 8363
-      playtime_windows_forever: 3261
+      playtime_2weeks: 2627
+      playtime_forever: 8521
+      playtime_windows_forever: 3419
       playtime_mac_forever: 0
       playtime_linux_forever: 1173
-      rtime_last_played: 1666901202
+      rtime_last_played: 1666984120
     - appid: 333600
       playtime_forever: 58
       playtime_windows_forever: 0
@@ -1675,7 +1675,6 @@ owned:
       playtime_linux_forever: 163
       rtime_last_played: 1661960380
     - appid: 601510
-      playtime_2weeks: 7
       playtime_forever: 265
       playtime_windows_forever: 265
       playtime_mac_forever: 0
@@ -1874,7 +1873,6 @@ owned:
       playtime_linux_forever: 0
       rtime_last_played: 0
     - appid: 804010
-      playtime_2weeks: 13
       playtime_forever: 13
       playtime_windows_forever: 13
       playtime_mac_forever: 0

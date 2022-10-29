@@ -1,0 +1,7 @@
+﻿---
+  detectors:
+    IrresponsibleModule:
+      enabled: false
+  exclude_paths:
+    - _snippets
+    - spec/fixtures/steam_info.rb # one-time test fixture creator

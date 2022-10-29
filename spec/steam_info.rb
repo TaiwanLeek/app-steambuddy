@@ -18,8 +18,6 @@ class TakeResult
   end
 
   def response
-    puts @api
-    puts @param
     response = HTTParty.get(@api, @param)
     JSON.parse(response.body)
   end

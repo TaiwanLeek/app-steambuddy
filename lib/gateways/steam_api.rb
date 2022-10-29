@@ -30,7 +30,6 @@ module SteamBuddy
 
       def owned_games(steam_id)
         url = st_api_path('IPlayerService/GetOwnedGames/v1')
-        puts steam_id
         call_st_url(url, steam_id)['response']
       end
 

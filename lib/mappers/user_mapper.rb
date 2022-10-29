@@ -5,54 +5,61 @@ module SteamBuddy
   module Steam
     # Data Mapper: Steam contributor -> User entity
     class UserMapper
-      def initialize(gh_token, gateway_class = Steam::Api)
-        @token = gh_token
+      def initialize(steam_key, gateway_class = Steam::Api)
+        @key = steam_key
         @gateway_class = gateway_class
-        @gateway = @gateway_class.new(@token)
+        @gateway = @gateway_class.new(@key)
       end
 
-      def load_several(url)
-        @gateway.friend_list_data(url).map do |data|
-          UserMapper.build_entity(data)
+      def find(steam_id)
+        friend_list_data = @gateway.friend_list_data(steam_id)
+        build_entity(steam_id, friend_list_data)
+      end
+
+      def build_entity(steam_id, friend_list_data)
+        DataMapper.new(steam_id, friend_list_data, @key, @gateway_class).build_entity
+      end
+
+      # Extracts entity specific elements from data structure
+      class DataMapper
+        def initialize(steam_id, friend_list_data, key, gateway_class)
+          @steam_id = steam_id
+          @friend_list_data = friend_list_data
+          @played_game_mapper = PlayedGameMapper.new(
+            key, gateway_class
+          )
         end
-      end
 
-      def self.build_entity(data)
-        DataMapper.new(data).build_entity
-      end
-    end
+        def build_entity
+          SteamBuddy::Entity::User.new(
+            steam_id: @steam_id,
+            games_count:,
+            played_games:,
+            friend_list:
+          )
+        end
 
-    # Extracts entity specific elements from data structure
-    class DataMapper
-      def initialize(data)
-        @data = data
-      end
+        private
 
-      def build_entity
-        Entity::User.new(
-          steamid:,
-          games_count:,
-          played_games:,
-          friend_list:
-        )
-      end
+        def games_count
+          @played_game_mapper.find_game_count(@steam_id)
+        end
 
-      private
+        def played_games
+          @played_game_mapper.find_games(@steam_id)
+        end
 
-      def steamid
-        @data['steamid']
-      end
-
-      def games_count
-        @data['games_count']
-      end
-
-      def played_games
-        @data['played_games']
-      end
-
-      def friend_list
-        @data['friend_list']
+        def friend_list
+          @friend_list_data.map do |friend_data|
+            friend_steam_id = friend_data['steamid']
+            SteamBuddy::Entity::User.new(
+              steam_id: friend_steam_id,
+              games_count: nil,
+              played_games: nil,
+              friend_list: nil
+            )
+          end
+        end
       end
     end
   end

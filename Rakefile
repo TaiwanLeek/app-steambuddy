@@ -8,6 +8,14 @@ task :default do
   puts `rake -T`
 end
 
+task :run do
+  sh 'bundle exec puma'
+end
+
+task :rerun do
+  sh "rerun -c --ignore 'coverage/*' -- bundle exec puma"
+end
+
 desc 'run tests'
 task :spec do
   sh 'ruby spec/steam_info.rb'

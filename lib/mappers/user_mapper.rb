@@ -33,7 +33,7 @@ module SteamBuddy
         def build_entity
           SteamBuddy::Entity::User.new(
             steam_id: @steam_id,
-            games_count:,
+            game_count:,
             played_games:,
             friend_list:
           )
@@ -41,7 +41,7 @@ module SteamBuddy
 
         private
 
-        def games_count
+        def game_count
           @played_game_mapper.find_game_count(@steam_id)
         end
 
@@ -54,7 +54,7 @@ module SteamBuddy
             friend_steam_id = friend_data['steamid']
             SteamBuddy::Entity::User.new(
               steam_id: friend_steam_id,
-              games_count: nil,
+              game_count: nil,
               played_games: nil,
               friend_list: nil
             )

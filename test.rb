@@ -5,6 +5,6 @@ require_app
 
 require_relative 'spec/read_config'
 
-a = SteamBuddy::Steam::UserMapper.new(STEAM_KEY).find(STEAM_ID)
+user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY).find(STEAM_ID)
 
-puts a
+puts user

@@ -8,6 +8,7 @@ task :default do
   puts `rake -T`
 end
 
+desc 'run service'
 task :run do
   sh 'bundle exec puma'
 end

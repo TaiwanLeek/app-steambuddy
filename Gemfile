@@ -29,21 +29,21 @@ end
 
 ## Testing
 group :test do
-    gem 'minitest', '~> 5'
-    gem 'minitest-rg', '~> 5'
+  gem 'minitest', '~> 5'
+  gem 'minitest-rg', '~> 5'
 
-    gem 'simplecov', '~> 0'
-    gem 'vcr', '~> 6'
-    gem 'webmock', '~> 3'
+  gem 'simplecov', '~> 0'
+  gem 'vcr', '~> 6'
+  gem 'webmock', '~> 3'
 end
 
 group :development do
-    gem 'rerun', '~> 0'
+  gem 'rerun', '~> 0'
 end
 
 ## Code Quality
 group :development do
-    gem 'flog'
-    gem 'reek'
-    gem 'rubocop'
+  gem 'flog'
+  gem 'reek'
+  gem 'rubocop'
 end

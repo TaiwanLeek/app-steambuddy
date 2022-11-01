@@ -23,6 +23,23 @@ task :spec do
   sh 'ruby spec/gateway_steam_spec.rb'
 end
 
+namespace :db do
+  task :config do
+    require 'sequel'
+    require_relative 'config/environment' # load config info
+    require_relative 'spec/helpers/database_helper'
+
+    def app = SteamBuddy::App
+  end
+
+  desc 'Run migrations'
+  task :migrate => :config do
+    Sequel.extension :migration
+    puts "Migrating #{app.environment} database to latest"
+    Sequel::Migrator.run(app.DB, 'db/migrations')
+  end
+end
+
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do

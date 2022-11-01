@@ -3,6 +3,8 @@
 require_relative 'require_app'
 require_app
 
-require_relative 'config/environment'
+require_relative 'spec/helpers/test_config_helper'
 
-SteamBuddy::App.new('0')
+user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY).find(STEAM_ID)
+
+puts user

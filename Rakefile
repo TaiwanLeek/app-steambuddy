@@ -43,6 +43,17 @@ namespace :db do
     puts "Migrating #{app.environment} database to latest"
     Sequel::Migrator.run(app.DB, 'db/migrations')
   end
+
+  desc 'Delete dev or test database file (set correct RACK_ENV)'
+  task :drop => :config do
+    if app.environment == :production
+      puts 'Do not damage production database!'
+      return
+    end
+
+    FileUtils.rm(SteamBuddy::App.config.DB_FILENAME)
+    puts "Deleted #{SteamBuddy::App.config.DB_FILENAME}"
+  end
 end
 
 namespace :vcr do

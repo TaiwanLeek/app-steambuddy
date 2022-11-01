@@ -12,16 +12,15 @@ module SteamBuddy
       end
 
       def find_game_count(steam_id)
-        @gateway.owned_games_data(steam_id)['game_count']
+        game_count = @gateway.owned_games_data(steam_id)['game_count']
+        game_count || 0
       end
 
       def find_games(steam_id)
         owned_games_data = @gateway.owned_games_data(steam_id)
         game_list_data = owned_games_data['games']
-        build_entities(game_list_data)
-      end
+        return game_list_data unless game_list_data
 
-      def build_entities(game_list_data)
         game_list_data.map do |data|
           DataMapper.new(data).build_entity
         end

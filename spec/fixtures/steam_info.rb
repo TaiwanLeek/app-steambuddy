@@ -2,7 +2,7 @@
 
 # Steam Web API Reference: https://steamcommunity.com/dev
 
-require_relative 'read_config'
+require_relative '../test_config'
 
 require 'httparty'
 require 'json'
@@ -43,5 +43,5 @@ st_results = {}
 st_results['friends'] = friends_info['friendslist']['friends']
 st_results['owned'] = owned_info
 
-filename = 'spec/fixtures/steam_results.yml'
+filename = 'steam_results.yml'
 File.write(filename, st_results.to_yaml)

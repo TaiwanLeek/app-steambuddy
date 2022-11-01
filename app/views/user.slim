@@ -4,8 +4,16 @@
       span.user.attribute Your SteamID64:
     .col
       span.user.detail = user.steam_id
-  .row
+  .row.top-buffer
     .col
-      span.user.attribute Your game count:
+      span.user.attribute Game Count:
     .col
       span.user.detail = user.game_count
+  .row.top-buffer
+    .col
+      span.user.attribute Friend List:
+    .col
+      .row
+        - user.friend_list.each do |friend|
+          .col-sm-12
+            span.user.detail = friend.steam_id

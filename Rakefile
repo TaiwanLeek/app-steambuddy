@@ -23,6 +23,11 @@ task :spec do
   sh 'ruby spec/gateway_steam_spec.rb'
 end
 
+desc 'Run application console'
+task :console do
+  sh 'pry -r ./load_all'
+end
+
 namespace :db do
   task :config do
     require 'sequel'

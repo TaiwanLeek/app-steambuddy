@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ENV['RACK_ENV'] = 'test'
+require_relative 'test_config_helper'
 
 require 'simplecov'
 SimpleCov.start
@@ -13,8 +13,6 @@ require 'webmock'
 
 require_relative '../require_app'
 require_app
-
-require_relative 'test_config_helper'
 
 CORRECT = YAML.safe_load(File.read('spec/fixtures/steam_results.yml'))
 

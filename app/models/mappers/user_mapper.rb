@@ -30,6 +30,7 @@ module SteamBuddy
           )
         end
 
+        # Why this can work???
         def build_entity
           SteamBuddy::Entity::User.new(
             steam_id: @steam_id,

@@ -30,18 +30,28 @@ module SteamBuddy
             routing.halt 400 unless steam_id64 &&
                                     steam_id64.length == STEAM_ID64_LENGTH
 
-            routing.redirect "user/#{steam_id64}"
+            # Get user from Steam
+            user = Steam::UserMapper
+              .new(App.config.STEAM_KEY)
+              .find(steam_id64)
+
+            # Add user to database
+            Repository::For.entity(user).create(user)
+
+            # Redirect viewer to user page
+            routing.redirect "user/#{user.steam_id}"
           end
         end
 
         routing.on String do |steam_id64|
           # GET /user/steam_id64
           routing.get do
-            steam_user = Steam::UserMapper
-              .new(STEAM_KEY)
-              .find(steam_id64)
+            # Get user from database
+            user = Repository::For.klass(Entity::User)
+            .find_id(steam_id64)
 
-            view 'user', locals: { user: steam_user }
+            # Show viewer the user
+            view 'user', locals: { user: }
           end
         end
       end

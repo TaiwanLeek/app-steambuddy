@@ -7,9 +7,9 @@ Sequel.migration do
     create_table(:users) do
       primary_key :id
 
-      Integer     :steam_id, unique: true
-      Integer     :game_count, unique: false, null: false
-      String      :played_games, unique: false. null: true
+      String      :steam_id, unique: true
+      Integer     :game_count, unique: false, null: true
+      String      :played_games, unique: false, null: true
       String      :friend_list, unique: false, null: true
 
       DateTime :created_at

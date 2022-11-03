@@ -8,6 +8,10 @@ module SteamBuddy
         rebuild_entity Database::UserOrm.first(steam_id:)
       end
 
+      def self.all 
+        Database::UserOrm.all.map { |db_user| rebuild_entity(db_user) }
+      end
+      
       def self.find(entity)
         find_id(entity.steam_id)
       end
@@ -24,8 +28,8 @@ module SteamBuddy
         Entity::User.new(
           steam_id: db_record.steam_id,
           game_count: db_record.game_count,
-          played_games: nil,
-          friend_list: nil
+          played_games: db_record.played_games,
+          friend_list: db_record.friend_list
         )
       end
 
@@ -50,7 +54,7 @@ module SteamBuddy
         end
 
         def call
-          owner = Users.db_find_or_create(@entity)
+          Users.db_find_or_create(@entity)
 
 =begin
           create_user.tap do |db_user|

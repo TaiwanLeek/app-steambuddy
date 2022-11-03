@@ -19,7 +19,8 @@ module SteamBuddy
 
       # GET /
       routing.root do
-        view 'home'
+        users = Repository::For.klass(Entity::User).all
+        view 'home', locals: {users: }
       end
 
       routing.on 'user' do

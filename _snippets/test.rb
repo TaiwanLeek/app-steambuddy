@@ -12,7 +12,7 @@ test_user = SteamBuddy::Repository::For.entity(user)
 test_user2 = SteamBuddy::Repository::For.entity(user).create(user)
 database_user = SteamBuddy::Repository::For.klass(SteamBuddy::Entity::User)
             .find_id("76561198012078200")
-
+                      
 =begin
 SteamBuddy::Entity::User.new(
             steam_id: @steam_id,

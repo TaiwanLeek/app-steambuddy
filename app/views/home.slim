@@ -16,3 +16,22 @@
         } Show Game Count
     .row
       .col-md-12.blank-row
+    - if users.any?
+      table class="table table-hover" id="users_table"
+        thead
+          tr
+            th Steam ID
+            th Game Count
+            th Test Message
+        tbody
+          - users.each.with_index do |user, index|
+            tr class="table-row user_row" data-href="user/#{user.steam_id}" id="user[#{index}].row"
+              td id='td_id'
+                span class="user_table_id" id="user[#{index}].id"
+                  = user.steam_id
+              td id='td_game_count'
+                span class="user_table_game_count" id="user[#{index}].game_count"
+                  = user.game_count
+              td id='td_test'
+                span class="user_table_test" id="test"
+                  = "test"

@@ -20,7 +20,7 @@ module SteamBuddy
       # GET /
       routing.root do
         users = Repository::For.klass(Entity::User).all
-        view 'home', locals: {users: }
+        view 'home', locals: { users: }
       end
 
       routing.on 'user' do
@@ -40,7 +40,7 @@ module SteamBuddy
             Repository::For.entity(user).create(user)
 
             # Redirect viewer to user page
-            routing.redirect "user/#{user.steam_id}"
+            routing.redirect "user/#{user.steam_id64}"
           end
         end
 
@@ -48,9 +48,8 @@ module SteamBuddy
           # GET /user/steam_id64
           routing.get do
             # Get user from database
-            user = Repository::For.klass(Entity::User)
-            .find_id(steam_id64)
-
+            user = Repository::For.klass(Entity::User).find_id(steam_id64)
+            puts steam_id64
             # Show viewer the user
             view 'user', locals: { user: }
           end

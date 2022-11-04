@@ -11,6 +11,7 @@ module SteamBuddy
     class User < Dry::Struct
       include Dry.Types
 
+      attribute :steam_id64, Strict::String
       attribute :steam_id, Strict::String
       attribute :game_count, Integer.optional
       attribute :played_games, Array.of(PlayedGame).optional

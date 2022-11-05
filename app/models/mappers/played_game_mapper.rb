@@ -11,13 +11,13 @@ module SteamBuddy
         @gateway = @gateway_class.new(@key)
       end
 
-      def find_game_count(steam_id)
-        game_count = @gateway.owned_games_data(steam_id)['game_count']
+      def find_game_count(steam_id64)
+        game_count = @gateway.owned_games_data(steam_id64)['game_count']
         game_count || 0
       end
 
-      def find_games(steam_id)
-        owned_games_data = @gateway.owned_games_data(steam_id)
+      def find_games(steam_id64)
+        owned_games_data = @gateway.owned_games_data(steam_id64)
         game_list_data = owned_games_data['games']
         return game_list_data unless game_list_data
 

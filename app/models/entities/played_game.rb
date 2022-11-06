@@ -11,6 +11,10 @@ module SteamBuddy
 
       attribute :appid, Strict::Integer
       attribute :played_time, Strict::Integer
+
+      def to_attr_hash
+        to_hash.except()
+      end
     end
   end
 end

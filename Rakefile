@@ -23,6 +23,39 @@ task :spec do
   sh 'ruby spec/gateway_steam_spec.rb'
 end
 
+desc 'Run application console'
+task :console do
+  sh 'pry -r ./load_all'
+end
+
+namespace :db do
+  task :config do
+    require 'sequel'
+    require_relative 'config/environment' # load config info
+    require_relative 'spec/helpers/database_helper'
+
+    def app = SteamBuddy::App
+  end
+
+  desc 'Run migrations'
+  task :migrate => :config do
+    Sequel.extension :migration
+    puts "Migrating #{app.environment} database to latest"
+    Sequel::Migrator.run(app.DB, 'db/migrations')
+  end
+
+  desc 'Delete dev or test database file (set correct RACK_ENV)'
+  task :drop => :config do
+    if app.environment == :production
+      puts 'Do not damage production database!'
+      return
+    end
+
+    FileUtils.rm(SteamBuddy::App.config.DB_FILENAME)
+    puts "Deleted #{SteamBuddy::App.config.DB_FILENAME}"
+  end
+end
+
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do

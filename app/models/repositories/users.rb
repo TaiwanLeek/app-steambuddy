@@ -59,8 +59,7 @@ module SteamBuddy
 
         def call
           Users.db_find_or_create(@entity)
-
-          @entity.played_games.each do |game|
+          @entity&.played_games&.each do |game|
             PlayedGames.db_find_or_create(game)
           end
         end

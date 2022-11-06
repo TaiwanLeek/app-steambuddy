@@ -16,9 +16,9 @@
       span.user.detail = user.game_count
   .row.top-buffer
     .col
-      span.user.attribute Your Game Count:
+      span.user.attribute Your Friends:
     .col
       .row
-        - user.friend_list.each do |friend|
+        - user&.friend_list&.each do |friend|
           .col-sm-12
             span.user.detail = friend.steam_id

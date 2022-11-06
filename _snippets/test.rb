@@ -7,7 +7,6 @@ require_relative '../spec/helpers/test_config_helper'
 
 user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY).find(STEAM_ID)
 app = SteamBuddy::App.new('1')
-api = SteamBuddy::Steam::Api.new("C450FFC18AD99BD334178BF3546E8CD5").friend_list_data('76561198012078200')
 
 # Add user to database
 test_user = SteamBuddy::Repository::For.entity(user)
@@ -17,7 +16,6 @@ test_user = SteamBuddy::Repository::For.entity(user)
 database_user = SteamBuddy::Repository::For.klass(SteamBuddy::Entity::User)
 #.find_id("76561198012078200")
                       
-
 puts user
 puts app
 puts 'Test end.'

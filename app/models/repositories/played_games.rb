@@ -2,7 +2,7 @@
 
 module SteamBuddy
   module Repository
-    # Repository for Members
+    # Repository for PlayedGames
     class PlayedGames
       def self.find_id(id)
         rebuild_entity Database::PlayedGameOrm.first(id:)

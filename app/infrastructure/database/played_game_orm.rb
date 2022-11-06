@@ -6,7 +6,7 @@ module SteamBuddy
   module Database
     # Object-Relational Mapper for Users
     class PlayedGameOrm < Sequel::Model(:played_games)
-      many_to_one :owner,
+      many_to_one :player,
                   class: :'SteamBuddy::Database::UserOrm'
 
       plugin :timestamps, update_on_create: true

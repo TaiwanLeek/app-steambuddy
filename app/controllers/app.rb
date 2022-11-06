@@ -49,7 +49,7 @@ module SteamBuddy
           routing.get do
             # Get user from database
             user = Repository::For.klass(Entity::User).find_id(steam_id64)
-            puts steam_id64
+
             # Show viewer the user
             view 'user', locals: { user: }
           end

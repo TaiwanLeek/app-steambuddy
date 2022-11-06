@@ -19,7 +19,7 @@ module SteamBuddy
       def self.create(entity)
         raise 'User already exists' if find(entity)
 
-        db_user = PersistUser.new(entity).call
+        PersistUser.new(entity).call
         rebuild_entity(entity)
       end
 
@@ -60,15 +60,9 @@ module SteamBuddy
         def call
           Users.db_find_or_create(@entity)
 
-=begin
-          create_user.tap do |db_user|
-            db_user.update(owner:)
-
-            @entity.contributors.each do |contributor|
-              db_user.add_contributor(db_find_or_create(contributor))
-            end
+          @entity.played_games.each do |game|
+            PlayedGames.db_find_or_create(game)
           end
-=end
         end
       end
     end

@@ -17,15 +17,7 @@ test_user = SteamBuddy::Repository::For.entity(user)
 database_user = SteamBuddy::Repository::For.klass(SteamBuddy::Entity::User)
 #.find_id("76561198012078200")
                       
-=begin
-SteamBuddy::Entity::User.new(
-            steam_id64: @steam_id,
-            steam_id: "bamboo",
-            game_count:,
-            played_games:,
-            friend_list:
-          )
-=end
+
 puts user
 puts app
 puts 'Test end.'

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module CodePraise
+module SteamBuddy
   module Repository
     # Repository for Members
     class PlayedGames

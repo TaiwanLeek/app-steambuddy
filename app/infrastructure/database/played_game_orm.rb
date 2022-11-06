@@ -6,13 +6,13 @@ module SteamBuddy
   module Database
     # Object-Relational Mapper for Users
     class PlayedGameOrm < Sequel::Model(:played_games)
-      many_to_one :user,
+      many_to_one :owner,
                   class: :'SteamBuddy::Database::UserOrm'
 
       plugin :timestamps, update_on_create: true
 
-      def self.find_or_create(game_info)
-        first(appid: game_info[:appid]) || create(game_info)
+      def self.find_or_create(played_game)
+        first(appid: played_game[:appid]) || create(played_game)
       end
     end
   end

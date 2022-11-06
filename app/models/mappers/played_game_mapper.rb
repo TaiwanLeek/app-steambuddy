@@ -22,18 +22,20 @@ module SteamBuddy
         return game_list_data unless game_list_data
 
         game_list_data.map do |data|
-          DataMapper.new(data).build_entity
+          DataMapper.new(steam_id64, data).build_entity
         end
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(data)
+        def initialize(steam_id64, data)
           @data = data
+          @player_id64 = steam_id64
         end
 
         def build_entity
           SteamBuddy::Entity::PlayedGame.new(
+            player_id64: @player_id64,
             appid:,
             played_time:
           )

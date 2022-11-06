@@ -16,6 +16,7 @@ module SteamBuddy
         return nil unless db_record
 
         Entity::PlayedGame.new(
+          player_id64: db_record.player_id64,
           appid: db_record.appid,
           played_time: db_record.played_time
         )

@@ -6,7 +6,7 @@ Sequel.migration do
   change do
     create_table(:played_games) do
       primary_key :id
-      foreign_key :player_id, :users
+      foreign_key :player_id64, :users
 
       Integer     :appid, unique: false, null: true
       Integer     :played_time, unique: false, null: true

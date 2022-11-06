@@ -17,7 +17,7 @@ module SteamBuddy
       end
 
       def self.create(entity)
-        raise 'User already exists' if find(entity)
+        # raise 'User already exists' if find(entity)
 
         PersistUser.new(entity).call
         rebuild_entity(entity)

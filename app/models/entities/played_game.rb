@@ -9,6 +9,7 @@ module SteamBuddy
     class PlayedGame < Dry::Struct
       include Dry.Types
 
+      attribute :player_id64, Strict::String
       attribute :appid, Strict::Integer
       attribute :played_time, Strict::Integer
 

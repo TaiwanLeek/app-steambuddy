@@ -2,14 +2,14 @@
 
 module SteamBuddy
   module Repository
-    # Repository for Users
-    class Users
+    # Repository for Players
+    class Players
       def self.find_id(steam_id64)
-        rebuild_entity Database::UserOrm.first(steam_id64:)
+        rebuild_entity Database::PlayerOrm.first(steam_id64:)
       end
 
       def self.all
-        Database::UserOrm.all.map { |db_user| rebuild_entity(db_user) }
+        Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }
       end
 
       def self.find(entity)
@@ -17,18 +17,18 @@ module SteamBuddy
       end
 
       def self.create(entity)
-        # raise 'User already exists' if find(entity)
+        # raise 'Player already exists' if find(entity)
 
-        PersistUser.new(entity).call
+        PersistPlayer.new(entity).call
         rebuild_entity(entity)
       end
 
       def self.rebuild_entity(db_record)
         return nil unless db_record
 
-        # Notice: in users entity, there are played_gmaes & friend_list attributes
-        # but in users db, these two attributes don't exist, so they got nil value
-        Entity::User.new(
+        # Notice: in players entity, there are played_gmaes & friend_list attributes
+        # but in players db, these two attributes don't exist, so they got nil value
+        Entity::Player.new(
           steam_id64: db_record.steam_id64,
           steam_id: db_record.steam_id,
           game_count: db_record.game_count,
@@ -39,26 +39,26 @@ module SteamBuddy
 
       def self.rebuild_many(db_records)
         db_records.map do |db_member|
-          Users.rebuild_entity(db_member)
+          Players.rebuild_entity(db_member)
         end
       end
 
       def self.db_find_or_create(entity)
-        Database::UserOrm.find_or_create(entity.to_attr_hash)
+        Database::PlayerOrm.find_or_create(entity.to_attr_hash)
       end
 
-      # Helper class to persist user and its games to database
-      class PersistUser
+      # Helper class to persist player and its games to database
+      class PersistPlayer
         def initialize(entity)
           @entity = entity
         end
 
-        def create_user
-          Database::UserOrm.create(@entity.to_attr_hash)
+        def create_player
+          Database::PlayerOrm.create(@entity.to_attr_hash)
         end
 
         def call
-          Users.db_find_or_create(@entity)
+          Players.db_find_or_create(@entity)
           @entity&.played_games&.each do |game|
             PlayedGames.db_find_or_create(game)
           end

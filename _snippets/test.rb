@@ -5,11 +5,11 @@ require_app
 
 require_relative '../spec/helpers/test_config_helper'
 
-user = SteamBuddy::Steam::UserMapper
+player = SteamBuddy::Steam::PlayerMapper
     .new(STEAM_KEY)
     .find(STEAM_ID)
 
-# Add user to database
-SteamBuddy::Repository::For.entity(user).create(user)
+# Add player to database
+SteamBuddy::Repository::For.entity(player).create(player)
 
 puts 'Test end.'

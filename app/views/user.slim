@@ -1,24 +1,24 @@
 .container
   .row
     .col
-      span.user.attribute Your SteamID64:
+      span.player.attribute Your SteamID64:
     .col
-      span.user.detail = user.steam_id64
+      span.player.detail = player.steam_id64
   .row
     .col
-      span.user.attribute Your Steam Name:
+      span.player.attribute Your Steam Name:
     .col
-      span.user.detail = user.steam_id
+      span.player.detail = player.steam_id
   .row.top-buffer
     .col
-      span.user.attribute Game Count:
+      span.player.attribute Game Count:
     .col
-      span.user.detail = user.game_count
+      span.player.detail = player.game_count
   .row.top-buffer
     .col
-      span.user.attribute Your Friends:
+      span.player.attribute Your Friends:
     .col
       .row
-        - user&.friend_list&.each do |friend|
+        - player&.friend_list&.each do |friend|
           .col-sm-12
-            span.user.detail = friend.steam_id
+            span.player.detail = friend.steam_id

@@ -33,7 +33,7 @@
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/entities/user.rb": {
+      "/home/pride829/Git/steambuddy/lib/entities/player.rb": {
         "lines": [
           null,
           null,
@@ -192,7 +192,7 @@
           null
         ]
       },
-      "/home/pride829/Git/steambuddy/lib/mappers/user_mapper.rb": {
+      "/home/pride829/Git/steambuddy/lib/mappers/player_mapper.rb": {
         "lines": [
           null,
           null,

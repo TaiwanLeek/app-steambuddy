@@ -4,11 +4,11 @@ require 'sequel'
 
 Sequel.migration do
   change do
-    create_table(:users) do
+    create_table(:players) do
       primary_key :id
 
-      String      :steam_id64, unique: true
-      String      :steam_id, unique: false, null: true
+      String      :remote_id, unique: true
+      String      :playername, unique: false, null: true
       Integer     :game_count, unique: false, null: true
 
       DateTime :created_at

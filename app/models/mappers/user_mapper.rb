@@ -3,8 +3,8 @@
 module SteamBuddy
   # Provides access to contributor data
   module Steam
-    # Data Mapper: Steam contributor -> User entity
-    class UserMapper
+    # Data Mapper: Steam contributor -> Player entity
+    class PlayerMapper
       def initialize(steam_key, gateway_class = Steam::Api)
         @key = steam_key
         @gateway_class = gateway_class
@@ -31,7 +31,7 @@ module SteamBuddy
         end
 
         def build_entity
-          SteamBuddy::Entity::User.new(
+          SteamBuddy::Entity::Player.new(
             steam_id64: @steam_id64,
             steam_id: 'bamboo',
             game_count:,
@@ -53,7 +53,7 @@ module SteamBuddy
         def friend_list
           @friend_list_data.map do |friend_data|
             friend_steam_id = friend_data['steamid']
-            SteamBuddy::Entity::User.new(
+            SteamBuddy::Entity::Player.new(
               steam_id64: friend_steam_id,
               steam_id: 'bamboo',
               game_count: nil,

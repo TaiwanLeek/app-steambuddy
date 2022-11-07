@@ -25,40 +25,40 @@ describe 'Tests Steam API library' do
 
   describe 'Friends information' do
     it 'should provide correct friend list' do
-      user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY)
+      player = SteamBuddy::Steam::PlayerMapper.new(STEAM_KEY)
         .find(STEAM_ID)
-      user_friend_set = user.friend_list.map(&:steam_id)
+      player_friend_set = player.friend_list.map(&:steam_id)
 
       correct_friend_set = CORRECT['friends'].map do |friend|
         friend['steamid']
       end
 
-      _(user_friend_set).must_equal correct_friend_set
+      _(player_friend_set).must_equal correct_friend_set
     end
   end
   describe 'Owned games information' do
     it 'should provide correct game count' do
-      user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY)
+      player = SteamBuddy::Steam::PlayerMapper.new(STEAM_KEY)
         .find(STEAM_ID)
       correct_game_count = CORRECT['owned']['response']['game_count']
       if correct_game_count
-        _(user.game_count).must_equal correct_game_count
+        _(player.game_count).must_equal correct_game_count
       else
         assert_nil owned_games.count
       end
     end
 
     it 'should provide correct owned game list' do
-      user = SteamBuddy::Steam::UserMapper.new(STEAM_KEY)
+      player = SteamBuddy::Steam::PlayerMapper.new(STEAM_KEY)
         .find(STEAM_ID)
-      user_owned_games_set = user.played_games.map(&:appid)
+      player_owned_games_set = player.played_games.map(&:appid)
       correct_games_set = CORRECT['owned']['response']['games'].map do |game|
         game['appid']
       end
       if correct_games_set
-        _(user_owned_games_set).must_equal correct_games_set
+        _(player_owned_games_set).must_equal correct_games_set
       else
-        assert_nil user_owned_games_set
+        assert_nil player_owned_games_set
       end
     end
   end

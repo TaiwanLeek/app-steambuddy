@@ -8,14 +8,14 @@ require_relative('played_game')
 module SteamBuddy
   module Entity
     # Domain entity for team members
-    class User < Dry::Struct
+    class Player < Dry::Struct
       include Dry.Types
 
-      attribute :steam_id64, Strict::String
+      attribute :remote_id, Strict::String
       attribute :steam_id, Strict::String
       attribute :game_count, Integer.optional
       attribute :played_games, Array.of(PlayedGame).optional
-      attribute :friend_list, Array.of(User).optional
+      attribute :friend_list, Array.of(Player).optional
 
       def to_attr_hash
         to_hash.except(:played_games, :friend_list)

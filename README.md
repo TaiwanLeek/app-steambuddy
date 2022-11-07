@@ -13,7 +13,7 @@ SteamBuddy pulls data from Steam's API, and make list out of your *favorite play
 
 ## Long-term gols
 
-- Static analysis among certain user and all their friends' gaming data.
+- Static analysis among certain player and all their friends' gaming data.
 
 ## TODO:
 

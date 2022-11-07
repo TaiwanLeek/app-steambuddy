@@ -1,5 +1,5 @@
 .container
-  form role="form" action="/user" method='POST' id='show-user-game-count'
+  form role="form" action="/player" method='POST' id='show-player-game-count'
     .row.vertical-align.query-bar
       .col-md-2.col-sm-3
         .text-right STEAMID64:
@@ -14,26 +14,26 @@
         button { 
           type='submit' id='repo-form-submit' class='submit' 
           value='submit' class="btn btn-success" 
-        } Show User Information
+        } Show Player Information
     .row
       .col-md-12.blank-row
-    - if users.any?
-      table class="table table-hover" id="users_table"
+    - if players.any?
+      table class="table table-hover" id="players_table"
         thead
           tr
             th Steam ID
             th Steam Name
             th Game Count
         tbody
-          - users.each.with_index do |user, index|
-            tr class="table-row user_row" data-href="user/#{user.steam_id}" id="user[#{index}].row"
+          - players.each.with_index do |player, index|
+            tr class="table-row player_row" data-href="player/#{player.steam_id}" id="player[#{index}].row"
               td id='td_id'
-                span class="user_table_id" id="user[#{index}].steam_id64"
-                  = user.steam_id64
+                span class="player_table_id" id="player[#{index}].steam_id64"
+                  = player.steam_id64
               td id='td_name'
-                span class="user_table_name" id="user[#{index}].steam_id"
-                  = user.steam_id
+                span class="player_table_name" id="player[#{index}].steam_id"
+                  = player.steam_id
               td id='td_game_count'
-                span class="user_table_game_count" id="user[#{index}].game_count"
-                  = user.game_count
+                span class="player_table_game_count" id="player[#{index}].game_count"
+                  = player.game_count
               

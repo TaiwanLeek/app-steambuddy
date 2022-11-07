@@ -19,39 +19,39 @@ module SteamBuddy
 
       # GET /
       routing.root do
-        users = Repository::For.klass(Entity::User).all
-        view 'home', locals: { users: }
+        players = Repository::For.klass(Entity::Player).all
+        view 'home', locals: { players: }
       end
 
-      routing.on 'user' do
+      routing.on 'player' do
         routing.is do
-          # POST /user/
+          # POST /player/
           routing.post do
             steam_id64 = routing.params['steam_id64']
             routing.halt 400 unless steam_id64 &&
                                     steam_id64.length == STEAM_ID64_LENGTH
 
-            # Get user from Steam
-            user = Steam::UserMapper
+            # Get player from Steam
+            player = Steam::PlayerMapper
               .new(App.config.STEAM_KEY)
               .find(steam_id64)
 
-            # Add user to database
-            Repository::For.entity(user).create(user)
+            # Add player to database
+            Repository::For.entity(player).create(player)
 
-            # Redirect viewer to user page
-            routing.redirect "user/#{user.steam_id64}"
+            # Redirect viewer to player page
+            routing.redirect "player/#{player.steam_id64}"
           end
         end
 
         routing.on String do |steam_id64|
-          # GET /user/steam_id64
+          # GET /player/steam_id64
           routing.get do
-            # Get user from database
-            user = Repository::For.klass(Entity::User).find_id(steam_id64)
+            # Get player from database
+            player = Repository::For.klass(Entity::Player).find_id(steam_id64)
 
-            # Show viewer the user
-            view 'user', locals: { user: }
+            # Show viewer the player
+            view 'player', locals: { player: }
           end
         end
       end

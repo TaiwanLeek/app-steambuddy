@@ -33,7 +33,7 @@ module SteamBuddy
         def build_entity
           SteamBuddy::Entity::User.new(
             steam_id64: @steam_id64,
-            steam_id: "bamboo",
+            steam_id: 'bamboo',
             game_count:,
             played_games:,
             friend_list:
@@ -55,7 +55,7 @@ module SteamBuddy
             friend_steam_id = friend_data['steamid']
             SteamBuddy::Entity::User.new(
               steam_id64: friend_steam_id,
-              steam_id: "bamboo",
+              steam_id: 'bamboo',
               game_count: nil,
               played_games: nil,
               friend_list: nil

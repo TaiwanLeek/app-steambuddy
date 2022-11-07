@@ -25,7 +25,9 @@ module SteamBuddy
 
       # Database Setup
       DB = Sequel.connect(ENV.fetch('DATABASE_URL'))
+      # rubocop:disable Naming/MethodName
       def self.DB = DB
+      # rubocop:enable Naming/MethodName
     end
   end
 end

@@ -8,7 +8,7 @@ Sequel.migration do
       primary_key :id
 
       String      :remote_id, unique: true
-      String      :playername, unique: false, null: true
+      String      :username, unique: false, null: true
       Integer     :game_count, unique: false, null: true
 
       DateTime :created_at

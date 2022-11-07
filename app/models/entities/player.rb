@@ -12,7 +12,7 @@ module SteamBuddy
       include Dry.Types
 
       attribute :remote_id, Strict::String
-      attribute :steam_id, Strict::String
+      attribute :username, Strict::String
       attribute :game_count, Integer.optional
       attribute :played_games, Array.of(PlayedGame).optional
       attribute :friend_list, Array.of(Player).optional

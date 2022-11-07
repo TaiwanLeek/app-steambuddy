@@ -35,15 +35,15 @@ module SteamBuddy
 
         def build_entity
           SteamBuddy::Entity::PlayedGame.new(
-            player_id64: @player_id64,
-            appid:,
+            player_remote_id: @player_id64,
+            remote_id:,
             played_time:
           )
         end
 
         private
 
-        def appid
+        def remote_id
           @data['appid']
         end
 

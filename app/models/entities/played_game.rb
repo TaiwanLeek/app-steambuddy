@@ -9,12 +9,12 @@ module SteamBuddy
     class PlayedGame < Dry::Struct
       include Dry.Types
 
-      attribute :player_id64, Strict::String
-      attribute :appid, Strict::Integer
+      attribute :player_remote_id, Strict::String
+      attribute :remote_id, Strict::Integer
       attribute :played_time, Strict::Integer
 
       def to_attr_hash
-        to_hash.except
+        to_hash.except(:player_remote_id, :remote_id)
       end
     end
   end

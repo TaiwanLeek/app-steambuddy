@@ -32,8 +32,8 @@ module SteamBuddy
 
         def build_entity
           SteamBuddy::Entity::Player.new(
-            steam_id64: @steam_id64,
-            steam_id: 'bamboo',
+            remote_id: @steam_id64,
+            username: 'temp_username',
             game_count:,
             played_games:,
             friend_list:
@@ -54,8 +54,9 @@ module SteamBuddy
           @friend_list_data.map do |friend_data|
             friend_steam_id = friend_data['steamid']
             SteamBuddy::Entity::Player.new(
-              steam_id64: friend_steam_id,
-              steam_id: 'bamboo',
+              remote_id: friend_steam_id,
+              username: 'temp_username',
+              # TODO: Add game_count and played_games
               game_count: nil,
               played_games: nil,
               friend_list: nil

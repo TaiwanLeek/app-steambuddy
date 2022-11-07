@@ -5,8 +5,8 @@
         .text-right STEAMID64:
       .col-md-8.col-sm-6
         input { 
-          type='text' name='steam_id64'
-          id='steam_id64_input' class="form-control"
+          type='text' name='remote_id'
+          id='remote_id' class="form-control"
           value="76561198326876707"
           placeholder="e.g. 76561198012078200"
         }
@@ -26,13 +26,13 @@
             th Game Count
         tbody
           - players.each.with_index do |player, index|
-            tr class="table-row player_row" data-href="player/#{player.steam_id}" id="player[#{index}].row"
+            tr class="table-row player_row" data-href="player/#{player.username}" id="player[#{index}].row"
               td id='td_id'
-                span class="player_table_id" id="player[#{index}].steam_id64"
-                  = player.steam_id64
+                span class="player_table_id" id="player[#{index}].remote_id"
+                  = player.remote_id
               td id='td_name'
-                span class="player_table_name" id="player[#{index}].steam_id"
-                  = player.steam_id
+                span class="player_table_name" id="player[#{index}].username"
+                  = player.username
               td id='td_game_count'
                 span class="player_table_game_count" id="player[#{index}].game_count"
                   = player.game_count

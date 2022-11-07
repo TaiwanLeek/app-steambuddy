@@ -4,8 +4,8 @@ module SteamBuddy
   module Repository
     # Repository for Players
     class Players
-      def self.find_id(steam_id64)
-        rebuild_entity Database::PlayerOrm.first(steam_id64:)
+      def self.find_id(remote_id)
+        rebuild_entity Database::PlayerOrm.first(remote_id:)
       end
 
       def self.all
@@ -13,12 +13,10 @@ module SteamBuddy
       end
 
       def self.find(entity)
-        find_id(entity.steam_id64)
+        find_id(entity.remote_id)
       end
 
       def self.create(entity)
-        # raise 'Player already exists' if find(entity)
-
         PersistPlayer.new(entity).call
         rebuild_entity(entity)
       end
@@ -26,11 +24,10 @@ module SteamBuddy
       def self.rebuild_entity(db_record)
         return nil unless db_record
 
-        # Notice: in players entity, there are played_gmaes & friend_list attributes
-        # but in players db, these two attributes don't exist, so they got nil value
+        # TODO: Add played_games and friend_list
         Entity::Player.new(
-          steam_id64: db_record.steam_id64,
-          steam_id: db_record.steam_id,
+          remote_id: db_record.remote_id,
+          username: db_record.username,
           game_count: db_record.game_count,
           played_games: nil,
           friend_list: nil
@@ -43,7 +40,7 @@ module SteamBuddy
         end
       end
 
-      def self.db_find_or_create(entity)
+      def self.find_or_create(entity)
         Database::PlayerOrm.find_or_create(entity.to_attr_hash)
       end
 
@@ -58,9 +55,9 @@ module SteamBuddy
         end
 
         def call
-          Players.db_find_or_create(@entity)
+          Players.find_or_create(@entity)
           @entity&.played_games&.each do |game|
-            PlayedGames.db_find_or_create(game)
+            PlayedGames.find_or_create(game)
           end
         end
       end

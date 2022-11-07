@@ -9,9 +9,9 @@ Sequel.migration do
       foreign_key :player_id, :players
       foreign_key :game_id, :games
 
-      Integer :played_time, unique: false, null: true
+      Integer     :played_time, unique: false, null: true
 
-      index %i[player_id game_id]
+      index       %i[player_id game_id]
 
       DateTime :created_at
       DateTime :updated_at

@@ -5,5 +5,5 @@ ENV['RACK_ENV'] = 'test'
 require 'yaml'
 
 CONFIG = YAML.safe_load(File.read('config/secrets.yml'))['test']
-STEAM_KEY = CONFIG['steam_key']
-STEAM_ID = CONFIG['steam_id_0']
+STEAM_KEY = CONFIG['STEAM_KEY']
+STEAM_ID = CONFIG['STEAM_ID_0']

@@ -56,9 +56,8 @@ module SteamBuddy
             SteamBuddy::Entity::Player.new(
               remote_id: friend_steam_id,
               username: 'temp_username',
-              # TODO: Add game_count and played_games
-              game_count: nil,
-              played_games: nil,
+              game_count: @played_game_mapper.find_game_count(friend_steam_id),
+              played_games: @played_game_mapper.find_games(friend_steam_id),
               friend_list: nil
             )
           end

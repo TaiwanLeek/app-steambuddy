@@ -37,9 +37,6 @@ namespace :db do
     def app = SteamBuddy::App
   end
 
-  desc 'Delete dev or test database, then migrate.'
-  task all: %i[drop migrate]
-
   desc 'Run migrations'
   task :migrate => :config do
     Sequel.extension :migration

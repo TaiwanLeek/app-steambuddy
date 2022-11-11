@@ -22,29 +22,11 @@ module SteamBuddy
       end
 
       def total_played_time
-        sum = 0
-        return sum if played_games.nil?
-
-        played_games.each do |games|
-          sum += games.played_time
-        end
-        sum / 60
+        played_games ? played_games.sum(&:played_time) : 0
       end
 
       def favorite_game
-        max_time = 0
-        fav_id = nil
-        return 'None', 0 if played_games.nil?
-
-        played_games.each do |played_game|
-          fav_id, max_time = if played_game.played_time > max_time
-                               [played_game.game.remote_id,
-                                played_game.played_time]
-                             else
-                               [fav_id, max_time]
-                             end
-        end
-        [fav_id, max_time / 60]
+        played_games&.min { |played_game_a, played_game_b| played_game_b.played_time <=> played_game_a.played_time }
       end
     end
   end

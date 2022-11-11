@@ -79,9 +79,9 @@
           td
             = player.username
           td
-            = player.favorite_game[0]
+            = player.favorite_game&.game&.remote_id
           td
-            = player.favorite_game[1]
+            = player.favorite_game&.played_time
         - player&.friend_list&.each do |friend|
           tr
             td
@@ -89,9 +89,9 @@
             td
               = friend.username
             td
-              = friend.favorite_game[0]
+              = friend.favorite_game&.game&.remote_id
             td
-              = friend.favorite_game[1]
+              = friend.favorite_game&.played_time
 
 javascript:
   function print_table()

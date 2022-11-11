@@ -10,20 +10,20 @@ module SteamBuddy
         @gateway = @gateway_class.new(@key)
       end
 
-      def find(steam_id64)
-        friend_list_data = @gateway.friend_list_data(steam_id64)
-        build_entity(steam_id64, friend_list_data)
+      def find(remote_id)
+        friend_list_data = @gateway.friend_list_data(remote_id)
+        build_entity(remote_id, friend_list_data)
       end
 
-      def build_entity(steam_id64, friend_list_data)
-        DataMapper.new(steam_id64, friend_list_data, @key, @gateway_class).build_entity
+      def build_entity(remote_id, friend_list_data)
+        DataMapper.new(remote_id, friend_list_data, @key, @gateway_class).build_entity
       end
 
       # TODO: Refactor this
       # I can't really describe why we need a datamapper here
       class DataMapper
-        def initialize(steam_id64, friend_list_data, key, gateway_class)
-          @steam_id64 = steam_id64
+        def initialize(remote_id, friend_list_data, key, gateway_class)
+          @remote_id = remote_id
           @friend_list_data = friend_list_data
           @played_game_mapper = PlayedGameMapper.new(
             key, gateway_class
@@ -32,7 +32,7 @@ module SteamBuddy
 
         def build_entity
           SteamBuddy::Entity::Player.new(
-            remote_id: @steam_id64,
+            remote_id: @remote_id,
             username: 'temp_username',
             game_count:,
             played_games:,
@@ -43,11 +43,11 @@ module SteamBuddy
         private
 
         def game_count
-          @played_game_mapper.find_game_count(@steam_id64)
+          @played_game_mapper.find_game_count(@remote_id)
         end
 
         def played_games
-          @played_game_mapper.find_games(@steam_id64)
+          @played_game_mapper.find_games(@remote_id)
         end
 
         def friend_list

@@ -4,6 +4,7 @@ require 'sequel'
 
 module SteamBuddy
   module Database
+    # Model for owned game data accessing
     class OwnedGameOrm < Sequel::Model(:owned_games)
       many_to_one :game,
                   class: :'SteamBuddy::Database::GameOrm'

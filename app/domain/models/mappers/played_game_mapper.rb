@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+MINUTES_IN_AN_HOUR = 60
+
 module SteamBuddy
   module Steam
     # Get played games data from Api
@@ -10,13 +12,13 @@ module SteamBuddy
         @gateway = @gateway_class.new(@key)
       end
 
-      def find_game_count(steam_id64)
-        game_count = @gateway.owned_games_data(steam_id64)['game_count']
+      def find_game_count(remote_id)
+        game_count = @gateway.owned_games_data(remote_id)['game_count']
         game_count || 0
       end
 
-      def find_games(steam_id64)
-        owned_games_data = @gateway.owned_games_data(steam_id64)
+      def find_games(remote_id)
+        owned_games_data = @gateway.owned_games_data(remote_id)
         game_list_data = owned_games_data['games']
         return game_list_data unless game_list_data
 
@@ -42,7 +44,7 @@ module SteamBuddy
         private
 
         def played_time
-          @data['playtime_forever']
+          @data['playtime_forever'].to_i / MINUTES_IN_AN_HOUR
         end
 
         def game

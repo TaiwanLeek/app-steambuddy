@@ -1,7 +1,8 @@
 ﻿---
 detectors:
-  UncommunicativeVariableName:
+  UncommunicativeMethodName:
     accept:
+      - DB
 exclude_paths:
   - _snippets
   - spec/fixtures/steam_info.rb # one-time test fixture creator

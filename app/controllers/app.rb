@@ -24,7 +24,7 @@ module SteamBuddy
         view 'home', locals: { players: }
       end
 
-      routing.on 'player' do
+      routing.on 'player' do # rubocop:disable Metrics/BlockLength
         routing.is do
           # POST /player/
           routing.post do
@@ -41,18 +41,29 @@ module SteamBuddy
             Repository::For.entity(player).find_or_create_with_friends(player)
 
             # Redirect viewer to player page
-            routing.redirect "player/#{player.remote_id}/game_count"
+            routing.redirect "player/#{player.remote_id}"
           end
         end
 
         routing.on String, String do |remote_id, info_value|
-          # GET /player/remote_id
+          # GET /player/remote_id/info_value
           routing.get do
             # Get player from database
             player = Repository::For.klass(Entity::Player).find_id(remote_id)
 
+            player ||= Steam::PlayerMapper
+              .new(App.config.STEAM_KEY)
+              .find(remote_id)
+
             # Show viewer the player
             view 'player', locals: { player:, info_value: }
+          end
+        end
+
+        routing.on String do |remote_id|
+          # GET /player/remote_id
+          routing.get do
+            routing.redirect "#{remote_id}/game_count"
           end
         end
       end

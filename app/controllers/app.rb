@@ -41,7 +41,7 @@ module SteamBuddy
             Repository::For.entity(player).find_or_create_with_friends(player)
 
             # Redirect viewer to player page
-            routing.redirect "player/#{player.remote_id}/0"
+            routing.redirect "player/#{player.remote_id}/game_count"
           end
         end
 

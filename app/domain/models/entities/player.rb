@@ -13,7 +13,7 @@ module SteamBuddy
 
       attribute :remote_id, Strict::String
       attribute :username, Strict::String
-      attribute :game_count, Integer.optional
+      attribute :game_count, Integer
       attribute :played_games, Array.of(PlayedGame).optional
       attribute :friend_list, Array.of(Player).optional
 
@@ -28,18 +28,18 @@ module SteamBuddy
         played_games.each do |games|
           sum += games.played_time
         end
-        sum/60
+        sum / 60
       end
 
       def favorite_game
         max_time = 0
         fav_id = nil
-        return "None", 0 if played_games.nil?
+        return 'None', 0 if played_games.nil?
 
         played_games.each do |games|
           fav_id, max_time = games.played_time > max_time ? [games.remote_id, games.played_time] : [fav_id, max_time]
         end
-        return fav_id, max_time/60
+        [fav_id, max_time / 60]
       end
     end
   end

@@ -21,21 +21,19 @@ module SteamBuddy
         return game_list_data unless game_list_data
 
         game_list_data.map do |data|
-          DataMapper.new(steam_id64, data).build_entity
+          DataMapper.new(data).build_entity
         end
       end
 
       # TODO: Refactor this
       # I can't really describe why we need a datamapper here
       class DataMapper
-        def initialize(steam_id64, data)
+        def initialize(data)
           @data = data
-          @player_id64 = steam_id64
         end
 
         def build_entity
           SteamBuddy::Entity::PlayedGame.new(
-            player_remote_id: @player_id64,
             game:,
             played_time:
           )

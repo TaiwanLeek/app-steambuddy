@@ -11,7 +11,6 @@ module SteamBuddy
     class PlayedGame < Dry::Struct
       include Dry.Types
 
-      attribute :player_remote_id, Strict::String
       attribute :game, Game
       attribute :played_time, Strict::Integer
 

@@ -6,9 +6,9 @@ module SteamBuddy
     class Players
       # Create records of one player and all of their friend
       def self.find_or_create_with_friends(entity)
-        db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
+        db_player = find_or_create(entity)
 
-        entity.friend_list.each do |friend_entity|
+        entity&.friend_list&.each do |friend_entity|
           db_player_friend = find_or_create(friend_entity)
 
           unless db_player.friends_dataset.first(remote_id: friend_entity.remote_id)
@@ -22,7 +22,11 @@ module SteamBuddy
 
       # Create a record of player in database based on a player entity
       def self.find_or_create(entity)
-        Database::PlayerOrm.find_or_create(entity.to_attr_hash)
+        db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
+        entity&.played_games&.each do |played_game_entity|
+          Games.find_or_create(played_game_entity.game.remote_id)
+        end
+        db_player
       end
     end
   end

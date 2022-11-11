@@ -5,7 +5,7 @@ require 'dry-struct'
 
 module SteamBuddy
   module Entity
-    # Domain entity for team members
+    # Domain entity for a game
     class Game < Dry::Struct
       include Dry.Types
 

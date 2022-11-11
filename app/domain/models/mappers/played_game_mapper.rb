@@ -1,9 +1,8 @@
 # frozen_string_literal: false
 
 module SteamBuddy
-  # Provides access to contributor data
   module Steam
-    # Data Mapper: Steam contributor -> PlayedGame entity
+    # Get played games data from Api
     class PlayedGameMapper
       def initialize(steam_key, gateway_class = Steam::Api)
         @key = steam_key
@@ -26,7 +25,8 @@ module SteamBuddy
         end
       end
 
-      # Extracts entity specific elements from data structure
+      # TODO: Refactor this
+      # I can't really describe why we need a datamapper here
       class DataMapper
         def initialize(steam_id64, data)
           @data = data
@@ -36,19 +36,19 @@ module SteamBuddy
         def build_entity
           SteamBuddy::Entity::PlayedGame.new(
             player_remote_id: @player_id64,
-            remote_id:,
+            game:,
             played_time:
           )
         end
 
         private
 
-        def remote_id
-          @data['appid']
-        end
-
         def played_time
           @data['playtime_forever']
+        end
+
+        def game
+          SteamBuddy::Entity::Game.new(remote_id: @data['appid'])
         end
       end
     end

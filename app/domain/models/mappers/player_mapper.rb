@@ -1,9 +1,8 @@
 # frozen_string_literal: false
 
 module SteamBuddy
-  # Provides access to contributor data
   module Steam
-    # Data Mapper: Steam contributor -> Player entity
+    # Get player data from Api
     class PlayerMapper
       def initialize(steam_key, gateway_class = Steam::Api)
         @key = steam_key
@@ -20,7 +19,8 @@ module SteamBuddy
         DataMapper.new(steam_id64, friend_list_data, @key, @gateway_class).build_entity
       end
 
-      # Extracts entity specific elements from data structure
+      # TODO: Refactor this
+      # I can't really describe why we need a datamapper here
       class DataMapper
         def initialize(steam_id64, friend_list_data, key, gateway_class)
           @steam_id64 = steam_id64

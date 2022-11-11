@@ -6,15 +6,13 @@ require 'dry-struct'
 module SteamBuddy
   module Entity
     # Domain entity for team members
-    class PlayedGame < Dry::Struct
+    class Game < Dry::Struct
       include Dry.Types
 
-      attribute :player_remote_id, Strict::String
-      attribute :game, Strict::Game
-      attribute :played_time, Strict::Integer
+      attribute :remote_id, Strict::Integer
 
       def to_attr_hash
-        to_hash.except(:player_remote_id, :remote_id)
+        to_hash
       end
     end
   end

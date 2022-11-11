@@ -1,24 +1,107 @@
 .container
-  .row
-    .col
-      span.player.attribute Your SteamID64:
-    .col
-      span.player.detail = player.remote_id
-  .row
-    .col
-      span.player.attribute Your Steam Name:
-    .col
-      span.player.detail = player.username
-  .row.top-buffer
-    .col
-      span.player.attribute Game Count:
-    .col
-      span.player.detail = player.game_count
-  .row.top-buffer
-    .col
-      span.player.attribute Your Friends:
-    .col
-      .row
+  <select id="info" onchange="print_table()" autocomplete="off" data-placeholder="Select Information">
+    <option value="0">game count</option>
+    <option value="1">played time</option>
+    <option value="2">favorite game</option>
+  </select>
+
+  <p id="demo"></p>
+
+  - if info_value == "0"
+    table.table id="game_count_table"
+      thead
+        tr
+          th Remote Id
+          th User Name
+          th Game Count
+          th
+      tbody
+        tr
+          td
+            = player.remote_id
+          td
+            = player.username
+          td
+            = player.game_count
         - player&.friend_list&.each do |friend|
-          .col-sm-12
-            span.player.detail = friend.steam_id
+          tr
+            td
+              = friend.remote_id
+            td
+              = friend.username
+            td
+              = friend.game_count
+
+  - if info_value == "1"
+    table.table id="played_time_table"
+      thead
+        tr
+          th Remote Id
+          th User Name
+          th Game Count
+          th Total Played Hour
+          th
+      tbody
+        tr
+          td
+            = player.remote_id
+          td
+            = player.username
+          td
+            = player.game_count
+          td
+            = player.total_played_time
+        - player&.friend_list&.each do |friend|
+          tr
+            td
+              = friend.remote_id
+            td
+              = friend.username
+            td
+              = friend.game_count
+            td
+              = friend.total_played_time
+
+  - if info_value == "2"
+    table.table id="favorite_game_table"
+      thead
+        tr
+          th Remote Id
+          th User Name
+          th Favorite Game
+          th Played Hour
+          th
+      tbody
+        tr
+          td
+            = player.remote_id
+          td
+            = player.username
+          td
+            = player.favorite_game[0]
+          td
+            = player.favorite_game[1]
+        - player&.friend_list&.each do |friend|
+          tr
+            td
+              = friend.remote_id
+            td
+              = friend.username
+            td
+              = friend.favorite_game[0]
+            td
+              = friend.favorite_game[1]
+
+javascript:
+  function print_table()
+  {
+    var info_value = document.getElementById("info").value;
+
+    path_name = window.location.pathname;
+    path_peice = path_name.split("/");
+
+    res_path = "http://" + location.host.trim() + "/" + "player/" + path_peice[2] + "/" + info_value;
+    console.log(res_path);
+    
+    location.href = res_path;
+  }

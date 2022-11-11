@@ -9,7 +9,8 @@ module SteamBuddy
   # Web App
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, css: 'style.css', path: 'app/views/assets'
+    plugin :assets, path: 'app/views/assets',
+                    css: 'style.css', js: 'table_row_click.js', js: 'select.js'
     plugin :common_logger, $stderr
     plugin :halt
 
@@ -40,18 +41,19 @@ module SteamBuddy
             Repository::For.entity(player).create(player)
 
             # Redirect viewer to player page
-            routing.redirect "player/#{player.remote_id}"
+            routing.redirect "player/#{player.remote_id}/0"
           end
         end
 
-        routing.on String do |remote_id|
+        routing.on String, String do |remote_id, info_value|
           # GET /player/remote_id
           routing.get do
             # Get player from database
-            player = Repository::For.klass(Entity::Player).find_id(remote_id)
+            # player = Repository::For.klass(Entity::Player).find_id(remote_id)
+            player = Steam::PlayerMapper.new(App.config.STEAM_KEY).find(remote_id)
 
             # Show viewer the player
-            view 'player', locals: { player: }
+            view 'player', locals: { player:, info_value: }
           end
         end
       end

@@ -9,7 +9,7 @@ module SteamBuddy
     class Game < Dry::Struct
       include Dry.Types
 
-      attribute :remote_id, Strict::Integer
+      attribute :remote_id, Strict::String
 
       def to_attr_hash
         to_hash

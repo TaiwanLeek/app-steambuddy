@@ -46,7 +46,7 @@ module SteamBuddy
         end
 
         def game
-          SteamBuddy::Entity::Game.new(remote_id: @data['appid'])
+          SteamBuddy::Entity::Game.new(remote_id: @data['appid'].to_s)
         end
       end
     end

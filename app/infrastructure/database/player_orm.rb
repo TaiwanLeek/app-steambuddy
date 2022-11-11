@@ -11,7 +11,7 @@ module SteamBuddy
                    left_key: :player_id, right_key: :player_friend_id
 
       one_to_many :owned_games,
-                  class: :'SteamBuddy::Database:OwnedGameOrm',
+                  class: :'SteamBuddy::Database::OwnedGameOrm',
                   key: :player_id
 
       plugin :timestamps, update_on_create: true

@@ -14,7 +14,7 @@ module SteamBuddy
     plugin :common_logger, $stderr
     plugin :halt
 
-    route do |routing|
+    route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
       response['Content-Type'] = 'text/html; charset=utf-8'
 

@@ -4,6 +4,37 @@ module SteamBuddy
   module Repository
     # Repository class for player data accessing
     class Players
+      def self.all
+        Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }
+      end
+
+      def self.rebuild_entity(db_player)
+        return nil unless db_player
+
+        played_games = db_player.owned_games.map { |db_owned_game| OwnedGames.rebuild_entity(db_owned_game) }
+        friend_list = db_player.friends.map { |db_friend| rebuild_entity_without_friends(db_friend) }
+
+        Entity::Player.new(
+          db_player.to_hash.merge(
+            played_games:,
+            friend_list:
+          )
+        )
+      end
+
+      def self.rebuild_entity_without_friends(db_player)
+        return nil unless db_player
+
+        played_games = db_player.owned_games.map { |db_owned_game| OwnedGames.rebuild_entity(db_owned_game) }
+
+        Entity::Player.new(
+          db_player.to_hash.merge(
+            played_games:,
+            friend_list: nil
+          )
+        )
+      end
+
       # Create records of one player and all of their friend
       def self.find_or_create_with_friends(entity)
         db_player = find_or_create(entity)

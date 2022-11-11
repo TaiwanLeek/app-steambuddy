@@ -4,6 +4,8 @@ module SteamBuddy
   module Repository
     # Repository class for player data accessing
     class Players
+      @listed_games_number = 5
+
       def self.all
         Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }
       end
@@ -58,7 +60,9 @@ module SteamBuddy
       # Create a record of player in database based on a player entity
       def self.find_or_create(entity)
         db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
-        entity&.played_games&.each do |owned_game_entity|
+        entity&.played_games&.sort do |a, b|
+          b.played_time <=> a.played_time
+        end&.first(@listed_games_number)&.each do |owned_game_entity|
           OwnedGames.find_or_create(db_player, owned_game_entity)
         end
         db_player

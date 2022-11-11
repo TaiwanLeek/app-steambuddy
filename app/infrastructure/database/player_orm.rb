@@ -4,6 +4,7 @@ require 'sequel'
 
 module SteamBuddy
   module Database
+    # Model for player data accessing
     class PlayerOrm < Sequel::Model(:players)
       many_to_many :friends,
                    class: :'SteamBuddy::Database::PlayerOrm',

@@ -23,8 +23,8 @@ module SteamBuddy
       # Create a record of player in database based on a player entity
       def self.find_or_create(entity)
         db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
-        entity&.played_games&.each do |played_game_entity|
-          Games.find_or_create(played_game_entity.game.remote_id)
+        entity&.played_games&.each do |owned_game_entity|
+          OwnedGames.find_or_create(db_player, owned_game_entity)
         end
         db_player
       end

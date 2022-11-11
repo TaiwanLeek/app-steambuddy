@@ -36,8 +36,13 @@ module SteamBuddy
         fav_id = nil
         return 'None', 0 if played_games.nil?
 
-        played_games.each do |games|
-          fav_id, max_time = games.played_time > max_time ? [games.remote_id, games.played_time] : [fav_id, max_time]
+        played_games.each do |played_game|
+          fav_id, max_time = if played_game.played_time > max_time
+                               [played_game.game.remote_id,
+                                played_game.played_time]
+                             else
+                               [fav_id, max_time]
+                             end
         end
         [fav_id, max_time / 60]
       end

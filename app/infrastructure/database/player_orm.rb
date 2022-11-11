@@ -15,6 +15,10 @@ module SteamBuddy
                   key: :player_id
 
       plugin :timestamps, update_on_create: true
+
+      def self.find_or_create(player_info)
+        first(remote_id: player_info[:remote_id]) || create(player_info)
+      end
     end
   end
 end

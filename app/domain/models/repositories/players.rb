@@ -8,11 +8,15 @@ module SteamBuddy
         Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }
       end
 
-      def self.rebuild_entity(db_player)
+      def self.find_id(remote_id)
+        rebuild_entity_with_friends(Database::PlayerOrm.find(remote_id:))
+      end
+
+      def self.rebuild_entity_with_friends(db_player)
         return nil unless db_player
 
         played_games = db_player.owned_games.map { |db_owned_game| OwnedGames.rebuild_entity(db_owned_game) }
-        friend_list = db_player.friends.map { |db_friend| rebuild_entity_without_friends(db_friend) }
+        friend_list = db_player.friends.map { |db_friend| rebuild_entity(db_friend) }
 
         Entity::Player.new(
           db_player.to_hash.merge(
@@ -22,7 +26,7 @@ module SteamBuddy
         )
       end
 
-      def self.rebuild_entity_without_friends(db_player)
+      def self.rebuild_entity(db_player)
         return nil unless db_player
 
         played_games = db_player.owned_games.map { |db_owned_game| OwnedGames.rebuild_entity(db_owned_game) }

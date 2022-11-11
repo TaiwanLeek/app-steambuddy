@@ -24,7 +24,10 @@ module SteamBuddy
       end
 
       # Database Setup
+      # rubocop:disable Lint/ConstantDefinitionInBlock
       DB = Sequel.connect(ENV.fetch('DATABASE_URL'))
+      # rubocop:enable Lint/ConstantDefinitionInBlock
+
       # rubocop:disable Naming/MethodName
       def self.DB = DB
       # rubocop:enable Naming/MethodName

@@ -32,14 +32,19 @@ module SteamBuddy
             routing.halt 400 unless remote_id &&
                                     remote_id.length == STEAM_ID64_LENGTH
 
-            # Get player from Steam
-            player = Steam::PlayerMapper
-              .new(App.config.STEAM_KEY)
-              .find(remote_id)
+            # Try getting player from database
+            db_player = Repository::For.klass(Entity::Player).find_id(remote_id)
+            player = Repository::For.klass(Entity::Player).find_id(db_player&.remote_id)
 
-            # Add player to database
-            Repository::For.entity(player).find_or_create_with_friends(player)
+            unless player&.full_friend_data
+              # Get player from API
+              player = Steam::PlayerMapper
+                .new(App.config.STEAM_KEY)
+                .find(remote_id)
 
+              # Add player to database
+              Repository::For.entity(player).find_or_create_with_friends(player)
+            end
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
           end

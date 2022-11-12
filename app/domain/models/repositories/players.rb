@@ -11,7 +11,16 @@ module SteamBuddy
       end
 
       def self.find_id(remote_id)
-        rebuild_entity_with_friends(Database::PlayerOrm.find(remote_id:))
+        return unless remote_id
+
+        db_player = Database::PlayerOrm.find(remote_id:)
+        return unless db_player
+
+        if db_player.full_friend_data
+          rebuild_entity_with_friends(db_player)
+        else
+          rebuild_entity(db_player)
+        end
       end
 
       def self.rebuild_entity_with_friends(db_player)
@@ -20,7 +29,8 @@ module SteamBuddy
         Entity::Player.new(
           db_player.to_hash.merge(
             played_games: rebuild_games_entity(db_player),
-            friend_list: rebuild_friends_entity(db_player)
+            friend_list: rebuild_friends_entity(db_player),
+            full_friend_data: true
           )
         )
       end
@@ -52,6 +62,7 @@ module SteamBuddy
           db_player_friend = find_or_create(friend_entity)
           players_add_friend(db_player, db_player_friend)
         end
+        db_player.update(full_friend_data: true)
         db_player
       end
 
@@ -67,6 +78,8 @@ module SteamBuddy
 
       # Create a record of player in database based on a player entity
       def self.find_or_create(entity)
+        return unless entity
+
         db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
         entity&.played_games&.sort do |played_game_a, played_game_b|
           played_game_b.played_time <=> played_game_a.played_time

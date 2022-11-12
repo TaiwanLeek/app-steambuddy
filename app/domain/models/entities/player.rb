@@ -13,7 +13,8 @@ module SteamBuddy
 
       attribute :remote_id, Strict::String
       attribute :username, Strict::String
-      attribute :game_count, Integer
+      attribute :game_count, Strict::Integer
+      attribute :full_friend_data, Strict::Bool
       attribute :played_games, Array.of(PlayedGame).optional
       attribute :friend_list, Array.of(Player).optional
 

@@ -10,6 +10,7 @@ Sequel.migration do
       String      :remote_id, unique: true
       String      :username, unique: false
       Integer     :game_count, unique: false, null: true
+      Boolean     :full_friend_data, unique: false
 
       DateTime :created_at
       DateTime :updated_at

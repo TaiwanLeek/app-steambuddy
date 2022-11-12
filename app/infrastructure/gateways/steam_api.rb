@@ -39,7 +39,8 @@ module SteamBuddy
 
       def friend_list(steam_id)
         url = st_api_path('ISteamUser/GetFriendList/v1')
-        call_steam_url(url, steam_id)['friendslist']['friends']
+        friend_list = call_steam_url(url, steam_id)['friendslist']
+        friend_list['friends'] if friend_list
       end
 
       def personaname(steam_id)

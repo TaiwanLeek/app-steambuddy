@@ -30,6 +30,7 @@ module SteamBuddy
             remote_id: @remote_id,
             username:,
             game_count:,
+            full_friend_data: true,
             played_games:,
             friend_list:
           )
@@ -40,6 +41,7 @@ module SteamBuddy
             remote_id: @remote_id,
             username:,
             game_count:,
+            full_friend_data: false,
             played_games:,
             friend_list: nil
           )
@@ -58,6 +60,7 @@ module SteamBuddy
         end
 
         def friend_list
+          return unless @friend_list_data
           @friend_list_data.map do |friend_data|
             friend_steam_id = friend_data['steamid']
             DataMapper.new(friend_steam_id, @key, @gateway_class).build_entity

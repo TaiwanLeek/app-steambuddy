@@ -50,14 +50,19 @@ module SteamBuddy
 
         entity&.friend_list&.each do |friend_entity|
           db_player_friend = find_or_create(friend_entity)
-
-          unless db_player.friends_dataset.first(remote_id: friend_entity.remote_id)
-            db_player.add_friend(db_player_friend)
-          end
-          unless db_player_friend.friends_dataset.first(remote_id: entity.remote_id)
-            db_player_friend.add_friend(db_player)
-          end
+          players_add_friend(db_player, db_player_friend)
         end
+        db_player
+      end
+
+      def self.players_add_friend(db_player, db_player_friend)
+        unless db_player.friends_dataset.first(remote_id: db_player_friend.remote_id)
+          db_player.add_friend(db_player_friend)
+        end
+
+        return if db_player_friend.friends_dataset.first(remote_id: db_player.remote_id)
+
+        db_player_friend.add_friend(db_player)
       end
 
       # Create a record of player in database based on a player entity

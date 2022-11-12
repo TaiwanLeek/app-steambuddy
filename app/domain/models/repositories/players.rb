@@ -4,7 +4,7 @@ module SteamBuddy
   module Repository
     # Repository class for player data accessing
     class Players
-      @listed_games_number = 5
+      @listed_games_number = 1
 
       def self.all
         Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }

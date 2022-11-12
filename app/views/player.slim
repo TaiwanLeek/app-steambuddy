@@ -79,7 +79,7 @@
           td
             = player.username
           td
-            = player.favorite_game&.game&.remote_id
+            = player.favorite_game&.game&.name
           td
             = player.favorite_game&.played_time
         - player&.friend_list&.each do |friend|
@@ -89,7 +89,7 @@
             td
               = friend.username
             td
-              = friend.favorite_game&.game&.remote_id
+              = friend.favorite_game&.game&.name
             td
               = friend.favorite_game&.played_time
 

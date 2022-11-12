@@ -22,6 +22,19 @@ module SteamBuddy
       def friend_list_data(steam_id)
         Request.new(@steam_key).friend_list(steam_id)
       end
+
+      def game_name(appid)
+        url = 'https://store.steampowered.com/api/appdetails'
+        parameter = {
+          query: {
+            appids: appid
+          }
+        }
+        response = HTTParty.get(url, parameter)
+        body = JSON.parse(response.body)
+        game_body = body[appid.to_s] if body
+        game_body['data']['name'] if game_body && game_body['success']
+      end
     end
 
     # Sends out HTTP requests to Steam
@@ -30,6 +43,11 @@ module SteamBuddy
 
       def initialize(key)
         @key = key
+      end
+
+      def game_name(_appid)
+        url = st_api_path('IPlayerService/GetOwnedGames/v1')
+        call_steam_url(url, steam_id)['response']
       end
 
       def owned_games(steam_id)

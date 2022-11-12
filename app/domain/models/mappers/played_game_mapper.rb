@@ -10,6 +10,7 @@ module SteamBuddy
         @key = steam_key
         @gateway_class = gateway_class
         @gateway = @gateway_class.new(@key)
+        @listed_games_number = 1
       end
 
       def find_game_count(remote_id)
@@ -22,16 +23,19 @@ module SteamBuddy
         game_list_data = owned_games_data['games']
         return game_list_data unless game_list_data
 
-        game_list_data.map do |data|
-          DataMapper.new(data).build_entity
+        game_list_data.sort do |game_a, game_b|
+          game_b['playtime_forever'] <=> game_a['playtime_forever']
+        end.first(@listed_games_number).map do |data|
+          DataMapper.new(data, @gateway).build_entity
         end
       end
 
       # TODO: Refactor this
       # I can't really describe why we need a datamapper here
       class DataMapper
-        def initialize(data)
+        def initialize(data, gateway)
           @data = data
+          @gateway = gateway
         end
 
         def build_entity
@@ -48,7 +52,9 @@ module SteamBuddy
         end
 
         def game
-          SteamBuddy::Entity::Game.new(remote_id: @data['appid'].to_s)
+          remote_id = @data['appid'].to_s
+          SteamBuddy::Entity::Game.new(remote_id:,
+                                       name: @gateway.game_name(remote_id) || '')
         end
       end
     end

@@ -10,6 +10,7 @@ module SteamBuddy
       include Dry.Types
 
       attribute :remote_id, Strict::String
+      attribute :name, Strict::String
 
       def to_attr_hash
         to_hash

@@ -6,9 +6,7 @@ Sequel.migration do
   change do
     create_table(:games) do
       primary_key :id
-
-      Integer     :remote_id, unique: true, null: true
-      String      :title, unique: false, null: true
+      String      :remote_id, unique: true
 
       DateTime :created_at
       DateTime :updated_at

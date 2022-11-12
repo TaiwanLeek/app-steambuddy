@@ -1,13 +1,14 @@
 .container
-  <select id="info" onchange="print_table()" autocomplete="off" data-placeholder="Select Information">
-    <option value="0">game count</option>
-    <option value="1">played time</option>
-    <option value="2">favorite game</option>
+  <select id="info" onchange="print_table()">
+    <option value="">Select type</option>
+    <option value="game_count">Game count</option>
+    <option value="played_time">Played time</option>
+    <option value="favorite_game">Favorite game</option>
   </select>
 
   <p id="demo"></p>
 
-  - if info_value == "0"
+  - if info_value == "game_count"
     table.table id="game_count_table"
       thead
         tr
@@ -32,7 +33,7 @@
             td
               = friend.game_count
 
-  - if info_value == "1"
+  - if info_value == "played_time"
     table.table id="played_time_table"
       thead
         tr
@@ -62,7 +63,7 @@
             td
               = friend.total_played_time
 
-  - if info_value == "2"
+  - if info_value == "favorite_game"
     table.table id="favorite_game_table"
       thead
         tr
@@ -78,9 +79,9 @@
           td
             = player.username
           td
-            = player.favorite_game[0]
+            = player.favorite_game&.game&.remote_id
           td
-            = player.favorite_game[1]
+            = player.favorite_game&.played_time
         - player&.friend_list&.each do |friend|
           tr
             td
@@ -88,9 +89,9 @@
             td
               = friend.username
             td
-              = friend.favorite_game[0]
+              = friend.favorite_game&.game&.remote_id
             td
-              = friend.favorite_game[1]
+              = friend.favorite_game&.played_time
 
 javascript:
   function print_table()

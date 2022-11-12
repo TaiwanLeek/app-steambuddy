@@ -4,10 +4,16 @@ require 'sequel'
 
 module SteamBuddy
   module Database
-    # Object-Relational Mapper for Players
+    # Model for player data accessing
     class PlayerOrm < Sequel::Model(:players)
-      one_to_many :played_games,
-                  class: :'SteamBuddy::Database::PlayedGameOrm'
+      many_to_many :friends,
+                   class: :'SteamBuddy::Database::PlayerOrm',
+                   join_table: :friends,
+                   left_key: :player_id, right_key: :player_friend_id
+
+      one_to_many :owned_games,
+                  class: :'SteamBuddy::Database::OwnedGameOrm',
+                  key: :player_id
 
       plugin :timestamps, update_on_create: true
 

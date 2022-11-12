@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 require_relative 'players'
-require_relative 'played_games'
 
 module SteamBuddy
   module Repository
     # Finds the right repository for an entity object or class
     module For
       ENTITY_REPOSITORY = {
-        Entity::Player => Players,
-        Entity::PlayedGame => PlayedGames
+        Entity::Player => Players
       }.freeze
 
       def self.klass(entity_klass)

@@ -1,9 +1,10 @@
 # frozen_string_literal: false
 
+MINUTES_IN_AN_HOUR = 60
+
 module SteamBuddy
-  # Provides access to contributor data
   module Steam
-    # Data Mapper: Steam contributor -> PlayedGame entity
+    # Get played games data from Api
     class PlayedGameMapper
       def initialize(steam_key, gateway_class = Steam::Api)
         @key = steam_key
@@ -11,44 +12,43 @@ module SteamBuddy
         @gateway = @gateway_class.new(@key)
       end
 
-      def find_game_count(steam_id64)
-        game_count = @gateway.owned_games_data(steam_id64)['game_count']
+      def find_game_count(remote_id)
+        game_count = @gateway.owned_games_data(remote_id)['game_count']
         game_count || 0
       end
 
-      def find_games(steam_id64)
-        owned_games_data = @gateway.owned_games_data(steam_id64)
+      def find_games(remote_id)
+        owned_games_data = @gateway.owned_games_data(remote_id)
         game_list_data = owned_games_data['games']
         return game_list_data unless game_list_data
 
         game_list_data.map do |data|
-          DataMapper.new(steam_id64, data).build_entity
+          DataMapper.new(data).build_entity
         end
       end
 
-      # Extracts entity specific elements from data structure
+      # TODO: Refactor this
+      # I can't really describe why we need a datamapper here
       class DataMapper
-        def initialize(steam_id64, data)
+        def initialize(data)
           @data = data
-          @player_id64 = steam_id64
         end
 
         def build_entity
           SteamBuddy::Entity::PlayedGame.new(
-            player_remote_id: @player_id64,
-            remote_id:,
+            game:,
             played_time:
           )
         end
 
         private
 
-        def remote_id
-          @data['appid']
+        def played_time
+          @data['playtime_forever'].to_i / MINUTES_IN_AN_HOUR
         end
 
-        def played_time
-          @data['playtime_forever']
+        def game
+          SteamBuddy::Entity::Game.new(remote_id: @data['appid'].to_s)
         end
       end
     end

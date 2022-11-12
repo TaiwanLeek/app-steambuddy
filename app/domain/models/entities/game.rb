@@ -3,16 +3,13 @@
 require 'dry-types'
 require 'dry-struct'
 
-require_relative('game')
-
 module SteamBuddy
   module Entity
-    # Domain entity for a game that has been played by a player
-    class PlayedGame < Dry::Struct
+    # Domain entity for a game
+    class Game < Dry::Struct
       include Dry.Types
 
-      attribute :game, Game
-      attribute :played_time, Strict::Integer
+      attribute :remote_id, Strict::String
 
       def to_attr_hash
         to_hash

@@ -9,5 +9,4 @@ player = SteamBuddy::Steam::PlayerMapper.new(STEAM_KEY).find("76561198326876707"
 
 SteamBuddy::Repository::For.entity(player).create(player)
 
-
 puts 'Test end.'

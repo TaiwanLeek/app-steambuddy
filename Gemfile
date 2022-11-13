@@ -10,7 +10,6 @@ gem 'rake'
 gem 'puma', '~> 6'
 gem 'roda', '~> 3'
 gem 'slim', '~> 4'
-gem 'slim-rails', '3.2.0'
 
 ## Validation
 gem 'dry-struct', '~> 1'

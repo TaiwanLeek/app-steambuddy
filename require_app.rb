@@ -8,13 +8,4 @@ def require_app(folders = %w[infrastructure domain views controllers])
   Dir.glob("./{#{full_list}}/**/*.rb").each do |file|
     require file
   end
-
-=begin
-
-  Dir.glob('./{config,app}/**/*.rb').each do |file|
-    require file
-  end
-
-=end
-
 end

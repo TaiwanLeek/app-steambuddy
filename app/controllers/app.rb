@@ -8,8 +8,8 @@ STEAM_ID64_LENGTH = 17
 module SteamBuddy
   # Web App
   class App < Roda
-    plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, path: 'app/views/assets',
+    plugin :render, engine: 'slim', views: 'app/presentation/views_html'
+    plugin :assets, path: 'app/presentation/assets',
                     css: 'style.css', js: 'table_row_click.js'
     plugin :common_logger, $stderr
     plugin :halt
@@ -67,9 +67,7 @@ module SteamBuddy
 
         routing.on String do |remote_id|
           # GET /player/remote_id
-          routing.get do
-            routing.redirect "#{remote_id}/game_count"
-          end
+          routing.get { routing.redirect "#{remote_id}/game_count" }
         end
       end
     end

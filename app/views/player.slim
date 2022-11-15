@@ -9,11 +9,11 @@
   <p id="demo"></p>
 
   - table_id = ""
-  - if info_value == "0"
+  - if info_value == "game_count"
     - table_id = "game_count_table"
-  - elsif info_value == "1"
+  - elsif info_value == "played_time"
     - table_id = "played_time_table"
-  - else info_value == "2"
+  - else info_value == "favorite_game"
     - table_id =  "favorite_game_table"
 
 
@@ -22,12 +22,11 @@
       tr
         th Remote Id
         th User Name
-        - if info_value == "0"
+        - if info_value == "game_count"
           th Game Count
-        - elsif info_value == "1"
-          th Game Count
+        - elsif info_value == "played_time"
           th Total Played Hour
-        - else info_value == "2"
+        - else info_value == "favorite_game"
           th Favorite Game
           th Played Hour
         th
@@ -37,15 +36,13 @@
           = player.remote_id
         td
           = player.username
-        - if info_value == "0"
+        - if info_value == "game_count"
           td
             = player.game_count
-        - elsif info_value == "1"
-          td
-            = player.game_count
+        - elsif info_value == "played_time"
           td
             = player.total_played_time
-        - else info_value == "2"
+        - else info_value == "favorite_game"
           td
             = player.favorite_game&.game&.name
           td
@@ -56,19 +53,17 @@
               = friend.remote_id
             td
               = friend.username
-            - if info_value == "0"
+            - if info_value == "game_count"
               td
                 = friend.game_count
-            - elsif info_value == "1"
-              td
-                = friend.game_count
+            - elsif info_value == "played_time"
               td
                 = friend.total_played_time
-            - else info_value == "2"
+            - else info_value == "favorite_game"
               td
-                = friend.favorite_game[0]
+                = friend.favorite_game&.game&.name
               td
-                = friend.favorite_game[1]
+                = friend.favorite_game&.played_time
 
 javascript:
   function print_table()

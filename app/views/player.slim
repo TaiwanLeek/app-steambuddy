@@ -8,76 +8,41 @@
 
   <p id="demo"></p>
 
+  - table_id = ""
   - if info_value == "game_count"
-    table.table id="game_count_table"
-      thead
-        tr
-          th SteamID64
-          th Persona Name
-          th Game Count
-          th
-      tbody
-        tr
-          td
-            = player.remote_id
-          td
-            = player.username
-          td
-            = player.game_count
-        - player&.friend_list&.each do |friend|
-          tr
-            td
-              = friend.remote_id
-            td
-              = friend.username
-            td
-              = friend.game_count
+    - table_id = "game_count_table"
+  - elsif info_value == "played_time"
+    - table_id = "played_time_table"
+  - else info_value == "favorite_game"
+    - table_id =  "favorite_game_table"
 
-  - if info_value == "played_time"
-    table.table id="played_time_table"
-      thead
-        tr
-          th SteamID64
-          th Persona Name
+
+  table.table id = table_id
+    thead
+      tr
+        th Remote Id
+        th User Name
+        - if info_value == "game_count"
           th Game Count
-          th Total Hours Played
-          th
-      tbody
-        tr
-          td
-            = player.remote_id
-          td
-            = player.username
+        - elsif info_value == "played_time"
+          th Total Played Hour
+        - else info_value == "favorite_game"
+          th Favorite Game
+          th Played Hour
+        th
+    tbody
+      tr
+        td
+          = player.remote_id
+        td
+          = player.username
+        - if info_value == "game_count"
           td
             = player.game_count
+        - elsif info_value == "played_time"
           td
             = player.total_played_time
-        - player&.friend_list&.each do |friend|
-          tr
-            td
-              = friend.remote_id
-            td
-              = friend.username
-            td
-              = friend.game_count
-            td
-              = friend.total_played_time
-
-  - if info_value == "favorite_game"
-    table.table id="favorite_game_table"
-      thead
-        tr
-          th SteamID64
-          th Persona Name
-          th Favorite Game
-          th Hours Played
-          th
-      tbody
-        tr
-          td
-            = player.remote_id
-          td
-            = player.username
+        - else info_value == "favorite_game"
           td
             = player.favorite_game&.game&.name
           td
@@ -88,10 +53,17 @@
               = friend.remote_id
             td
               = friend.username
-            td
-              = friend.favorite_game&.game&.name
-            td
-              = friend.favorite_game&.played_time
+            - if info_value == "game_count"
+              td
+                = friend.game_count
+            - elsif info_value == "played_time"
+              td
+                = friend.total_played_time
+            - else info_value == "favorite_game"
+              td
+                = friend.favorite_game&.game&.name
+              td
+                = friend.favorite_game&.played_time
 
 javascript:
   function print_table()

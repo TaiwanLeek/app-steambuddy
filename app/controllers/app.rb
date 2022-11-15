@@ -21,7 +21,10 @@ module SteamBuddy
       # GET /
       routing.root do
         players = Repository::For.klass(Entity::Player).all
-        view 'home', locals: { players: }
+
+        viewable_player = Views::PlayersList.new(players)
+
+        view 'home', locals: { players: viewable_player }
       end
 
       routing.on 'player' do # rubocop:disable Metrics/BlockLength

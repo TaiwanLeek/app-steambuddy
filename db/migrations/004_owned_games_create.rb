@@ -4,11 +4,12 @@ require 'sequel'
 
 Sequel.migration do
   change do
-    create_table(:games) do
+    create_table(:owned_games) do
       primary_key :id
+      foreign_key :game_id, :games
+      foreign_key :player_id, :players
 
-      Integer     :remote_id, unique: true, null: true
-      String      :title, unique: false, null: true
+      Integer     :played_time, unique: false
 
       DateTime :created_at
       DateTime :updated_at

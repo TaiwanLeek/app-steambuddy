@@ -1,65 +1,92 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 module SteamBuddy
   module Repository
-    # Repository for Players
+    # Repository class for player data accessing
     class Players
-      def self.find_id(remote_id)
-        rebuild_entity Database::PlayerOrm.first(remote_id:)
-      end
+      @listed_games_number = 1
 
       def self.all
         Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }
       end
 
-      def self.find(entity)
-        find_id(entity.remote_id)
+      def self.find_id(remote_id)
+        return unless remote_id
+
+        db_player = Database::PlayerOrm.find(remote_id:)
+        return unless db_player
+
+        if db_player.full_friend_data
+          rebuild_entity_with_friends(db_player)
+        else
+          rebuild_entity(db_player)
+        end
       end
 
-      def self.create(entity)
-        PersistPlayer.new(entity).call
-        rebuild_entity(entity)
-      end
+      def self.rebuild_entity_with_friends(db_player)
+        return unless db_player
 
-      def self.rebuild_entity(db_record)
-        return nil unless db_record
-
-        # TODO: Add played_games and friend_list
         Entity::Player.new(
-          remote_id: db_record.remote_id,
-          username: db_record.username,
-          game_count: db_record.game_count,
-          played_games: nil,
-          friend_list: nil
+          db_player.to_hash.merge(
+            played_games: rebuild_games_entity(db_player),
+            friend_list: rebuild_friends_entity(db_player),
+            full_friend_data: true
+          )
         )
       end
 
-      def self.rebuild_many(db_records)
-        db_records.map do |db_member|
-          Players.rebuild_entity(db_member)
-        end
+      def self.rebuild_entity(db_player)
+        return unless db_player
+
+        Entity::Player.new(
+          db_player.to_hash.merge(
+            played_games: rebuild_games_entity(db_player),
+            friend_list: nil
+          )
+        )
       end
 
+      def self.rebuild_games_entity(db_player)
+        db_player.owned_games&.map { |db_owned_game| OwnedGames.rebuild_entity(db_owned_game) }
+      end
+
+      def self.rebuild_friends_entity(db_player)
+        db_player.friends&.map { |db_friend| rebuild_entity(db_friend) }
+      end
+
+      # Create records of one player and all of their friend
+      def self.find_or_create_with_friends(entity)
+        db_player = find_or_create(entity)
+
+        entity&.friend_list&.each do |friend_entity|
+          db_player_friend = find_or_create(friend_entity)
+          players_add_friend(db_player, db_player_friend)
+        end
+        db_player.update(full_friend_data: true)
+        db_player
+      end
+
+      def self.players_add_friend(db_player, db_player_friend)
+        unless db_player.friends_dataset.first(remote_id: db_player_friend.remote_id)
+          db_player.add_friend(db_player_friend)
+        end
+
+        return if db_player_friend.friends_dataset.first(remote_id: db_player.remote_id)
+
+        db_player_friend.add_friend(db_player)
+      end
+
+      # Create a record of player in database based on a player entity
       def self.find_or_create(entity)
-        Database::PlayerOrm.find_or_create(entity.to_attr_hash)
-      end
+        return unless entity
 
-      # Helper class to persist player and its games to database
-      class PersistPlayer
-        def initialize(entity)
-          @entity = entity
+        db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
+        entity&.played_games&.sort do |played_game_a, played_game_b|
+          played_game_b.played_time <=> played_game_a.played_time
+        end&.first(@listed_games_number)&.each do |owned_game_entity|
+          OwnedGames.create(db_player, owned_game_entity)
         end
-
-        def create_player
-          Database::PlayerOrm.create(@entity.to_attr_hash)
-        end
-
-        def call
-          Players.find_or_create(@entity)
-          @entity&.played_games&.each do |game|
-            PlayedGames.find_or_create(game)
-          end
-        end
+        db_player
       end
     end
   end

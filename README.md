@@ -9,7 +9,7 @@ SteamBuddy pulls data from Steam's API, and make list out of your *favorite play
 ## TODO:
 
 ** 
-- Presentation layer - easy 
+- Presentation layer - easy  DONE
 - Cookie - ?
 - Flash - easy
 **
@@ -18,7 +18,7 @@ SteamBuddy pulls data from Steam's API, and make list out of your *favorite play
 - Refactoring each method - easy - medium
 - Writing unit test - medium
 - Writing frontend test - easy
-- Refactoring data struture - hard
+- Refactoring data struture - hard (played_game_mapper DONE)
 - Refactoring domain logic - hard
 
 - Features:

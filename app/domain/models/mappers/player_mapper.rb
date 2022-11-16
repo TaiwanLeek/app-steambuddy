@@ -61,6 +61,7 @@ module SteamBuddy
 
         def friend_list
           return unless @friend_list_data
+
           @friend_list_data.map do |friend_data|
             friend_steam_id = friend_data['steamid']
             DataMapper.new(friend_steam_id, @key, @gateway_class).build_entity

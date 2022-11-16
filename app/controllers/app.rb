@@ -2,17 +2,23 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 STEAM_ID64_LENGTH = 17
 
 module SteamBuddy
   # Web App
   class App < Roda
-    plugin :render, engine: 'slim', views: 'app/presentation/views_html'
-    plugin :assets, path: 'app/presentation/assets',
-                    css: 'style.css', js: 'table_row_click.js'
-    plugin :common_logger, $stderr
     plugin :halt
+    plugin :flash
+    plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
+    plugin :render, engine: 'slim', views: 'app/presentation/views_html'
+    plugin :public, root: 'app/presentation/public'
+    plugin :assets, path: 'app/presentation/assets',
+                    css: 'style.css', js: 'table_row.js'
+    plugin :common_logger, $stderr
+
+    use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
 
     route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
@@ -22,9 +28,11 @@ module SteamBuddy
       routing.root do
         players = Repository::For.klass(Entity::Player).all
 
-        viewable_player = Views::PlayersList.new(players)
+        # flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
 
-        view 'home', locals: { players: viewable_player }
+        viewable_players = Views::PlayersList.new(players)
+
+        view 'home', locals: { players: viewable_players }
       end
 
       routing.on 'player' do # rubocop:disable Metrics/BlockLength
@@ -32,8 +40,12 @@ module SteamBuddy
           # POST /player/
           routing.post do
             remote_id = routing.params['remote_id']
-            routing.halt 400 unless remote_id &&
-                                    remote_id.length == STEAM_ID64_LENGTH
+
+            unless remote_id &&
+                   remote_id.length == STEAM_ID64_LENGTH
+              response.status = 400
+              routing.redirect '/'
+            end
 
             # Try getting player from database
             db_player = Repository::For.klass(Entity::Player).find_id(remote_id)

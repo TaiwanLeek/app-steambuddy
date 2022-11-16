@@ -28,19 +28,24 @@ module Views
       @player.game_count
     end
 
+    def player_friend
+      @player&.friend_list&.map { |friend| Player.new(friend) }
+    end
+
     def fullname
-      "#{player_name}"
+      player_name.to_s
+    end
+
+    def total_played_time
+      @player.total_played_time
+    end
+
+    def favorite_game_name
+      @player.favorite_game&.game&.name
+    end
+
+    def favorite_game_played_time
+      @player.favorite_game&.played_time
     end
   end
 end
-
-# tr class="table-row player_row" data-href="player/#{player.username}" id="player[#{index}].row"
-#               td id='td_id'
-#                 span class="player_table_id" id="player[#{index}].remote_id"
-#                   = player.remote_id
-#               td id='td_name'
-#                 span class="player_table_name" id="player[#{index}].username"
-#                   = player.username
-#               td id='td_game_count'
-#                 span class="player_table_game_count" id="player[#{index}].game_count"
-#                   = player.game_count

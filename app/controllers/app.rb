@@ -63,8 +63,10 @@ module SteamBuddy
               .new(App.config.STEAM_KEY)
               .find(remote_id)
 
+            viewable_player = Views::Player.new(player)
+
             # Show viewer the player
-            view 'player', locals: { player:, info_value: }
+            view 'player', locals: { player: viewable_player, info_value: }
           end
         end
 

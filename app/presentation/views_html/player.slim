@@ -33,37 +33,37 @@
     tbody
       tr
         td
-          = player.remote_id
+          = player.player_id
         td
-          = player.username
+          = player.player_name
         - if info_value == "game_count"
           td
-            = player.game_count
+            = player.player_game_count
         - elsif info_value == "played_time"
           td
             = player.total_played_time
         - else info_value == "favorite_game"
           td
-            = player.favorite_game&.game&.name
+            = player.favorite_game_name
           td
-            = player.favorite_game&.played_time
-        - player&.friend_list&.each do |friend|
+            = player.favorite_game_played_time
+        - player.player_friend.each do |friend|
           tr
             td
-              = friend.remote_id
+              = friend.player_id
             td
-              = friend.username
+              = friend.player_name
             - if info_value == "game_count"
               td
-                = friend.game_count
+                = friend.player_game_count
             - elsif info_value == "played_time"
               td
                 = friend.total_played_time
             - else info_value == "favorite_game"
               td
-                = friend.favorite_game&.game&.name
+                = friend.favorite_game_name
               td
-                = friend.favorite_game&.played_time
+                = friend.favorite_game_played_time
 
 javascript:
   function print_table()

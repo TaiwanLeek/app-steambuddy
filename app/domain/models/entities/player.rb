@@ -3,7 +3,7 @@
 require 'dry-types'
 require 'dry-struct'
 
-require_relative('played_game')
+require_relative('owned_game')
 
 module SteamBuddy
   module Entity
@@ -15,19 +15,19 @@ module SteamBuddy
       attribute :username, Strict::String
       attribute :game_count, Strict::Integer
       attribute :full_friend_data, Strict::Bool
-      attribute :played_games, Array.of(PlayedGame).optional
+      attribute :owned_games, Array.of(OwnedGame).optional
       attribute :friend_list, Array.of(Player).optional
 
       def to_attr_hash
-        to_hash.except(:played_games, :friend_list)
+        to_hash.except(:owned_games, :friend_list)
       end
 
       def total_played_time
-        played_games ? played_games.sum(&:played_time) : 0
+        owned_games ? owned_games.sum(&:played_time) : 0
       end
 
       def favorite_game
-        played_games&.min { |played_game_a, played_game_b| played_game_b.played_time <=> played_game_a.played_time }
+        owned_games&.min { |owned_game_a, owned_game_b| owned_game_b.played_time <=> owned_game_a.played_time }
       end
     end
   end

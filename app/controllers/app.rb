@@ -2,17 +2,23 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 STEAM_ID64_LENGTH = 17
 
 module SteamBuddy
   # Web App
   class App < Roda
-    plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, path: 'app/views/assets',
-                    css: 'style.css', js: 'table_row_click.js'
-    plugin :common_logger, $stderr
     plugin :halt
+    plugin :flash
+    plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
+    plugin :render, engine: 'slim', views: 'app/presentation/views_html'
+    plugin :public, root: 'app/presentation/public'
+    plugin :assets, path: 'app/presentation/assets',
+                    css: 'style.css', js: 'table_row.js'
+    plugin :common_logger, $stderr
+
+    use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
 
     route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
@@ -21,7 +27,12 @@ module SteamBuddy
       # GET /
       routing.root do
         players = Repository::For.klass(Entity::Player).all
-        view 'home', locals: { players: }
+
+        flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
+
+        viewable_players = Views::PlayersList.new(players)
+
+        view 'home', locals: { players: viewable_players }
       end
 
       routing.on 'player' do # rubocop:disable Metrics/BlockLength
@@ -29,8 +40,13 @@ module SteamBuddy
           # POST /player/
           routing.post do
             remote_id = routing.params['remote_id']
-            routing.halt 400 unless remote_id &&
-                                    remote_id.length == STEAM_ID64_LENGTH
+
+            unless remote_id &&
+                   remote_id.length == STEAM_ID64_LENGTH
+              flash[:error] = 'Invalid Steam ID!'
+              response.status = 400
+              routing.redirect '/'
+            end
 
             # Try getting player from database
             db_player = Repository::For.klass(Entity::Player).find_id(remote_id)
@@ -38,13 +54,23 @@ module SteamBuddy
 
             unless player&.full_friend_data
               # Get player from API
-              player = Steam::PlayerMapper
-                .new(App.config.STEAM_KEY)
-                .find(remote_id)
+              begin
+                player = Steam::PlayerMapper
+                  .new(App.config.STEAM_KEY)
+                  .find(remote_id)
+              rescue StandardError
+                flash[:error] = 'Could not find player friends'
+              end
 
               # Add player to database
-              Repository::For.entity(player).find_or_create_with_friends(player)
+              begin
+                Repository::For.entity(player).find_or_create_with_friends(player)
+              rescue StandardError => e
+                logger.error err.backtrace.join("\n")
+                flash[:error] = 'Having trouble accessing the database'
+              end
             end
+
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
           end
@@ -60,16 +86,18 @@ module SteamBuddy
               .new(App.config.STEAM_KEY)
               .find(remote_id)
 
+            Steam::PlayerMapper.new(App.config.STEAM_KEY).friend_sort!(player, info_value)
+
+            viewable_player = Views::Player.new(player)
+
             # Show viewer the player
-            view 'player', locals: { player:, info_value: }
+            view 'player', locals: { player: viewable_player, info_value: }
           end
         end
 
         routing.on String do |remote_id|
           # GET /player/remote_id
-          routing.get do
-            routing.redirect "#{remote_id}/game_count"
-          end
+          routing.get { routing.redirect "#{remote_id}/game_count" }
         end
       end
     end

@@ -9,7 +9,7 @@ module SteamBuddy
     module For
       ENTITY_REPOSITORY = {
         Entity::Player => Players,
-        Entity::PlayedGame => OwnedGames
+        Entity::OwnedGame => OwnedGames
       }.freeze
 
       def self.klass(entity_klass)

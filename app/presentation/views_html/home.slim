@@ -25,15 +25,15 @@
             th Persona Name
             th Game Count
         tbody
-          - players.each.with_index do |player, index|
-            tr class="table-row player_row" data-href="player/#{player.username}" id="player[#{index}].row"
+          - players.each do |player|
+            tr class="table-row player_row" data-href=player.info_link id="#{player.index_str}.row"
               td id='td_id'
-                span class="player_table_id" id="player[#{index}].remote_id"
-                  = player.remote_id
+                span class="player_table_id" id="#{player.index_str}.player_id"
+                  = player.player_id
               td id='td_name'
-                span class="player_table_name" id="player[#{index}].username"
-                  = player.username
+                span class="player_table_name" id="#{player.index_str}.player_name"
+                  = player.player_name
               td id='td_game_count'
-                span class="player_table_game_count" id="player[#{index}].game_count"
-                  = player.game_count
+                span class="player_table_game_count" id="#{player.index_str}.player_game_count"
+                  = player.player_game_count
               

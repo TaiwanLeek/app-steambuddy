@@ -8,20 +8,22 @@ SteamBuddy pulls data from Steam's API, and make list out of your *favorite owne
 
 ## TODO:
 
-** 
-- Presentation layer - easy  DONE
+### This weak
+- *Presentation layer - DONE*
 - Cookie - ?
-- Flash - easy
-**
+- *Flash - Done*
 
-- Rename Played game to Owned game - very easy (DONE)
+### Refactor
+- *Rename Played game to Owned game - DONE*
 - Refactoring each method - easy - medium
-- Writing unit test - medium
-- Writing frontend test - easy
-- Refactoring data struture - hard (played_game_mapper DONE)
+- *Refactoring data struture - hard (played_game_mapper part is DONE)*
 - Refactoring domain logic - hard
 
-- Features:
+### Write test
+- Writing unit test - medium
+- Writing frontend test - easy
+
+### Features
 - Money spent - hard
 - Game info, player info - medium
-- Sorting - easy (DONE)
+- *Sorting - DONE*

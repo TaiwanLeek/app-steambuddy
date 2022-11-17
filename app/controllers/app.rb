@@ -28,7 +28,7 @@ module SteamBuddy
       routing.root do
         players = Repository::For.klass(Entity::Player).all
 
-        # flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
+        flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
 
         viewable_players = Views::PlayersList.new(players)
 
@@ -43,6 +43,7 @@ module SteamBuddy
 
             unless remote_id &&
                    remote_id.length == STEAM_ID64_LENGTH
+              flash[:error] = 'Invalid Steam ID!'
               response.status = 400
               routing.redirect '/'
             end
@@ -53,13 +54,23 @@ module SteamBuddy
 
             unless player&.full_friend_data
               # Get player from API
-              player = Steam::PlayerMapper
-                .new(App.config.STEAM_KEY)
-                .find(remote_id)
+              begin
+                player = Steam::PlayerMapper
+                  .new(App.config.STEAM_KEY)
+                  .find(remote_id)
+              rescue StandardError
+                flash[:error] = 'Could not find player friends'
+              end
 
               # Add player to database
-              Repository::For.entity(player).find_or_create_with_friends(player)
+              begin
+                Repository::For.entity(player).find_or_create_with_friends(player)
+              rescue StandardError => e
+                logger.error err.backtrace.join("\n")
+                flash[:error] = 'Having trouble accessing the database'
+              end
             end
+
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
           end

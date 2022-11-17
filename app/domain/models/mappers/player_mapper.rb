@@ -11,7 +11,6 @@ module SteamBuddy
       end
 
       def find(remote_id)
-        puts info_value
         friend_list_data = @gateway.friend_list_data(remote_id)
         DataMapper.new(remote_id, @key, @gateway_class, friend_list_data).build_entity_with_friends
       end
@@ -42,7 +41,7 @@ module SteamBuddy
           @friend_list_data = friend_list_data
           @key = key
           @gateway_class = gateway_class
-          @played_game_mapper = PlayedGameMapper.new(@key, @gateway_class)
+          @owned_game_mapper = OwnedGameMapper.new(@key, @gateway_class)
         end
 
         def build_entity_with_friends
@@ -51,7 +50,7 @@ module SteamBuddy
             username:,
             game_count:,
             full_friend_data: true,
-            played_games:,
+            owned_games:,
             friend_list:
           )
         end
@@ -62,17 +61,17 @@ module SteamBuddy
             username:,
             game_count:,
             full_friend_data: false,
-            played_games:,
+            owned_games:,
             friend_list: nil
           )
         end
 
         def game_count
-          @played_game_mapper.find_game_count(@remote_id)
+          @owned_game_mapper.find_game_count(@remote_id)
         end
 
-        def played_games
-          @played_game_mapper.find_games(@remote_id)
+        def owned_games
+          @owned_game_mapper.find_games(@remote_id)
         end
 
         def username

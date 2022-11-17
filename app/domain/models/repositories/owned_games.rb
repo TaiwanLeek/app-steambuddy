@@ -8,7 +8,7 @@ module SteamBuddy
         return nil unless db_owned_game
 
         game = Entity::Game.new(remote_id: db_owned_game.game.remote_id, name: db_owned_game.game.name)
-        Entity::PlayedGame.new(game:, played_time: db_owned_game.played_time)
+        Entity::OwnedGame.new(game:, played_time: db_owned_game.played_time)
       end
 
       def self.create(db_player, owned_game_entity)

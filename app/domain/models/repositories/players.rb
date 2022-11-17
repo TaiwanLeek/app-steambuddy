@@ -28,7 +28,7 @@ module SteamBuddy
 
         Entity::Player.new(
           db_player.to_hash.merge(
-            played_games: rebuild_games_entity(db_player),
+            owned_games: rebuild_games_entity(db_player),
             friend_list: rebuild_friends_entity(db_player),
             full_friend_data: true
           )
@@ -40,7 +40,7 @@ module SteamBuddy
 
         Entity::Player.new(
           db_player.to_hash.merge(
-            played_games: rebuild_games_entity(db_player),
+            owned_games: rebuild_games_entity(db_player),
             friend_list: nil
           )
         )
@@ -81,8 +81,8 @@ module SteamBuddy
         return unless entity
 
         db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
-        entity&.played_games&.sort do |played_game_a, played_game_b|
-          played_game_b.played_time <=> played_game_a.played_time
+        entity&.owned_games&.sort do |owned_game_a, owned_game_b|
+          owned_game_b.played_time <=> owned_game_a.played_time
         end&.first(@listed_games_number)&.each do |owned_game_entity|
           OwnedGames.create(db_player, owned_game_entity)
         end

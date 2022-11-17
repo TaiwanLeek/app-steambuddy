@@ -5,7 +5,7 @@ MINUTES_IN_AN_HOUR = 60
 module SteamBuddy
   module Steam
     # Get played games data from Api
-    class PlayedGameMapper
+    class OwnedGameMapper
       def initialize(steam_key, gateway_class = Steam::Api)
         @key = steam_key
         @gateway_class = gateway_class
@@ -33,7 +33,7 @@ module SteamBuddy
       end
 
       def build_entity(data)
-        SteamBuddy::Entity::PlayedGame.new(
+        SteamBuddy::Entity::OwnedGame.new(
           game: game(data),
           played_time: played_time(data)
         )

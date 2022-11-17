@@ -55,7 +55,7 @@ module SteamBuddy
               # Get player from API
               player = Steam::PlayerMapper
                 .new(App.config.STEAM_KEY)
-                .find(remote_id, 'game_count')
+                .find(remote_id)
 
               # Add player to database
               Repository::For.entity(player).find_or_create_with_friends(player)

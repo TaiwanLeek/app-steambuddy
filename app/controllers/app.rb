@@ -86,7 +86,7 @@ module SteamBuddy
               .new(App.config.STEAM_KEY)
               .find(remote_id)
 
-            Steam::PlayerMapper.new(App.config.STEAM_KEY).friend_sort!(player, info_value)
+            Steam::PlayerMapper::DataHelper.friend_sort!(player, info_value)
 
             viewable_player = Views::Player.new(player)
 

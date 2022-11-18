@@ -11,14 +11,14 @@ module SteamBuddy
   class App < Roda
     plugin :halt
     plugin :flash
-    plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
+    # plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
     plugin :render, engine: 'slim', views: 'app/presentation/views_html'
     plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
                     css: 'style.css', js: 'table_row.js'
     plugin :common_logger, $stderr
 
-    use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
+    # use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
 
     route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
@@ -66,7 +66,7 @@ module SteamBuddy
               begin
                 Repository::For.entity(player).find_or_create_with_friends(player)
               rescue StandardError => e
-                logger.error err.backtrace.join("\n")
+                Logger.error e.backtrace.join("\n")
                 flash[:error] = 'Having trouble accessing the database'
               end
             end
@@ -86,7 +86,7 @@ module SteamBuddy
               .new(App.config.STEAM_KEY)
               .find(remote_id)
 
-            Steam::PlayerMapper.new(App.config.STEAM_KEY).friend_sort!(player, info_value)
+            Steam::PlayerMapper::DataHelper.friend_sort!(player, info_value)
 
             viewable_player = Views::Player.new(player)
 

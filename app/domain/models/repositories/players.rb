@@ -81,18 +81,12 @@ module SteamBuddy
         return unless entity
 
         db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
-        entity&.owned_games&.sort do |owned_game_a, owned_game_b|
-          owned_game_b.played_time <=> owned_game_a.played_time
-        end&.first(@listed_games_number)&.each do |owned_game_entity|
-          OwnedGames.create(db_player, owned_game_entity)
-        end
+        sort_owned_games(db_player, entity)
 
         db_player
       end
 
-      private
-
-      def sort_owned_games(db_player, entity)
+      def self.sort_owned_games(db_player, entity)
         entity&.owned_games&.sort do |owned_game_a, owned_game_b|
           owned_game_b.played_time <=> owned_game_a.played_time
         end&.first(@listed_games_number)&.each do |owned_game_entity|

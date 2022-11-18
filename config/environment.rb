@@ -4,6 +4,7 @@ require 'figaro'
 require 'roda'
 require 'sequel'
 require 'yaml'
+require 'logger'
 require 'rack/session'
 
 module SteamBuddy
@@ -31,6 +32,10 @@ module SteamBuddy
       DB = Sequel.connect(ENV.fetch('DATABASE_URL')) # rubocop:disable Lint/ConstantDefinitionInBlock
 
       def self.DB = DB # rubocop:disable Naming/MethodName
+
+      # Logger Setup
+      LOGGER = Logger.new($stderr)
+      def self.logger = LOGGER
     end
   end
 end

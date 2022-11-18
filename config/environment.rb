@@ -4,6 +4,7 @@ require 'figaro'
 require 'roda'
 require 'sequel'
 require 'yaml'
+require 'logger'
 require 'rack/session'
 
 module SteamBuddy

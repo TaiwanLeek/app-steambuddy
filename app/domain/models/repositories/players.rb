@@ -81,7 +81,7 @@ module SteamBuddy
         return unless entity
 
         db_player = Database::PlayerOrm.find_or_create(entity.to_attr_hash)
-        sort_owned_games
+        sort_owned_games(db_player, entity)
 
         db_player
       end

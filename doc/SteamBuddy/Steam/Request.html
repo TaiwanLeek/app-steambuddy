@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class SteamBuddy::Steam::Request - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-call_steam_url">#call_steam_url</a>
+    <li ><a href="#method-i-call_steam_url_with_steam_ids">#call_steam_url_with_steam_ids</a>
+    <li ><a href="#method-i-friend_list">#friend_list</a>
+    <li ><a href="#method-i-game_name">#game_name</a>
+    <li ><a href="#method-i-owned_games">#owned_games</a>
+    <li ><a href="#method-i-personaname">#personaname</a>
+    <li ><a href="#method-i-st_api_path">#st_api_path</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-SteamBuddy::Steam::Request">
+  <h1 id="class-SteamBuddy::Steam::Request" class="class">
+    class SteamBuddy::Steam::Request
+  </h1>
+
+  <section class="description">
+    
+<p>Sends out HTTP requests to <a href="../Steam.html"><code>Steam</code></a></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="API_ROOT">API_ROOT
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-call_steam_url" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">call_steam_url</span><span
+            class="method-args">(url, steam_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="call_steam_url-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_steam_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">steam_id</span>)
+  <span class="ruby-identifier">parameter</span> = {
+    <span class="ruby-value">query:</span> {
+      <span class="ruby-value">key:</span> <span class="ruby-ivar">@key</span>,
+      <span class="ruby-value">steamid:</span> <span class="ruby-identifier">steam_id</span>
+    }
+  }
+  <span class="ruby-identifier">response</span> = <span class="ruby-constant">HTTParty</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">parameter</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-call_steam_url_with_steam_ids" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">call_steam_url_with_steam_ids</span><span
+            class="method-args">(url, steam_ids)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="call_steam_url_with_steam_ids-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_steam_url_with_steam_ids</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">steam_ids</span>)
+  <span class="ruby-identifier">parameter</span> = {
+    <span class="ruby-value">query:</span> {
+      <span class="ruby-value">key:</span> <span class="ruby-ivar">@key</span>,
+      <span class="ruby-value">steamids:</span> <span class="ruby-identifier">steam_ids</span>
+    }
+  }
+  <span class="ruby-identifier">response</span> = <span class="ruby-constant">HTTParty</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">parameter</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-friend_list" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">friend_list</span><span
+            class="method-args">(steam_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="friend_list-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">friend_list</span>(<span class="ruby-identifier">steam_id</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-identifier">st_api_path</span>(<span class="ruby-string">&#39;ISteamUser/GetFriendList/v1&#39;</span>)
+  <span class="ruby-identifier">friend_list</span> = <span class="ruby-identifier">call_steam_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">steam_id</span>)[<span class="ruby-string">&#39;friendslist&#39;</span>]
+  <span class="ruby-identifier">friend_list</span>[<span class="ruby-string">&#39;friends&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">friend_list</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-game_name" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">game_name</span><span
+            class="method-args">(_appid)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="game_name-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">game_name</span>(<span class="ruby-identifier">_appid</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-identifier">st_api_path</span>(<span class="ruby-string">&#39;IPlayerService/GetOwnedGames/v1&#39;</span>)
+  <span class="ruby-identifier">call_steam_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">steam_id</span>)[<span class="ruby-string">&#39;response&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-owned_games" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">owned_games</span><span
+            class="method-args">(steam_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="owned_games-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">owned_games</span>(<span class="ruby-identifier">steam_id</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-identifier">st_api_path</span>(<span class="ruby-string">&#39;IPlayerService/GetOwnedGames/v1&#39;</span>)
+  <span class="ruby-identifier">call_steam_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">steam_id</span>)[<span class="ruby-string">&#39;response&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-personaname" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">personaname</span><span
+            class="method-args">(steam_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="personaname-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">personaname</span>(<span class="ruby-identifier">steam_id</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-identifier">st_api_path</span>(<span class="ruby-string">&#39;ISteamUser/GetPlayerSummaries/v2&#39;</span>)
+  <span class="ruby-identifier">call_steam_url_with_steam_ids</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">steam_id</span>)[<span class="ruby-string">&#39;response&#39;</span>][<span class="ruby-string">&#39;players&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;personaname&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-st_api_path" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">st_api_path</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="st_api_path-source">
+            <pre><span class="ruby-comment"># File app/infrastructure/gateways/steam_api.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">st_api_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-node">&quot;#{API_ROOT}#{path}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

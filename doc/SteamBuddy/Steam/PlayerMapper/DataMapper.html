@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class SteamBuddy::Steam::PlayerMapper::DataMapper - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-build_entity">#build_entity</a>
+    <li ><a href="#method-i-build_entity_with_friends">#build_entity_with_friends</a>
+    <li ><a href="#method-i-friend_list">#friend_list</a>
+    <li ><a href="#method-i-game_count">#game_count</a>
+    <li ><a href="#method-i-owned_games">#owned_games</a>
+    <li ><a href="#method-i-username">#username</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-SteamBuddy::Steam::PlayerMapper::DataMapper">
+  <h1 id="class-SteamBuddy::Steam::PlayerMapper::DataMapper" class="class">
+    class SteamBuddy::Steam::PlayerMapper::DataMapper
+  </h1>
+
+  <section class="description">
+    
+<p>Maintained a mapper that keep remote_id. However I don’t think it is a good idea.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(remote_id, key, gateway_class, friend_list_data = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">remote_id</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">gateway_class</span>, <span class="ruby-identifier">friend_list_data</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@remote_id</span> = <span class="ruby-identifier">remote_id</span>
+  <span class="ruby-ivar">@friend_list_data</span> = <span class="ruby-identifier">friend_list_data</span>
+  <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">key</span>
+  <span class="ruby-ivar">@gateway_class</span> = <span class="ruby-identifier">gateway_class</span>
+  <span class="ruby-ivar">@owned_game_mapper</span> = <span class="ruby-constant">OwnedGameMapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@key</span>, <span class="ruby-ivar">@gateway_class</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-build_entity" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">build_entity</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="build_entity-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_entity</span>
+  <span class="ruby-constant">SteamBuddy</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span><span class="ruby-operator">::</span><span class="ruby-constant">Player</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-value">remote_id:</span> <span class="ruby-ivar">@remote_id</span>,
+    <span class="ruby-value">username:</span>,
+    <span class="ruby-value">game_count:</span>,
+    <span class="ruby-value">full_friend_data:</span> <span class="ruby-keyword">false</span>,
+    <span class="ruby-value">owned_games:</span>,
+    <span class="ruby-value">friend_list:</span> <span class="ruby-keyword">nil</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-build_entity_with_friends" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">build_entity_with_friends</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="build_entity_with_friends-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_entity_with_friends</span>
+  <span class="ruby-constant">SteamBuddy</span><span class="ruby-operator">::</span><span class="ruby-constant">Entity</span><span class="ruby-operator">::</span><span class="ruby-constant">Player</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-value">remote_id:</span> <span class="ruby-ivar">@remote_id</span>,
+    <span class="ruby-value">username:</span>,
+    <span class="ruby-value">game_count:</span>,
+    <span class="ruby-value">full_friend_data:</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">owned_games:</span>,
+    <span class="ruby-value">friend_list:</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-friend_list" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">friend_list</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="friend_list-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">friend_list</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@friend_list_data</span>
+
+  <span class="ruby-ivar">@friend_list_data</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">friend_data</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">friend_steam_id</span> = <span class="ruby-identifier">friend_data</span>[<span class="ruby-string">&#39;steamid&#39;</span>]
+    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">friend_steam_id</span>, <span class="ruby-ivar">@key</span>, <span class="ruby-ivar">@gateway_class</span>).<span class="ruby-identifier">build_entity</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-game_count" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">game_count</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="game_count-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">game_count</span>
+  <span class="ruby-ivar">@owned_game_mapper</span>.<span class="ruby-identifier">find_game_count</span>(<span class="ruby-ivar">@remote_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-owned_games" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">owned_games</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="owned_games-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">owned_games</span>
+  <span class="ruby-ivar">@owned_game_mapper</span>.<span class="ruby-identifier">find_games</span>(<span class="ruby-ivar">@remote_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-username" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">username</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="username-source">
+            <pre><span class="ruby-comment"># File app/domain/models/mappers/player_mapper.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">username</span>
+  <span class="ruby-ivar">@gateway_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@key</span>).<span class="ruby-identifier">personaname</span>(<span class="ruby-ivar">@remote_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

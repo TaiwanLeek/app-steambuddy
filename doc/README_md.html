@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-SteamBuddy">SteamBuddy</a>
+    <li><a href="#label-Overview">Overview</a>
+    <li><a href="#label-TODO-3A">TODO:</a>
+    <li><a href="#label-This+weak">This weak</a>
+    <li><a href="#label-Refactor">Refactor</a>
+    <li><a href="#label-Write+test">Write test</a>
+    <li><a href="#label-Features">Features</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="./Gemfile.html">Gemfile</a>
+    <li><a href="./Gemfile_lock.html">Gemfile.lock</a>
+    <li><a href="./Procfile.html">Procfile</a>
+    <li><a href="./README_md.html">README</a>
+    <li><a href="./Rakefile.html">Rakefile</a>
+    <li><a href="./app/presentation/assets/css/style_css.html">style.css</a>
+    <li><a href="./app/presentation/assets/js/select_js.html">select.js</a>
+    <li><a href="./app/presentation/assets/js/table_row_click_js.html">table_row_click.js</a>
+    <li><a href="./app/presentation/views_html/flash_bar_slim.html">flash_bar.slim</a>
+    <li><a href="./app/presentation/views_html/home_slim.html">home.slim</a>
+    <li><a href="./app/presentation/views_html/layout_slim.html">layout.slim</a>
+    <li><a href="./app/presentation/views_html/player_slim.html">player.slim</a>
+    <li><a href="./config_ru.html">config.ru</a>
+    <li><a href="./coverage/assets/0_12_3/application_css.html">application.css</a>
+    <li><a href="./coverage/assets/0_12_3/application_js.html">application.js</a>
+    <li><a href="./coverage/index_html.html">index.html</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README.md">
+
+<h1 id="label-SteamBuddy"><a href="SteamBuddy.html"><code>SteamBuddy</code></a><span><a href="#label-SteamBuddy">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Application that allows Steam <em>player</em> to compare their <em>games</em> and <em>play time</em> with their <em>friends</em>.</p>
+
+<h2 id="label-Overview">Overview<span><a href="#label-Overview">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="SteamBuddy.html"><code>SteamBuddy</code></a> pulls data from Steam’s API, and make list out of your <em>favorite owned game</em>. It will generate <em>reports</em> to compare the total play time, favorite games of you and your friends on Steam.</p>
+
+<h2 id="label-TODO-3A">TODO:<span><a href="#label-TODO-3A">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-This+weak">This weak<span><a href="#label-This+weak">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><em>Presentation layer - DONE</em></p>
+</li><li>
+<p>Cookie - ?</p>
+</li><li>
+<p><em>Flash - Done</em></p>
+</li></ul>
+
+<h3 id="label-Refactor">Refactor<span><a href="#label-Refactor">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><em>Rename Played game to Owned game - DONE</em></p>
+</li><li>
+<p>Refactoring each method - easy - medium</p>
+</li><li>
+<p><em>Refactoring data struture - hard (played_game_mapper part is DONE)</em></p>
+</li><li>
+<p>Refactoring domain logic - hard</p>
+</li></ul>
+
+<h3 id="label-Write+test">Write test<span><a href="#label-Write+test">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Writing unit test - medium</p>
+</li><li>
+<p>Writing frontend test - easy</p>
+</li></ul>
+
+<h3 id="label-Features">Features<span><a href="#label-Features">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Money spent - hard</p>
+</li><li>
+<p>Game info, player info - medium</p>
+</li><li>
+<p><em>Sorting - DONE</em></p>
+</li></ul>
+
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

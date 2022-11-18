@@ -8,6 +8,8 @@ module Views
       @index = index
     end
 
+    attr_reader :player
+
     def info_link
       "/player/#{fullname}"
     end
@@ -29,7 +31,7 @@ module Views
     end
 
     def player_friend
-      @player&.friend_list&.map { |friend| Player.new(friend) }
+      PlayersList.new(@player&.friend_list)
     end
 
     def fullname

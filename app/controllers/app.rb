@@ -26,11 +26,12 @@ module SteamBuddy
 
       # GET /
       routing.root do
+        session[:watching] ||= []
         players = Repository::For.klass(Entity::Player).all
 
         flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
 
-        viewable_players = Views::PlayersList.new(players)
+        viewable_players = Views::PlayersList.new(players).filter(session[:watching])
 
         view 'home', locals: { players: viewable_players }
       end
@@ -71,6 +72,10 @@ module SteamBuddy
               end
             end
 
+            # Add player and player's friends remote_id to session
+            session[:watching].insert(0, player.remote_id).uniq!
+            player&.friend_list&.each { |friend| session[:watching].insert(0, friend.remote_id).uniq! }
+
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
           end
@@ -95,6 +100,7 @@ module SteamBuddy
           end
         end
 
+        # This route has to be placed AFTER |remote_id, info_value|
         routing.on String do |remote_id|
           # GET /player/remote_id
           routing.get { routing.redirect "#{remote_id}/game_count" }

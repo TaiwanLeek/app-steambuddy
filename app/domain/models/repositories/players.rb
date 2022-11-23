@@ -4,7 +4,7 @@ module SteamBuddy
   module Repository
     # Repository class for player data accessing
     class Players
-      @listed_games_number = 1
+      Listed_Games_Number = 1
 
       def self.all
         Database::PlayerOrm.all.map { |db_player| rebuild_entity(db_player) }
@@ -89,7 +89,7 @@ module SteamBuddy
       def self.sort_owned_games(db_player, entity)
         entity&.owned_games&.sort do |owned_game_a, owned_game_b|
           owned_game_b.played_time <=> owned_game_a.played_time
-        end&.first(@listed_games_number)&.each do |owned_game_entity|
+        end&.first(Listed_Games_Number)&.each do |owned_game_entity|
           OwnedGames.create(db_player, owned_game_entity)
         end
       end

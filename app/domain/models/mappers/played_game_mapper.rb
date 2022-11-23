@@ -21,7 +21,7 @@ module SteamBuddy
       def find_games(remote_id)
         owned_games_data = @gateway.owned_games_data(remote_id)
         game_list_data = owned_games_data['games']
-        return game_list_data unless game_list_data
+        return nil unless game_list_data
 
         game_list_data.sort! do |game_a, game_b|
           game_b['playtime_forever'] <=> game_a['playtime_forever']

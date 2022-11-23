@@ -4,8 +4,6 @@ require 'roda'
 require 'slim'
 require 'slim/include'
 
-STEAM_ID64_LENGTH = 17
-
 module SteamBuddy
   # Web App
   class App < Roda
@@ -29,7 +27,7 @@ module SteamBuddy
       routing.root do
         session[:watching] ||= []
 
-        result = Service::ListProjects.new.call
+        result = Service::ListPlayers.new.call
 
         if result.failure?
           flash[:error] = result.failure
@@ -48,40 +46,19 @@ module SteamBuddy
         routing.is do
           # POST /player/
           routing.post do
-            remote_id = routing.params['remote_id']
+            id_request = Forms::NewPlayer.new.call(routing.params) #  output: <Dry::Validation::Result:0x00007f4658035db8>
+            player_made = Service::AddPlayer.new.call(id_request)
 
-            unless remote_id &&
-                   remote_id.length == STEAM_ID64_LENGTH
-              flash[:error] = 'Invalid Steam ID!'
-              response.status = 400
+            if player_made.failure?
+              flash[:error] = player_made.failure
               routing.redirect '/'
             end
 
-            # Try getting player from database
-            db_player = Repository::For.klass(Entity::Player).find_id(remote_id)
-            player = Repository::For.klass(Entity::Player).find_id(db_player&.remote_id)
-
-            unless player&.full_friend_data
-              # Get player from API
-              begin
-                player = Steam::PlayerMapper
-                  .new(App.config.STEAM_KEY)
-                  .find(remote_id)
-              rescue StandardError
-                flash[:error] = 'Could not find player friends'
-              end
-
-              # Add player to database
-              begin
-                Repository::For.entity(player).find_or_create_with_friends(player)
-              rescue StandardError => e
-                Logger.error e.backtrace.join("\n")
-                flash[:error] = 'Having trouble accessing the database'
-              end
-            end
+            player = player_made.value!
 
             # Add player and player's friends remote_id to session
             session[:watching].insert(0, player.remote_id).uniq!
+            flash[:notice] = 'player added to your list!'
             player&.friend_list&.each { |friend| session[:watching].insert(0, friend.remote_id).uniq! }
 
             # Redirect viewer to player page

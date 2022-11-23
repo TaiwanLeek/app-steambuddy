@@ -23,15 +23,23 @@ module SteamBuddy
     route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
       response['Content-Type'] = 'text/html; charset=utf-8'
+      routing.public
 
       # GET /
       routing.root do
         session[:watching] ||= []
-        players = Repository::For.klass(Entity::Player).all
 
-        flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
+        result = Service::ListProjects.new.call
 
-        viewable_players = Views::PlayersList.new(players).filter(session[:watching])
+        if result.failure?
+          flash[:error] = result.failure
+          viewable_players = []
+        else
+          players = result.value!
+          flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
+
+          viewable_players = Views::PlayersList.new(players).filter(session[:watching])
+        end
 
         view 'home', locals: { players: viewable_players }
       end

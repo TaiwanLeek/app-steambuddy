@@ -13,7 +13,7 @@ player = SteamBuddy::Steam::PlayerMapper.new(STEAM_KEY).find("76561198326876707"
 players = SteamBuddy::Repository::For.klass(SteamBuddy::Entity::Player).all
 =end
 
-
+=begin
 remote_id = routing.params['remote_id']
 
             unless remote_id &&
@@ -49,5 +49,20 @@ remote_id = routing.params['remote_id']
             # Add player and player's friends remote_id to session
             session[:watching].insert(0, player.remote_id).uniq!
             player&.friend_list&.each { |friend| session[:watching].insert(0, friend.remote_id).uniq! }
+=end
+
+=begin
+# Get player from database
+player = Repository::For.klass(Entity::Player).find_id(remote_id)
+
+player ||= Steam::PlayerMapper
+  .new(App.config.STEAM_KEY)
+  .find(remote_id)
+=end
+
+Steam::PlayerMapper::DataHelper.friend_sort!(player, info_value)
+
+a = nil
+b = a || 4
 
 puts 'Test end.'

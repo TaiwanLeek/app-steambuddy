@@ -69,15 +69,14 @@ module SteamBuddy
         routing.on String, String do |remote_id, info_value|
           # GET /player/remote_id/info_value
           routing.get do
-            # Get player from database
-            player = Repository::For.klass(Entity::Player).find_id(remote_id)
+            player_result = Service::GetTable.new.call(
+              remote_id:,
+              info_value:
+            )
 
-            player ||= Steam::PlayerMapper
-              .new(App.config.STEAM_KEY)
-              .find(remote_id)
-
-            Steam::PlayerMapper::DataHelper.friend_sort!(player, info_value)
-
+            player = player_result.value!
+            puts 'player: '
+            puts player
             viewable_player = Views::Player.new(player)
 
             # Show viewer the player

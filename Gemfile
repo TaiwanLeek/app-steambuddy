@@ -13,37 +13,19 @@ gem 'rack-session', '~> 0.3'
 gem 'roda', '~> 3'
 gem 'slim', '~> 4'
 
-## Networking
-gem 'httparty'
-
-## Database
-gem 'hirb', '~> 0'
-gem 'hirb-unicode', '~> 0'
-gem 'sequel', '~> 5.49'
-
 # Controllers and services
 gem 'dry-monads', '~> 1.4'
 gem 'dry-transaction', '~> 0.13'
 gem 'dry-validation', '~> 1.7'
 
-# DOMAIN LAYER
 # Validation
 gem 'dry-struct', '~> 1'
 gem 'dry-types', '~> 1'
-
-# INFRASTRUCTURE LAYER
-# Networking
-gem 'http', '~> 5'
-
-group :development, :test do
-  gem 'sqlite3', '~> 1.4'
-end
 
 ## TESTING
 group :test do
   gem 'minitest', '~> 5'
   gem 'minitest-rg', '~> 5'
-
   gem 'page-object', '~> 2.3'
   gem 'simplecov', '~> 0'
   gem 'vcr', '~> 6'
@@ -61,12 +43,10 @@ gem 'pry'
 group :development do
   gem 'flog'
   gem 'reek'
-  gem 'rubocop'
+  gem 'rubocop', '~> 1.40'
 end
 
 ## Database
 group :production do
   gem 'pg'
 end
-
-gem 'rdoc'

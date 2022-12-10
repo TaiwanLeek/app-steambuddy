@@ -8,8 +8,10 @@ gem 'figaro', '~> 1.2'
 gem 'rake', '~> 13.0'
 
 ## Web Application
+gem 'multi_json', '~> 1.15'
 gem 'puma', '~> 6'
 gem 'rack-session', '~> 0.3'
+gem 'roar', '~> 1.1'
 gem 'roda', '~> 3'
 gem 'slim', '~> 4'
 

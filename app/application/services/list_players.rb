@@ -1,26 +1,18 @@
 # frozen_string_literal: true
 
-require 'dry/monads'
+require 'dry/transaction'
 
 module SteamBuddy
   module Service
     # Retrieves array of all listed player entities
-
-    # Author: a0985
     class ListPlayers
-      include Dry::Monads::Result::Mixin
+      include Dry.transaction
 
-      ##
-      # Get all players from database
-      # Author: a0985
-      # @return [Array<Entity::Player>]
-      def call
-        players = Repository::For.klass(Entity::Player).all
+      step :get_api_list
 
-        Success(players)
-      rescue StandardError
-        Failure('Having trouble accessing the database')
-      end
+      private
+
+      def get_api_list; end
     end
   end
 end

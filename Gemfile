@@ -52,3 +52,5 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'http', '~> 5.1'

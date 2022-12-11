@@ -10,7 +10,7 @@ module SteamBuddy
     class OwnedGame < Roar::Decorator
       include Roar::JSON
 
-      property :game, extend: Representer::Game
+      property :game, extend: Representer::Game, class: OpenStruct
       property :played_time
     end
   end

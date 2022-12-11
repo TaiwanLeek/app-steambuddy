@@ -14,8 +14,8 @@ module SteamBuddy
       property :username
       property :game_count
       property :full_friend_data
-      collection :owned_games, extend: Representer::OwnedGame
-      collection :friend_list, extend: Representer::Player
+      collection :owned_games, extend: Representer::OwnedGame, class: OpenStruct
+      collection :friend_list, extend: Representer::Player, class: OpenStruct
     end
   end
 end

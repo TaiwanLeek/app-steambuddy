@@ -14,35 +14,39 @@ module SteamBuddy
     plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
                     css: 'style.css', js: 'table_row.js'
+    plugin :caching
     plugin :common_logger, $stderr
 
     # use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
 
-    route do |routing| # rubocop:disable Metrics/BlockLength
+    route do |routing|
       routing.assets # load CSS
       response['Content-Type'] = 'text/html; charset=utf-8'
       routing.public
 
       # GET /
       routing.root do
-        session[:watching] ||= []
+        session[:players_watching] ||= []
 
-        result = Service::ListPlayers.new.call
+        result = Service::ListPlayers.new.call(session[:players_watching])
 
         if result.failure?
           flash[:error] = result.failure
           viewable_players = []
         else
-          players = result.value!
+          players = result.value!.players
           flash.now[:notice] = 'Add a Steam ID to get started' if players.none?
 
-          viewable_players = Views::PlayersList.new(players).filter(session[:watching])
+          viewable_players = Views::PlayersList.new(players).filter(session[:players_watching])
         end
 
+        App.configure :production do
+          response.expires 60, public: true
+        end
         view 'home', locals: { players: viewable_players }
       end
 
-      routing.on 'player' do # rubocop:disable Metrics/BlockLength
+      routing.on 'player' do
         routing.is do
           # POST /player/
           routing.post do
@@ -57,9 +61,9 @@ module SteamBuddy
             player = player_made.value!
 
             # Add player and player's friends remote_id to session
-            session[:watching].insert(0, player.remote_id).uniq!
+            session[:players_watching].insert(0, player.remote_id).uniq!
             flash[:notice] = 'player added to your list!'
-            player&.friend_list&.each { |friend| session[:watching].insert(0, friend.remote_id).uniq! }
+            player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
 
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"

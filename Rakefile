@@ -3,6 +3,7 @@
 require 'rake/testtask'
 
 CODE = 'lib/'
+APP_PORT = '9000'
 
 task :default do
   puts `rake -T`
@@ -10,17 +11,17 @@ end
 
 desc 'run service'
 task :run do
-  sh 'bundle exec puma'
+  sh "bundle exec puma -p #{APP_PORT}"
 end
 
 task :rerun do
   sh "rerun -c --ignore 'coverage/*' -- bundle exec puma"
 end
 
-desc 'run tests'
-task :spec do
-  sh 'ruby spec/fixtures/steam_info.rb'
-  sh 'ruby spec/gateway_steam_spec.rb'
+desc 'Run unit and integration tests'
+Rake::TestTask.new(:spec) do |t|
+  t.pattern = 'spec/tests/**/*_spec.rb'
+  t.warning = false
 end
 
 desc 'Run application console'

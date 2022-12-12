@@ -1,25 +1,34 @@
 # frozen_string_literal: true
 
-require 'dry/monads'
+require 'dry/transaction'
 
 module SteamBuddy
   module Service
     # Retrieves array of all listed player entities
-
-    # Author: a0985
     class ListPlayers
-      include Dry::Monads::Result::Mixin
+      include Dry::Transaction
 
-      ##
-      # Get all players from database
-      # Author: a0985
-      # @return [Array<Entity::Player>]
-      def call
-        players = Repository::For.klass(Entity::Player).all
+      step :get_api_list
+      step :reify_list
 
-        Success(players)
+      private
+
+      def get_api_list(players_list)
+        Gateway::Api.new(SteamBuddy::App.config)
+          .players_list(players_list)
+          .then do |result|
+            result.success? ? Success(result.payload) : Failure(result.message)
+          end
       rescue StandardError
-        Failure('Having trouble accessing the database')
+        Failure('Could not access our API')
+      end
+
+      def reify_list(players_json)
+        Representer::PlayersList.new(OpenStruct.new)
+          .from_json(players_json)
+          .then { |players| Success(players) }
+      rescue StandardError
+        Failure('Could not parse response from API')
       end
     end
   end

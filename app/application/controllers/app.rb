@@ -14,6 +14,7 @@ module SteamBuddy
     plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
                     css: 'style.css', js: 'table_row.js'
+    plugin :caching
     plugin :common_logger, $stderr
 
     # use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
@@ -27,14 +28,6 @@ module SteamBuddy
       routing.root do
         session[:players_watching] ||= []
 
-        # ##DEBUG
-
-        session[:players_watching].insert(0, '76561198012078200').uniq!
-        session[:players_watching].insert(0, '76561198326876707').uniq!
-        session[:players_watching].insert(0, '76561199077369243').uniq!
-
-        # ##DEBUG
-
         result = Service::ListPlayers.new.call(session[:players_watching])
 
         if result.failure?
@@ -47,6 +40,9 @@ module SteamBuddy
           viewable_players = Views::PlayersList.new(players).filter(session[:players_watching])
         end
 
+        App.configure :production do
+          response.expires 60, public: true
+        end
         view 'home', locals: { players: viewable_players }
       end
 

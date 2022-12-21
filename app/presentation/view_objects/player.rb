@@ -43,11 +43,11 @@ module Views
     end
 
     def favorite_game_name
-      @player.favorite_game&.game&.name
+      @player.owned_games[0]&.game&.name
     end
 
     def favorite_game_played_time
-      @player.favorite_game&.played_time
+      @player.owned_games[0]&.played_time
     end
   end
 end

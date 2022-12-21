@@ -82,8 +82,8 @@ module SteamBuddy
           when 'played_time'
             friend_b.total_played_time <=> friend_a.total_played_time
           when 'favorite_game'
-            favorite_game_case(friend_a&.favorite_game&.played_time,
-                               friend_b&.favorite_game&.played_time)
+            favorite_game_case(friend_a&.owned_games&.[](0)&.played_time,
+                               friend_b&.owned_games&.[](0)&.played_time)
           else
             friend_b.game_count <=> friend_a.game_count
           end

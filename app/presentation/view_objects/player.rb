@@ -39,7 +39,8 @@ module Views
     end
 
     def total_played_time
-      @player.total_played_time
+      # @player.total_played_time
+      @player.owned_games.sum(&:played_time)
     end
 
     def favorite_game_name

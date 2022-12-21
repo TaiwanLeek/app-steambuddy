@@ -15,6 +15,9 @@ module SteamBuddy
 
       private
 
+      DB_ERR_MSG = 'Having trouble accessing the database'
+      GH_NOT_FOUND_MSG = 'Could not find that project on Github'
+
       def request_player(input)
         result = Gateway::Api.new(SteamBuddy::App.config)
           .add_player(input[:remote_id])
@@ -23,7 +26,7 @@ module SteamBuddy
       rescue StandardError => e
         puts e.inspect
         puts e.backtrace
-        Failure('Cannot add players right now; please try again later')
+        Failure('Cannot add projects right now; please try again later')
       end
 
       def reify_player(player_json)

@@ -67,6 +67,7 @@ module SteamBuddy
 
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
+            # routing.redirect "player/#{id_request[:remote_id]}"
           end
         end
 

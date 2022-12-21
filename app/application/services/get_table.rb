@@ -26,7 +26,7 @@ module SteamBuddy
       end
 
       def friend_sort(input)
-        Steam::PlayerMapper::DataHelper.friend_sort!(input[:player_info], input[:info_value])
+        Service::DataHelper.friend_sort!(input[:player_info], input[:info_value])
         player = input[:player_info]
         Success(player)
       rescue StandardError => e

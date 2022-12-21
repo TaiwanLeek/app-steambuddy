@@ -4,20 +4,21 @@ require 'dry/transaction'
 
 module SteamBuddy
   module Service
-    # Transaction to get player info table accordin to info_value
+    # Transaction to store player from Steam API to database
 
     # Author: a0985
-    class GetTable
+    class GetTableOrigin
       include Dry::Transaction
 
-      step :request_player
+      step :find_player
       step :friend_sort
 
       private
 
-      def request_player(input)
-        player_made = Service::AddPlayer.new.call(input)
-        player = player_made.value!
+      def find_player(input)
+        # Get player from database
+        player = Repository::For.klass(Entity::Player).find_id(input[:remote_id])
+        player ||= player_from_steam(input)
 
         input[:player_info] = player
         Success(input)
@@ -32,6 +33,15 @@ module SteamBuddy
       rescue StandardError => e
         Logger.error e.backtrace.join("\n")
         Failure('Table accessing has some error')
+      end
+
+      # Following are support methods that other services could use
+
+      def player_from_steam(input)
+        # Get player from API
+        Steam::PlayerMapper
+          .new(App.config.STEAM_KEY)
+          .find(input[:remote_id])
       end
     end
   end

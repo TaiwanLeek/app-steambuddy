@@ -66,21 +66,19 @@ module SteamBuddy
             player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
 
             # Redirect viewer to player page
-            routing.redirect "player/#{player}"
+            routing.redirect "player/#{player.remote_id}"
           end
         end
 
-        routing.on String, String do |player, info_value|
+        routing.on String, String do |remote_id, info_value|
           # GET /player/remote_id/info_value
           routing.get do
             player_result = Service::GetTable.new.call(
-              remote_id: player.remote_id,
+              remote_id:,
               info_value:
             )
 
             player = player_result.value!
-            puts 'player: '
-            puts player
             viewable_player = Views::Player.new(player)
 
             # Show viewer the player
@@ -88,10 +86,10 @@ module SteamBuddy
           end
         end
 
-        # This route has to be placed AFTER |remote_id, info_value|
-        routing.on String do |player|
+        # This route has to be placed AFTER |player, info_value|
+        routing.on String do |remote_id|
           # GET /player/remote_id
-          routing.get { routing.redirect "#{player}/game_count" }
+          routing.get { routing.redirect "#{remote_id}/game_count" }
         end
       end
     end

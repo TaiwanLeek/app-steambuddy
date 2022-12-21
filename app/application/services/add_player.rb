@@ -11,7 +11,7 @@ module SteamBuddy
       include Dry::Transaction
 
       step :request_player
-      step :reify_project
+      step :reify_player
 
       private
 
@@ -26,7 +26,7 @@ module SteamBuddy
         Failure('Cannot add players right now; please try again later')
       end
 
-      def reify_project(player_json)
+      def reify_player(player_json)
         Representer::Player.new(OpenStruct.new)
           .from_json(player_json)
           .then { |player| Success(player) }

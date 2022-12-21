@@ -23,7 +23,7 @@ module SteamBuddy
         input[:player_info] = player
         Success(input)
       rescue StandardError
-        Failure('Having touble to find player')
+        Failure('Having trouble to find player')
       end
 
       def friend_sort(input)

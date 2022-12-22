@@ -67,6 +67,7 @@ module SteamBuddy
 
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
+            # routing.redirect "player/#{id_request[:remote_id]}"
           end
         end
 
@@ -79,8 +80,6 @@ module SteamBuddy
             )
 
             player = player_result.value!
-            puts 'player: '
-            puts player
             viewable_player = Views::Player.new(player)
 
             # Show viewer the player
@@ -88,7 +87,7 @@ module SteamBuddy
           end
         end
 
-        # This route has to be placed AFTER |remote_id, info_value|
+        # This route has to be placed AFTER |player, info_value|
         routing.on String do |remote_id|
           # GET /player/remote_id
           routing.get { routing.redirect "#{remote_id}/game_count" }

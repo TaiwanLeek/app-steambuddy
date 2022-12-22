@@ -17,6 +17,10 @@ module SteamBuddy
       def players_list(list)
         @request.players_list(list)
       end
+
+      def add_player(remote_id)
+        @request.add_player(remote_id)
+      end
     end
 
     class Request
@@ -32,6 +36,10 @@ module SteamBuddy
       def players_list(list)
         call_api('get', ['players'],
                  'list' => Value::WatchedList.to_encoded(list))
+      end
+
+      def add_player(remote_id)
+        call_api('post', ['players', remote_id])
       end
 
       private

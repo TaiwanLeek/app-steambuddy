@@ -13,13 +13,15 @@ module SteamBuddy
       def self.sorting_way(friend_a, friend_b, info_value)
         # TODO
         case info_value
-        when 'played_time'
-          friend_b.owned_games.sum(&:played_time) <=> friend_a.owned_games.sum(&:played_time)
-        when 'favorite_game'
-          favorite_game_case(friend_a&.owned_games&.[](0)&.played_time,
-                             friend_b&.owned_games&.[](0)&.played_time)
-        else
+        when 'game_count'
           friend_b.game_count <=> friend_a.game_count
+        when 'played_time'
+          friend_b.total_played_time <=> friend_a.total_played_time
+        when 'favorite_game'
+          favorite_game_case(friend_a&.favorite_game&.played_time,
+                             friend_b&.favorite_game&.played_time)
+        else
+          raise ArgumentError, 'Incorrect info_value!'
         end
       end
 

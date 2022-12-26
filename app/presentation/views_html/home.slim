@@ -6,13 +6,13 @@
       .col-md-8.col-sm-6
         input { 
           type='text' name='remote_id'
-          id='remote_id' class="form-control"
+          id='id_input' class="form-control"
           value="76561198326876707"
           placeholder="e.g. 76561198012078200"
         }
       .col-md-2.col-sm-3
         button { 
-          type='submit' id='repo-form-submit' class='submit' 
+          type='submit' id='player_form_submit' class='submit' 
           value='submit' class="btn btn-success" 
         } Show Player Information
     .row
@@ -22,8 +22,8 @@
         thead
           tr
             th SteamID64
-            th Persona Name
-            th Game Count
+            th Personal_Name
+            th Game_Count
         tbody
           - players.each do |player|
             tr class="table-row player_row" data-href=player.info_link id="#{player.index_str}.row"

@@ -63,7 +63,7 @@ module SteamBuddy
             # Add player and player's friends remote_id to session
             session[:players_watching].insert(0, player.remote_id).uniq!
             flash[:notice] = 'player added to your list!'
-            player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
+            # player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
 
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"

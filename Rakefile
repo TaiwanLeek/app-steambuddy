@@ -9,6 +9,24 @@ task :default do
   puts `rake -T`
 end
 
+desc 'Run unit and integration tests'
+Rake::TestTask.new(:spec) do |t|
+  t.pattern = 'spec/tests/{integration,unit}/**/*_spec.rb'
+  t.warning = false
+end
+
+desc 'Keep rerunning unit/integration tests upon changes'
+task :respec do
+  sh "rerun -c 'rake spec' --ignore 'coverage/*' --ignore 'repostore/*'"
+end
+
+# NOTE: run `rake run:test` in another process
+desc 'Run acceptance tests only'
+Rake::TestTask.new(:spec_accept) do |t|
+  t.pattern = 'spec/tests/acceptance/*_spec.rb'
+  t.warning = false
+end
+
 desc 'run service'
 task :run do
   sh "bundle exec puma -p #{APP_PORT}"

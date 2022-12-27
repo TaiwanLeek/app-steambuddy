@@ -21,12 +21,18 @@
       table class="table table-hover" id="players_table"
         thead
           tr
+            th
             th SteamID64
             th Personal_Name
             th Game_Count
         tbody
           - players.each do |player|
             tr class="table-row player_row" data-href=player.info_link id="#{player.index_str}.row"
+              td id='delete_player'
+                form role='form' method='post' action=player.id_link
+                  input type='hidden' name='_method' value='delete'
+                  button type="submit" class="btn btn-sm btn-link" id="#{player.index_str}.delete"
+                    i class="fas fa-trash-alt"
               td id='td_id'
                 span class="player_table_id" id="#{player.index_str}.player_id"
                   = player.player_id

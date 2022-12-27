@@ -107,5 +107,17 @@ describe 'Homepage Acceptance Tests' do
         _(page.warning_message.downcase).must_include 'invalid'
       end
     end
+
+    it '(SAD) should not be able to add valid but non-existent player ID' do
+      # GIVEN: user is on the home page without any players
+      visit HomePage do |page|
+        # WHEN: they add a player ID that is valid but non-existent
+        sad_id = '12345678912345678'
+        page.add_new_player(sad_id)
+
+        # THEN: they should see a warning message
+        _(page.warning_message.downcase).must_include 'could not find'
+      end
+    end
   end
 end

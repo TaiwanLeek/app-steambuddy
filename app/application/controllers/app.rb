@@ -51,7 +51,7 @@ module SteamBuddy
           # POST /player/
           routing.post do
             id_request = Forms::NewPlayer.new.call(routing.params) #  output: <Dry::Validation::Result:0x00007f4658035db8>
-            player_made = Service::AddPlayer.new.call(id_request)
+            player_made = Service::AddPlayerCheck.new.call(id_request)
 
             if player_made.failure?
               flash[:error] = player_made.failure
@@ -63,11 +63,12 @@ module SteamBuddy
             # Add player and player's friends remote_id to session
             session[:players_watching].insert(0, player.remote_id).uniq!
             flash[:notice] = 'player added to your list!'
+
+            # Add friend list into session
             # player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
 
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
-            # routing.redirect "player/#{id_request[:remote_id]}"
           end
         end
 

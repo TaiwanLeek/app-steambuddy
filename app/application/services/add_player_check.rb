@@ -4,12 +4,13 @@ require 'dry/transaction'
 
 module SteamBuddy
   module Service
-    # Transaction to store player from Steam API to database
+    # Chech if input is valid or not
 
     # Author: a0985
-    class AddPlayer
+    class AddPlayerCheck
       include Dry::Transaction
 
+      step :validate_input
       step :request_player
       step :reify_player
 
@@ -17,6 +18,14 @@ module SteamBuddy
 
       DB_ERR_MSG = 'Having trouble accessing the database'
       GH_NOT_FOUND_MSG = 'Could not find that player on Steam'
+
+      def validate_input(input)
+        if input.success?
+          Success(input)
+        else
+          Failure(input.errors.values)
+        end
+      end
 
       def request_player(input)
         result = Gateway::Api.new(SteamBuddy::App.config)

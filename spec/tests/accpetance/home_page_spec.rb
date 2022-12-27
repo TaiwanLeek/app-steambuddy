@@ -51,9 +51,9 @@ describe 'Homepage Acceptance Tests' do
 
   describe 'Add Player' do
     it '(HAPPY) should be able to request a player' do
-      # GIVEN: user is on the home page without any projects
+      # GIVEN: user is on the home page without any players
       visit HomePage do |page|
-        # WHEN: they add a project URL and submit
+        # WHEN: they add a player URL and submit
         good_id = STEAM_ID
         page.add_new_player(good_id)
 
@@ -71,11 +71,40 @@ describe 'Homepage Acceptance Tests' do
 
       # WHEN: they return to the home page
       visit HomePage do |page|
-        # THEN: they should see their project's details listed
+        # THEN: they should see their player's details listed
         _(page.players_table_element.exists?).must_equal true
         _(page.num_players).must_equal 1
         _(page.first_player.text).must_include STEAM_ID
         _(page.first_player.text).must_include USERNAME
+      end
+    end
+
+    it '(HAPPY) should see player highlighted when they hover over it' do
+      # GIVEN: user has requested a player to watch
+      good_id = STEAM_ID
+      visit HomePage do |page|
+        page.add_new_player(good_id)
+      end
+
+      # WHEN: they go to the home page
+      visit HomePage do |page|
+        # WHEN: ..and hover over their new player
+        page.first_player_hover
+
+        # THEN: the new player should get highlighted
+        _(page.first_player_highlighted?).must_equal true
+      end
+    end
+
+    it '(BAD) should not be able to add an invalid player URL' do
+      # GIVEN: user is on the home page without any players
+      visit HomePage do |page|
+        # WHEN: they request a player with an invalid URL
+        bad_id = 'foobar'
+        page.add_new_player(bad_id)
+
+        # THEN: they should see a warning message
+        _(page.warning_message.downcase).must_include 'invalid'
       end
     end
   end

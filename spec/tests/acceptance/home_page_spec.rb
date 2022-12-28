@@ -37,7 +37,7 @@ describe 'Homepage Acceptance Tests' do
 
     it '(HAPPY) should not see players they did not request' do
       # GIVEN: a player exists in the database but user has not requested it
-      project = SteamBuddy::Steam::PlayerMapper
+      player = SteamBuddy::Steam::PlayerMapper
         .new(STEAM_KEY).find(STEAM_ID)
       SteamBuddy::Repository::For.entity(player).create(player)
 
@@ -117,6 +117,24 @@ describe 'Homepage Acceptance Tests' do
 
         # THEN: they should see a warning message
         _(page.warning_message.downcase).must_include 'could not find'
+      end
+    end
+  end
+
+  describe 'Delete Player' do
+    it '(HAPPY) should be able to delete a requested player' do
+      # GIVEN: user has requested and created a player
+      visit HomePage do |page|
+        good_id = 'STEAM_ID'
+        page.add_new_player(good_id)
+      end
+
+      # WHEN: they revisit the homepage and delete the player
+      visit HomePage do |page|
+        page.first_player_delete
+
+        # THEN: they should not find any players
+        _(page.players_table_element.exists?).must_equal false
       end
     end
   end

@@ -3,10 +3,13 @@
 require 'roda'
 require 'slim'
 require 'slim/include'
+require_relative 'helpers'
 
 module SteamBuddy
   # Web App
   class App < Roda
+    include RouteHelpers
+
     plugin :halt
     plugin :flash
     plugin :all_verbs # allows DELETE and other HTTP verbs beyond GET/POST

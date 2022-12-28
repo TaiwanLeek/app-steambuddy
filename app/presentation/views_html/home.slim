@@ -15,31 +15,31 @@
           type='submit' id='player_form_submit' class='submit' 
           value='submit' class="btn btn-success" 
         } Show Player Information
-    .row
-      .col-md-12.blank-row
-    - if players.any?
-      table class="table table-hover" id="players_table"
-        thead
-          tr
-            th
-            th SteamID64
-            th Personal_Name
-            th Game_Count
-        tbody
-          - players.each do |player|
-            tr class="table-row player_row" data-href=player.info_link id="#{player.index_str}.row"
-              td id='delete_player'
-                form role='form' method='post' action=player.id_link
-                  input type='hidden' name='_method' value='delete'
-                  button type="submit" class="btn btn-sm btn-link" id="#{player.index_str}.delete"
-                    i class="fas fa-trash-alt"
-              td id='td_id'
-                span class="player_table_id" id="#{player.index_str}.player_id"
-                  = player.player_id
-              td id='td_name'
-                span class="player_table_name" id="#{player.index_str}.player_name"
-                  = player.player_name
-              td id='td_game_count'
-                span class="player_table_game_count" id="#{player.index_str}.player_game_count"
-                  = player.player_game_count
-              
+  .row
+    .col-md-12.blank-row
+  - if players.any?
+    table class="table table-hover" id="players_table"
+      thead
+        tr
+          th
+          th SteamID64
+          th Personal_Name
+          th Game_Count
+      tbody
+        - players.each do |player|
+          tr class="table-row player_row" data-href=player.info_link id="#{player.index_str}.row"
+            td id='delete_player'
+              form role='form' method='post' action=player.id_link
+                input type='hidden' name='_method' value='delete'
+                button type="submit" class="btn btn-sm btn-link" id="#{player.index_str}.delete"
+                  i class="fas fa-trash-alt"
+            td id='td_id'
+              span class="player_table_id" id="#{player.index_str}.player_id"
+                = player.player_id
+            td id='td_name'
+              span class="player_table_name" id="#{player.index_str}.player_name"
+                = player.player_name
+            td id='td_game_count'
+              span class="player_table_game_count" id="#{player.index_str}.player_game_count"
+                = player.player_game_count
+            

@@ -9,7 +9,7 @@ module SteamBuddy
   class App < Roda
     plugin :halt
     plugin :flash
-    # plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
+    plugin :all_verbs # allows DELETE and other HTTP verbs beyond GET/POST
     plugin :render, engine: 'slim', views: 'app/presentation/views_html'
     plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
@@ -17,7 +17,7 @@ module SteamBuddy
     plugin :caching
     plugin :common_logger, $stderr
 
-    # use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
+    use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
 
     route do |routing|
       routing.assets # load CSS
@@ -51,7 +51,13 @@ module SteamBuddy
           # POST /player/
           routing.post do
             id_request = Forms::NewPlayer.new.call(routing.params) #  output: <Dry::Validation::Result:0x00007f4658035db8>
-            player_made = Service::AddPlayer.new.call(id_request)
+            id_checkpoint = Service::AddPlayerCheck.new.call(id_request)
+            if id_checkpoint.failure?
+              flash[:error] = id_checkpoint.failure
+              routing.redirect '/'
+            end
+
+            player_made = Service::AddPlayer.new.call(id_checkpoint.value!)
 
             if player_made.failure?
               flash[:error] = player_made.failure
@@ -63,11 +69,12 @@ module SteamBuddy
             # Add player and player's friends remote_id to session
             session[:players_watching].insert(0, player.remote_id).uniq!
             flash[:notice] = 'player added to your list!'
-            player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
+
+            # Add friend list into session
+            # player&.friend_list&.each { |friend| session[:players_watching].insert(0, friend.remote_id).uniq! }
 
             # Redirect viewer to player page
             routing.redirect "player/#{player.remote_id}"
-            # routing.redirect "player/#{id_request[:remote_id]}"
           end
         end
 
@@ -89,8 +96,19 @@ module SteamBuddy
 
         # This route has to be placed AFTER |player, info_value|
         routing.on String do |remote_id|
+          # DELETE /player/remote_id
+          routing.delete do
+            fullname = remote_id.to_s
+            session[:players_watching].delete(fullname)
+
+            routing.redirect '/'
+          end
+
           # GET /player/remote_id
-          routing.get { routing.redirect "#{remote_id}/game_count" }
+          routing.get do
+            session[:players_watching] ||= []
+            routing.redirect "#{remote_id}/game_count"
+          end
         end
       end
     end

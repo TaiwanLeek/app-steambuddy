@@ -14,6 +14,10 @@ module Views
       "/player/#{fullname}"
     end
 
+    def id_link
+      "/player/#{player_id}"
+    end
+
     def index_str
       "player[#{@index}]"
     end

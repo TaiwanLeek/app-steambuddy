@@ -4,7 +4,7 @@ require 'dry/transaction'
 
 module SteamBuddy
   module Service
-    # Transaction to store project from Github API to database
+    # Transaction to store player from Steam API to database
 
     # Author: a0985
     class AddPlayer
@@ -16,7 +16,7 @@ module SteamBuddy
       private
 
       DB_ERR_MSG = 'Having trouble accessing the database'
-      GH_NOT_FOUND_MSG = 'Could not find that project on Github'
+      GH_NOT_FOUND_MSG = 'Could not find that player on Steam'
 
       def request_player(input)
         result = Gateway::Api.new(SteamBuddy::App.config)
@@ -26,7 +26,7 @@ module SteamBuddy
       rescue StandardError => e
         puts e.inspect
         puts e.backtrace
-        Failure('Cannot add projects right now; please try again later')
+        Failure('Cannot add players right now; please try again later')
       end
 
       def reify_player(player_json)

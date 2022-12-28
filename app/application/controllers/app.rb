@@ -3,13 +3,10 @@
 require 'roda'
 require 'slim'
 require 'slim/include'
-require_relative 'helpers'
 
 module SteamBuddy
   # Web App
   class App < Roda
-    include RouteHelpers
-
     plugin :halt
     plugin :flash
     plugin :all_verbs # allows DELETE and other HTTP verbs beyond GET/POST
@@ -109,10 +106,6 @@ module SteamBuddy
 
           # GET /player/remote_id
           routing.get do
-            path_request = PlayerRequestPath.new(
-              remote_id, request
-            )
-
             session[:players_watching] ||= []
             routing.redirect "#{remote_id}/game_count"
           end

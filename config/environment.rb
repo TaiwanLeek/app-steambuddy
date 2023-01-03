@@ -25,6 +25,10 @@ module SteamBuddy
       # Logger Setup
       LOGGER = Logger.new($stderr)
       def self.logger = LOGGER
+
+      configure :development, :test, :app_test do
+        require 'pry'; # for breakpoints
+      end
     end
   end
 end

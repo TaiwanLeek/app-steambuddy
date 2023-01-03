@@ -3,35 +3,50 @@
 source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
-## Configuration and Utilities
+# CONFIGURATION
 gem 'figaro', '~> 1.2'
 gem 'rake', '~> 13.0'
 
-## Web Application
-gem 'multi_json', '~> 1.15'
-gem 'puma', '~> 6'
+# PRESENTATION LAYER
+gem 'slim', '~> 4.1'
+
+# APPLICATION LAYER
+# Web application related
+gem 'puma', '~> 6.0'
 gem 'rack-session', '~> 0.3'
-gem 'roar', '~> 1.1'
-gem 'roda', '~> 3'
-gem 'slim', '~> 4'
+gem 'roda', '~> 3.62'
 
 # Controllers and services
 gem 'dry-monads', '~> 1.4'
 gem 'dry-transaction', '~> 0.13'
 gem 'dry-validation', '~> 1.7'
 
-# Validation
-gem 'dry-struct', '~> 1'
-gem 'dry-types', '~> 1'
+# Representers
+gem 'multi_json', '~> 1.15'
+gem 'roar', '~>1.1'
 
-## TESTING
+# INFRASTRUCTURE LAYER
+# Networking
+gem 'http', '~> 5'
+
+# TESTING
 group :test do
   gem 'minitest', '~> 5'
   gem 'minitest-rg', '~> 5'
-  gem 'page-object', '~> 2.3'
   gem 'simplecov', '~> 0'
-  gem 'vcr', '~> 6'
-  gem 'webmock', '~> 3'
+
+  gem 'headless', '~> 2.3'
+  gem 'page-object', '~> 2.3'
+  gem 'watir', '~> 7.0'
+
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara'
+
+  # A browser automation framework and ecosystem
+  gem 'selenium-webdriver'
+
+  # Keep your Selenium WebDrivers updated automatically
+  gem 'webdrivers', require: !ENV['SELENIUM_REMOTE_URL']
 end
 
 group :development do
@@ -41,16 +56,9 @@ end
 # DEBUGGING
 gem 'pry'
 
-## QUALITY
+# QUALITY
 group :development do
   gem 'flog'
   gem 'reek'
-  gem 'rubocop', '~> 1.40'
+  gem 'rubocop'
 end
-
-## Database
-group :production do
-  gem 'pg'
-end
-
-gem 'http', '~> 5.1'

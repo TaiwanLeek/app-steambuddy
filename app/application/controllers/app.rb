@@ -3,13 +3,11 @@
 require 'roda'
 require 'slim'
 require 'slim/include'
-require_relative 'helpers'
+require 'rack'
 
 module SteamBuddy
   # Web App
   class App < Roda
-    include RouteHelpers
-
     plugin :halt
     plugin :flash
     plugin :all_verbs # allows DELETE and other HTTP verbs beyond GET/POST
@@ -97,6 +95,13 @@ module SteamBuddy
           end
         end
 
+        routing.on String, String, String do |_remote_id, game_search, game_name|
+          # GET /player/remote_id/game_search/game_name
+          routing.get do
+            puts "hellodfgdf: #{game_search}, #{game_name}"
+          end
+        end
+
         # This route has to be placed AFTER |player, info_value|
         routing.on String do |remote_id|
           # DELETE /player/remote_id
@@ -109,10 +114,6 @@ module SteamBuddy
 
           # GET /player/remote_id
           routing.get do
-            path_request = PlayerRequestPath.new(
-              remote_id, request
-            )
-
             session[:players_watching] ||= []
             routing.redirect "#{remote_id}/game_count"
           end

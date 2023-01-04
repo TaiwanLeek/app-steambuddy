@@ -1,0 +1,80 @@
+.container
+  <select id="info" onchange="print_table()">
+    <option value="">Select type</option>
+    <option value="game_count">Game count</option>
+    <option value="played_time">Played time</option>
+    <option value="favorite_game">Favorite game</option>
+  </select>
+
+  <p id="demo"></p>
+
+  - table_id = ""
+  - if info_value == "game_count"
+    - table_id = "game_count_table"
+  - elsif info_value == "played_time"
+    - table_id = "played_time_table"
+  - else info_value == "favorite_game"
+    - table_id =  "favorite_game_table"
+
+
+  table.table id = table_id
+    thead
+      tr
+        th Remote Id
+        th User Name
+        - if info_value == "game_count"
+          th Game Count
+        - elsif info_value == "played_time"
+          th Total Played Hour
+        - else info_value == "favorite_game"
+          th Favorite Game
+          th Played Hour
+        th
+    tbody
+      tr
+        td
+          = player.player_id
+        td
+          = player.player_name
+        - if info_value == "game_count"
+          td
+            = player.player_game_count
+        - elsif info_value == "played_time"
+          td
+            = player.total_played_time
+        - else info_value == "favorite_game"
+          td
+            = player.favorite_game_name
+          td
+            = player.favorite_game_played_time
+        - player.player_friend.each do |friend|
+          tr
+            td
+              = friend.player_id
+            td
+              = friend.player_name
+            - if info_value == "game_count"
+              td
+                = friend.player_game_count
+            - elsif info_value == "played_time"
+              td
+                = friend.total_played_time
+            - else info_value == "favorite_game"
+              td
+                = friend.favorite_game_name
+              td
+                = friend.favorite_game_played_time
+
+javascript:
+  function print_table()
+  {
+    var info_value = document.getElementById("info").value;
+
+    path_name = window.location.pathname;
+    path_peice = path_name.split("/");
+
+    res_path = "http://" + location.host.trim() + "/" + "player/" + path_peice[2] + "/" + info_value;
+    console.log(res_path);
+    
+    location.href = res_path;
+  }

@@ -1,6 +1,5 @@
-break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:30
-break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:45
-break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:76
+break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:33
+break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:48
+break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:79
 break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/services/add_player.rb:21
-break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:39
-break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/spec/tests/acceptance/home_page_spec.rb:6
+break /home/youthink/Desktop/soa2022/steambuddy-ultimate-app/app/application/controllers/app.rb:42

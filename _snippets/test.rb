@@ -60,9 +60,14 @@ player ||= Steam::PlayerMapper
   .find(remote_id)
 =end
 
-Steam::PlayerMapper::DataHelper.friend_sort!(player, info_value)
+a = "game_seach/Overwatch"
+if a.include? "game_search"
+  b = a.split('/').map! { |item| item.downcase }
+  puts b[0]
+else
+  puts "OK"
+end
 
-a = nil
-b = a || 4
-
-puts 'Test end.'
+hash = {"apple" => 65, "carrot" => 0}
+hash1 = {"apple" => 151, "carrot" => 548}
+hash.select{|key, value| value if key.include? "app"} <=> hash1.select{|key, value| value if key.include? "app"}

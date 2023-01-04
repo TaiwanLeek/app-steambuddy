@@ -11,7 +11,12 @@ module SteamBuddy
       end
 
       def self.sorting_way(friend_a, friend_b, info_value)
-        # TODO
+        if info_value.include? 'game_search'
+          tmp = info_value.split('/').map! { |item| item.downcase }
+          info_value = tmp[0]
+          game_name = tmp[1]
+        end
+
         case info_value
         when 'game_count'
           friend_b.game_count <=> friend_a.game_count
@@ -20,6 +25,9 @@ module SteamBuddy
         when 'favorite_game'
           favorite_game_case(friend_a&.favorite_game&.played_time,
                              friend_b&.favorite_game&.played_time)
+        when 'game_search'
+          friend_b.owned_games.select { |key, value| value if key.include? game_name } <=>
+            friend_a.owned_games.select { |key, value| value if key.include? game_name }
         else
           raise ArgumentError, 'Incorrect info_value!'
         end

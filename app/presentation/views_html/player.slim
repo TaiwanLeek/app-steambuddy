@@ -1,12 +1,12 @@
 .container
-  <select id="info" onchange="print_table()">
-    <option value="">Select type</option>
-    <option value="game_count">Game count</option>
-    <option value="played_time">Played time</option>
-    <option value="favorite_game">Favorite game</option>
-  </select>
+  <div class="row-fluid">
+    <span><input id="games_count_info" type="button" value="game_count" onclick="print_table(this.value)"></span
+    <span><input id="played_time_info" type="button" value="played_time" onclick="print_table(this.value)"></span>  
+    <span><input id="favorite_game_info" type="button" value="favorite_game" onclick="print_table(this.value)"></span>
+  </div>
 
   <p id="demo"></p>
+  span.gap.bar ----
 
   - table_id = ""
   - if info_value == "game_count"
@@ -20,60 +20,86 @@
   table.table id = table_id
     thead
       tr
-        th Remote Id
-        th User Name
+        th Remote_Id
+        th User_Name
         - if info_value == "game_count"
-          th Game Count
+          th Game_Count
         - elsif info_value == "played_time"
-          th Total Played Hour
+          th Total_Played_Hour
+        - elsif info_value == "game_search"
+          th Game_Played_Hour
         - else info_value == "favorite_game"
-          th Favorite Game
+          th Favorite_Game
           th Played Hour
         th
     tbody
       tr
         td
-          = player.player_id
+          span id='player.player_id'
+            = player.player_id
         td
-          = player.player_name
+          span id='player.player_name'
+            = player.player_name
         - if info_value == "game_count"
           td
-            = player.player_game_count
+            span id='player.player_game_count'
+              = player.player_game_count
         - elsif info_value == "played_time"
           td
-            = player.total_played_time
+            span id='player.total_played_time'
+              = player.total_played_time
         - else info_value == "favorite_game"
           td
-            = player.favorite_game_name
+            span id='player.favorite_game_name'
+              = player.favorite_game_name
           td
-            = player.favorite_game_played_time
+            span id='player.favorite_game_played_time'
+              = player.favorite_game_played_time
         - player.player_friend.each do |friend|
           tr
             td
-              = friend.player_id
+              span id='friend.player_id'
+                = friend.player_id
             td
-              = friend.player_name
+              span id='friend.player_name'
+                = friend.player_name
             - if info_value == "game_count"
               td
-                = friend.player_game_count
+                span id='friend.player_game_count'
+                  = friend.player_game_count
             - elsif info_value == "played_time"
               td
-                = friend.total_played_time
+                span id='friend.total_played_time'
+                  = friend.total_played_time
             - else info_value == "favorite_game"
               td
-                = friend.favorite_game_name
+                span id='friend.favorite_game_name'
+                  = friend.favorite_game_name
               td
-                = friend.favorite_game_played_time
+                span id='friend.favorite_game_played_time'
+                  = friend.favorite_game_played_time
 
 javascript:
-  function print_table()
+  function print_table(info_value)
   {
-    var info_value = document.getElementById("info").value;
-
     path_name = window.location.pathname;
     path_peice = path_name.split("/");
 
     res_path = "http://" + location.host.trim() + "/" + "player/" + path_peice[2] + "/" + info_value;
+    console.log(res_path);
+    
+    location.href = res_path;
+  }
+
+  function print_table_by_game()
+  {
+    var x = document.getElementById("game_name_search").value;
+    document.getElementById("demo").innerHTML = x;
+
+    path_name = window.location.pathname;
+    path_peice = path_name.split("/");
+
+    res_path = "http://" + location.host.trim() + "/" + "player/" + path_peice[2] + "/" + "game_search/" + x;
     console.log(res_path);
     
     location.href = res_path;

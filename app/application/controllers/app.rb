@@ -3,6 +3,7 @@
 require 'roda'
 require 'slim'
 require 'slim/include'
+require 'rack'
 
 module SteamBuddy
   # Web App
@@ -91,6 +92,13 @@ module SteamBuddy
 
             # Show viewer the player
             view 'player', locals: { player: viewable_player, info_value: }
+          end
+        end
+
+        routing.on String, String, String do |_remote_id, game_search, game_name|
+          # GET /player/remote_id/game_search/game_name
+          routing.get do
+            puts "hellodfgdf: #{game_search}, #{game_name}"
           end
         end
 

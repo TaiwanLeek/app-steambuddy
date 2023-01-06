@@ -22,6 +22,8 @@ module SteamBuddy
         result = Gateway::Api.new(SteamBuddy::App.config)
           .add_player(input[:remote_id])
 
+        return Failure(result.message) if result.processing?
+
         result.success? ? Success(result.payload) : Failure(result.message)
       rescue StandardError => e
         puts e.inspect

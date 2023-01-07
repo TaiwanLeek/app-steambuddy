@@ -16,7 +16,7 @@ module SteamBuddy
       property :username
       property :game_count
       property :full_friend_data
-      property :total_played_time
+      property :total_play_time
       property :favorite_game, extend: Representer::OwnedGame, class: OpenStruct
       collection :owned_games, extend: Representer::OwnedGame, class: OpenStruct
       collection :friend_list, extend: Representer::Player, class: OpenStruct

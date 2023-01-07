@@ -1,7 +1,7 @@
 .container
   <div class="row-fluid">
     <span><input id="games_count_info" type="button" value="game_count" onclick="print_table(this.value)"></span
-    <span><input id="played_time_info" type="button" value="played_time" onclick="print_table(this.value)"></span>  
+    <span><input id="play_time_info" type="button" value="play_time" onclick="print_table(this.value)"></span>  
     <span><input id="favorite_game_info" type="button" value="favorite_game" onclick="print_table(this.value)"></span>
   </div>
 
@@ -11,8 +11,8 @@
   - table_id = ""
   - if info_value == "game_count"
     - table_id = "game_count_table"
-  - elsif info_value == "played_time"
-    - table_id = "played_time_table"
+  - elsif info_value == "play_time"
+    - table_id = "play_time_table"
   - else info_value == "favorite_game"
     - table_id =  "favorite_game_table"
 
@@ -24,13 +24,13 @@
         th User_Name
         - if info_value == "game_count"
           th Game_Count
-        - elsif info_value == "played_time"
-          th Total_Played_Hour
+        - elsif info_value == "play_time"
+          th Total_Play_Hour
         - elsif info_value == "game_search"
-          th Game_Played_Hour
+          th Game_Play_Hour
         - else info_value == "favorite_game"
           th Favorite_Game
-          th Played Hour
+          th Play_Hour
         th
     tbody
       tr
@@ -44,10 +44,10 @@
           td
             span id='player.player_game_count'
               = player.player_game_count
-        - elsif info_value == "played_time"
+        - elsif info_value == "play_time"
           td
-            span id='player.total_played_time'
-              = player.total_played_time
+            span id='player.total_play_time'
+              = player.total_play_time
         - else info_value == "favorite_game"
           td
             span id='player.favorite_game_name'
@@ -67,10 +67,10 @@
               td
                 span id='friend.player_game_count'
                   = friend.player_game_count
-            - elsif info_value == "played_time"
+            - elsif info_value == "play_time"
               td
-                span id='friend.total_played_time'
-                  = friend.total_played_time
+                span id='friend.total_play_time'
+                  = friend.total_play_time
             - else info_value == "favorite_game"
               td
                 span id='friend.favorite_game_name'

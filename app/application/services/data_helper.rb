@@ -20,8 +20,8 @@ module SteamBuddy
         case info_value
         when 'game_count'
           friend_b.game_count <=> friend_a.game_count
-        when 'played_time'
-          friend_b.total_played_time <=> friend_a.total_played_time
+        when 'play_time'
+          friend_b.total_play_time <=> friend_a.total_play_time
         when 'favorite_game'
           favorite_game_case(friend_a&.favorite_game&.played_time,
                              friend_b&.favorite_game&.played_time)

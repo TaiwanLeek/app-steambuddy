@@ -20,7 +20,7 @@ module SteamBuddy
 
     use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
 
-    route do |routing|
+    route do |routing| # rubocop:disable Metrics/BlockLength
       routing.assets # load CSS
       response['Content-Type'] = 'text/html; charset=utf-8'
       routing.public
@@ -47,7 +47,7 @@ module SteamBuddy
         view 'home', locals: { players: viewable_players }
       end
 
-      routing.on 'player' do
+      routing.on 'player' do # rubocop:disable Metrics/BlockLength
         routing.is do
           # POST /player/
           routing.post do
@@ -61,7 +61,8 @@ module SteamBuddy
             player_made = Service::AddPlayer.new.call(id_checkpoint.value!)
 
             if player_made.failure?
-              flash[:error] = player_made.failure
+              flash[:notice] = player_made.failure if player_made.failure == 'Loading the player info'
+              flash[:error] = player_made.failure if player_made.failure != 'Loading the player info'
               routing.redirect '/'
             end
 
